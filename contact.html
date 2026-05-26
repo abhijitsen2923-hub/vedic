@@ -340,8 +340,18 @@
     .foot-grid { flex-direction: column; text-align: center; }
     .foot-links { justify-content: center; gap: 18px 24px; }
   }
-    
-    
+  /* === Mobile responsive overrides === */
+  @media (max-width: 768px) {
+    section.py-5 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+    h1.display-4 { font-size: clamp(28px, 7vw, 40px); }
+    .card.shadow-lg { padding: 1.5rem !important; }
+    .foot-grid { gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    section.py-5 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+    .card.shadow-lg { padding: 1.25rem !important; border-radius: 16px !important; }
+    .container { padding-left: 16px; padding-right: 16px; }
+  }
     </style>
 </head>
 <body>

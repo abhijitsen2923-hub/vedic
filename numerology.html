@@ -459,7 +459,25 @@
     .foot-grid { flex-direction: column; text-align: center; }
     .foot-links { justify-content: center; gap: 18px 24px; }
   }
-
+  /* === Mobile responsive overrides === */
+  @media (max-width: 768px) {
+    .course-hero { padding: 60px 0 50px; }
+    .course-hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .course-hero .lead, .course-hero .course-meta { font-size: 14px; }
+    .section-padding { padding: 50px 0; }
+    .section-title, .display-5 { font-size: clamp(22px, 5vw, 30px); }
+    .custom-card, .syllabus-card { padding: 28px 22px; }
+    .foot-grid { gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    .course-hero { padding: 40px 0 32px; }
+    .section-padding { padding: 32px 0; }
+    .custom-card, .syllabus-card { padding: 22px 18px; }
+    .form-control, .form-select { font-size: 14px; }
+    .btn-gold { padding: 12px 28px !important; font-size: 14px; }
+    .container { padding-left: 16px; padding-right: 16px; }
+    .form-row-2 { grid-template-columns: 1fr; gap: 12px; }
+  }
 </style>
 </head>
 <body>
