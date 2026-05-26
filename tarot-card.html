@@ -650,30 +650,31 @@
             <h2 class="font-serif mb-2 text-dark">Enroll in Tarot Card Reading</h2>
             <p class="text-secondary small">Begin your structured pathway into intuitive card reading and professional tarot practice.</p>
           </div>
-          <form class="row g-3">
+          <form id="enroll-form" class="row g-3" action="https://formspree.io/f/YYYYYYYY" method="POST" novalidate>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="New enrollment - Tarot Card Reading">
+            <input type="hidden" name="course" value="Tarot Card Reading">
             <div class="col-md-6">
               <label class="form-label text-dark small fw-bold">Full Name</label>
-              <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" placeholder="Enter your full name" required>
+              <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="name" placeholder="Enter your full name" required>
             </div>
             <div class="col-md-6">
               <label class="form-label text-dark small fw-bold">Phone Number</label>
-              <input type="tel" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" placeholder="Enter your phone number" required>
+              <input type="tel" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="phone" placeholder="Enter your phone number" required>
             </div>
             <div class="col-12">
               <label class="form-label text-dark small fw-bold">Email Address</label>
-              <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" placeholder="Enter your email address" required>
+              <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="_replyto" placeholder="Enter your email address" required>
             </div>
             <div class="col-12">
               <label class="form-label text-dark small fw-bold">Prior Tarot Experience (Optional)</label>
-              <select class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
+              <select name="experience" class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
                 <option value="none">Beginner (No prior experience)</option>
                 <option value="intermediate">Intermediate (Basic spread knowledge)</option>
                 <option value="advanced">Advanced (Aspirational Professional)</option>
               </select>
             </div>
-            <div class="col-12 text-center mt-4">
-              <button type="submit" class="btn btn-gold px-5 py-3">Submit Inquiry</button>
-            </div>
+            <div class="col-12 text-center mt-4"><button type="submit" class="btn btn-gold px-5 py-3">Submit Inquiry</button><p class="form-status mt-3" role="status" aria-live="polite"></p></div>
           </form>
         </div>
       </div>
@@ -736,5 +737,21 @@
 
 <!-- Bootstrap 5 JS Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  (function(){
+    const f = document.getElementById('enroll-form'); if (!f) return;
+    let s = f.querySelector('.form-status'); if (!s) { s = document.createElement('p'); s.className='form-status mt-3'; f.appendChild(s); }
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (f.action.includes('YYYYYYYY')) { s.textContent = 'Form not configured yet. Replace YYYYYYYY with your Formspree enroll form ID.'; s.style.color = '#8b1a1a'; return; }
+      s.textContent = 'Sending...'; s.style.color = '';
+      try {
+        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } });
+        if (r.ok) { s.textContent = 'Thanks - we will contact you shortly.'; s.style.color = '#2d5016'; f.reset(); }
+        else { const d = await r.json().catch(() => ({})); s.textContent = (d.errors ? d.errors.map(x => x.message).join(', ') : 'Something went wrong.'); s.style.color = '#8b1a1a'; }
+      } catch { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
+    });
+  })();
+</script>
 </body>
 </html>

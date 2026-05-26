@@ -403,23 +403,42 @@
                 <div class="col-lg-6 offset-lg-1">
                     <div class="card border-0 shadow-lg p-4" style="border-radius: 20px;">
                         <h2 class="mb-3">Send Message</h2>
-                        <form onsubmit="event.preventDefault(); alert('Message Received! We will get back to you shortly.');">
+                        <form id="contact-form" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
+                            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                            <input type="hidden" name="_subject" value="New contact from IVA website">
                             <div class="mb-3">
                                 <label class="form-label small fw-bold">Full Name</label>
-                                <input type="text" class="form-control bg-light" required>
+                                <input type="text" name="name" class="form-control bg-light" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label small fw-bold">Email Address</label>
-                                <input type="email" class="form-control bg-light" required>
+                                <input type="email" name="_replyto" class="form-control bg-light" required>
                             </div>
                             <div class="mb-4">
                                 <label class="form-label small fw-bold">Message</label>
-                                <textarea class="form-control bg-light" rows="4" required></textarea>
+                                <textarea name="message" class="form-control bg-light" rows="4" required></textarea>
                             </div>
                             <button type="submit" class="btn w-100 py-3 text-dark fw-bold" style="background: linear-gradient(135deg, #f0c878, #d4a24c); border-radius: 50px;">
                                 Submit Enquiry
                             </button>
+                            <p class="form-status mt-3" role="status" aria-live="polite"></p>
                         </form>
+                        <script>
+                          (function(){
+                            const f = document.getElementById('contact-form'),
+                                  s = f.querySelector('.form-status');
+                            f.addEventListener('submit', async (e) => {
+                              e.preventDefault();
+                              if (f.action.includes('XXXXXXXX')) { s.textContent = 'Form not configured yet. Replace XXXXXXXX with your Formspree ID.'; s.style.color = '#8b1a1a'; return; }
+                              s.textContent = 'Sending...'; s.style.color = '';
+                              try {
+                                const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } });
+                                if (r.ok) { s.textContent = 'Thanks — we will be in touch.'; s.style.color = '#2d5016'; f.reset(); }
+                                else { const d = await r.json().catch(() => ({})); s.textContent = (d.errors ? d.errors.map(x => x.message).join(', ') : 'Something went wrong.'); s.style.color = '#8b1a1a'; }
+                              } catch { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
+                            });
+                          })();
+                        </script>
                     </div>
                 </div>
             </div>
