@@ -11,3 +11,6 @@ dist/
 
 # Local dev notes (not for the public repo)
 MEMORY.md
+
+# Local preview server helper
+.serve.ps1
