@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+     :root {
+    /* Cream aur Beige color combination variables */
+    --bg-cream: #f7f1e3;
+    --bg-cream-deep: #f0e8d3;
+    --bg-white: #ffffff;
+    --bg-card: #ffffff;
+    --ink: #1a1535;
+    --ink-soft: #4a4365;
+    --ink-muted: #7a7290;
+
+    /* Cosmic dark colors, accents ke liye */
+    --cosmic-deep: #0a0618;
+    --cosmic-mid: #1a1535;
+    --cosmic-purple: #2a1f5e;
+    --cosmic-violet: #4a2f8e;
+
+    /* Gold colors details highlight karne ke liye */
+    --gold: #d4a24c;
+    --gold-bright: #f0c878;
+    --gold-deep: #a8791f;
+
+    /* Borders aur shadows */
+    --border-light: rgba(26, 21, 53, 0.08);
+    --border-gold: rgba(212, 162, 76, 0.3);
+    --shadow-sm: 0 4px 12px rgba(26, 21, 53, 0.06);
+    --shadow-md: 0 8px 24px rgba(26, 21, 53, 0.08);
+    --shadow-lg: 0 20px 50px rgba(26, 21, 53, 0.12);
+    --shadow-cosmic: 0 30px 80px rgba(10, 6, 24, 0.4);
+
+    --serif: 'Fraunces', Georgia, serif;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+ body {
+    font-family: var(--sans);
+    background-image: url('./image/BACKGROUND.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--serif);
+  }
+  
+  .font-serif-display {
+    font-family: var(--serif-display);
+  }
+
+  /* Cosmic background effect classes */
+  .bg-cosmic {
+    background: linear-gradient(180deg, var(--cosmic-deep) 0%, var(--cosmic-mid) 100%);
+    color: #faf5ea;
+    position: relative;
+    /* overflow: hidden; */
+  }
+
+  .bg-cosmic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(1px 1px at 15% 15%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 45% 35%, rgba(255,245,210,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 75% 20%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 85% 65%, rgba(255,245,210,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 25% 75%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 60% 80%, rgba(255,245,210,0.6), transparent);
+    background-size: 100% 100%;
+    opacity: 0.8;
+  }
+
+  /* Navbar styling */
+  .navbar-brand .logo-mark {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle, rgba(212,162,76,0.2), transparent);
+  }
+  .navbar-brand .logo-mark svg {
+    width: 24px;
+    height: 24px;
+    color: var(--gold-bright);
+  }
+  .navbar-brand .logo-text {
+    font-family: var(--serif-display);
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: #faf5ea;
+  }
+  .navbar-brand .logo-text span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .nav-link {
+    color: #e8e0d0 !important;
+    font-size: 14.5px;
+    margin-right: 1.5rem;
+    transition: color 0.3s;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--gold-bright) !important;
+  }
+
+  /* Buttons styling */
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0f00 !important;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 24px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 162, 76, 0.3);
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 162, 76, 0.5);
+  }
+
+  /* Hero Section */
+  .about-hero {
+    position: relative;
+    padding: 120px 0 100px;
+    text-align: center;
+  }
+  .about-hero h1 {
+    font-size: clamp(38px, 5vw, 56px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #f0c878, #d4a24c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .about-hero .lead {
+    color: #d8cfbd;
+    font-size: 18px;
+    max-width: 850px;
+    margin: 20px auto 0;
+    line-height: 1.7;
+  }
+
+  /* Section Padding aur titles */
+  .section-padding {
+    padding: 90px 0;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .title-gold-line::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 15px 0 0;
+  }
+  .title-gold-line-center::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 15px auto 0;
+  }
+
+  /* Cards design */
+  .custom-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Ornate Card pattern */
+  .ornate-card {
+    background: linear-gradient(160deg, #1a1535 0%, #0a0618 100%);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 16px;
+    padding: 50px 40px;
+    color: #faf5ea;
+    position: relative;
+    overflow: hidden;
+  }
+  .ornate-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+  .ornate-card h3 {
+    color: var(--gold-bright);
+    font-family: var(--serif);
+  }
+
+  /* Ornate and Mystic Seals */
+  .mystic-seal {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2.5px solid var(--gold);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 24px;
+    color: var(--gold-bright);
+    background: radial-gradient(circle, rgba(212,162,76,0.15) 0%, transparent 80%);
+  }
+  .mystic-seal svg {
+    width: 44px;
+    height: 44px;
+  }
+ 
+  /* footer */
+  
+  footer {
+    background: var(--cosmic-deep);
+    color: #c4bba8;
+    padding: 50px 0 28px;
+  }
+  .foot-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(212, 162, 76, 0.15);
+  }
+  .foot-links {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .foot-links a {
+    color: #c4bba8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  .foot-links a:hover { color: var(--gold-bright); }
+  .foot-socials {
+    display: flex;
+    gap: 10px;
+  }
+  .foot-socials a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .foot-socials a:hover { background: var(--gold); color: var(--cosmic-deep); }
+  .foot-socials svg { width: 16px; height: 16px; }
+  .foot-bottom {
+    padding-top: 24px;
+    text-align: center;
+    font-size: 12.5px;
+    color: #7a7060;
+    letter-spacing: 0.5px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    nav ul { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+    .hero-visual { margin: 0 auto; }
+    .hero-ctas { justify-content: center; }
+    .student-row { justify-content: center; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px 0; padding: 28px; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(1), .stat-item:nth-child(2) { padding-bottom: 24px; border-bottom: 1px solid var(--border-light); }
+    .courses-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .journey-steps { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: 1fr; }
+    .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+    .cta-panel { padding: 48px 32px; }
+    .journey-panel { padding: 40px 28px; }
+    .lotus-deco { display: none; }
+    .testi-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 18px; }
+    .stats-bar-wrap { padding: 0 18px; }
+    .stats-bar { grid-template-columns: 1fr; padding: 24px; }
+    .stat-item { border-right: none !important; padding: 20px 0 !important; border-bottom: 1px solid var(--border-light); }
+    .stat-item:last-child { border-bottom: none; }
+    .courses-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .journey-steps { grid-template-columns: 1fr; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 40px; }
+    .hero-ctas { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .cta-buttons { flex-direction: column; width: 100%; }
+    .nav-right .btn { padding: 8px 14px; font-size: 11px; }
+    .foot-grid { flex-direction: column; text-align: center; }
+    .foot-links { justify-content: center; gap: 18px 24px; }
+  }
+    
+    
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+      <img src="image/logo.png" class="img-fluid" style="width: 180px; height: 60px;"/>
+      
+     
+
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about-us.html">About Us</a></li>
+        
+        <!-- FIXED DROPDOWN -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+          </a>
+         <ul class="dropdown-menu dropdown-menu-dark border-0 shadow-lg">
+            <li><a class="dropdown-item" href="Vedic-Astrology.html">Vedic Astrology</a></li>
+            <li><a class="dropdown-item" href="Tarot-Card.html">Tarot Card Reading</a></li>
+            <li><a class="dropdown-item" href="Numerology.html">Numerology</a></li>
+            <li><a class="dropdown-item" href="Palmistry.html">Palmistry</a></li>
+            <li><a class="dropdown-item" href="Vastu-Shastra.html">Vastu Shastra</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item ms-lg-2"><a href="#" class="btn btn-gold">Enroll Now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- Main Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h1 class="display-4 mb-4">Start Your Numerology Journey</h1>
+                    <p class="lead text-muted">Our team is ready to answer your questions. Contact us to learn more about our Numerology courses or to book a personal session.</p>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-3"><strong>📍 Office:</strong> Vedic Center</li>
+                        <li class="mb-3"><strong>📧 Email:</strong> support@vedicacademy.com</li>
+                        <li class="mb-3"><strong>📞 Phone:</strong> +91 123 456 7890</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="card border-0 shadow-lg p-4" style="border-radius: 20px;">
+                        <h2 class="mb-3">Send Message</h2>
+                        <form onsubmit="event.preventDefault(); alert('Message Received! We will get back to you shortly.');">
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Full Name</label>
+                                <input type="text" class="form-control bg-light" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Email Address</label>
+                                <input type="email" class="form-control bg-light" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold">Message</label>
+                                <textarea class="form-control bg-light" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn w-100 py-3 text-dark fw-bold" style="background: linear-gradient(135deg, #f0c878, #d4a24c); border-radius: 50px;">
+                                Submit Enquiry
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+   <footer>
+  <div class="container">
+    <div class="foot-grid">
+      <!-- <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
+          </svg>
+        </div>
+        <div class="logo-text">International<br><span>Vedic Academy</span></div>
+      </a> -->
+
+      <div class="foot-links">
+        <a href="blog.html">Blog</a>
+        <a href="about-us.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        
+      </div>
+
+      <div class="foot-socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="12" height="12" rx="3"/>
+            <circle cx="8" cy="8" r="3"/>
+            <circle cx="11.5" cy="4.5" r="0.6" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="3" width="14" height="10" rx="2"/>
+            <path d="M6.5 5.5l4 2.5-4 2.5z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9.5 8h2.2l.4-2.4H9.5v-1c0-.6.3-1 1-1H12V1h-2.2c-1.7 0-2.6 1-2.6 2.6v2H5.5V8h1.7v6h2.3V8z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 1a7 7 0 00-6 10.6L1 15l3.4-1A7 7 0 108 1z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="foot-bottom">
+      © 2026 International Vedic Academy · All Rights Reserved · Knowledge · Practice · Profession
+    </div> -->
+  </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

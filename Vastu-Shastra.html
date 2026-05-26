@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Learn Vastu Shastra Online — International Vedic Academy</title>
+<meta name="description" content="Discover how to balance spatial energy, directional elements, and cosmic harmony for homes and offices with our professional online Vastu Shastra course." />
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Cream / Beige palette */
+    --bg-cream: #f7f1e3;
+    --bg-cream-deep: #f0e8d3;
+    --bg-white: #ffffff;
+    --bg-card: #ffffff;
+    --ink: #1a1535;
+    --ink-soft: #4a4365;
+    --ink-muted: #7a7290;
+
+    /* Cosmic dark for accents */
+    --cosmic-deep: #0a0618;
+    --cosmic-mid: #1a1535;
+    --cosmic-purple: #2a1f5e;
+    --cosmic-violet: #4a2f8e;
+
+    /* Gold accents */
+    --gold: #d4a24c;
+    --gold-bright: #f0c878;
+    --gold-deep: #a8791f;
+
+    /* Borders & shadows */
+    --border-light: rgba(26, 21, 53, 0.08);
+    --border-gold: rgba(212, 162, 76, 0.3);
+    --shadow-sm: 0 4px 12px rgba(26, 21, 53, 0.06);
+    --shadow-md: 0 8px 24px rgba(26, 21, 53, 0.08);
+    --shadow-lg: 0 20px 50px rgba(26, 21, 53, 0.12);
+    --shadow-cosmic: 0 30px 80px rgba(10, 6, 24, 0.4);
+
+    --serif: 'Fraunces', Georgia, serif;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  /* Core Global Settings */
+  body {
+    font-family: var(--sans);
+    background-image: url('./image/BACKGROUND.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--serif);
+  }
+  
+  .font-serif-display {
+    font-family: var(--serif-display);
+  }
+
+  /* Cosmic dark background sections */
+  .bg-cosmic {
+    background: linear-gradient(180deg, var(--cosmic-deep) 0%, var(--cosmic-mid) 100%);
+    color: #faf5ea;
+    position: relative;
+    /* overflow: hidden; */
+  }
+
+  .bg-cosmic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(1px 1px at 15% 15%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 45% 35%, rgba(255,245,210,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 75% 20%, rgba(255,255,255,0.9), transparent),
+      radial-gradient(1px 1px at 85% 65%, rgba(255,245,210,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 25% 75%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 60% 80%, rgba(255,245,210,0.6), transparent);
+    background-size: 100% 100%;
+    opacity: 0.8;
+  }
+
+  /* Header Logo & Navigation */
+  .navbar-brand .logo-mark {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle, rgba(212,162,76,0.2), transparent);
+  }
+  .navbar-brand .logo-mark svg {
+    width: 24px;
+    height: 24px;
+    color: var(--gold-bright);
+  }
+  .navbar-brand .logo-text {
+    font-family: var(--serif-display);
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: #faf5ea;
+  }
+  .navbar-brand .logo-text span {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  .nav-link {
+    color: #e8e0d0 !important;
+    font-size: 14.5px;
+    margin-right: 1.5rem;
+    transition: color 0.3s;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--gold-bright) !important;
+  }
+
+  /* Custom Buttons */
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0f00 !important;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 28px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 162, 76, 0.35);
+  }
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 162, 76, 0.5);
+  }
+
+  .btn-outline-gold {
+    background: transparent;
+    color: var(--gold-bright) !important;
+    border: 1px solid var(--gold);
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .btn-outline-gold:hover {
+    background: rgba(212, 162, 76, 0.1);
+    border-color: var(--gold-bright);
+    color: #fff !important;
+  }
+
+  /* Hero Layout */
+  .course-hero {
+    position: relative;
+    padding: 100px 0 120px;
+  }
+  .course-hero h1 {
+    font-size: clamp(36px, 4.5vw, 54px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #f0c878, #d4a24c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .course-hero .lead {
+    color: #d8cfbd;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* Custom Interactive-style SVG Illustration container */
+  .celestial-graphic {
+    position: relative;
+    max-width: 440px;
+    margin: 0 auto;
+    filter: drop-shadow(0 15px 35px rgba(10, 6, 24, 0.5));
+  }
+  .celestial-graphic svg {
+    overflow: visible;
+  }
+
+  /* Interactive Elements on SVG Compass */
+  .direction-node {
+    transition: r 0.25s, fill 0.25s, stroke 0.25s, filter 0.25s;
+    cursor: pointer;
+  }
+  .direction-node:hover, .direction-node.active {
+    r: 10px;
+    fill: var(--gold-bright);
+    stroke: #ffffff;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1));
+  }
+  
+  .compass-line {
+    transition: stroke-width 0.2s, opacity 0.2s, stroke 0.2s;
+  }
+  .compass-line.active {
+    stroke: var(--gold-bright);
+    stroke-width: 2px;
+    opacity: 0.9;
+  }
+
+  /* Sections & Card Styles */
+  .section-padding {
+    padding: 100px 0;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 38px);
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .title-gold-line::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 15px 0 0;
+  }
+  .title-gold-line-center::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 15px auto 0;
+  }
+
+  /* Elegant Cards */
+  .custom-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 40px 32px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-gold);
+  }
+
+  /* Occult dark card */
+  .ornate-dark-card {
+    background: linear-gradient(160deg, #1a1535 0%, #0a0618 100%);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 16px;
+    padding: 45px 35px;
+    color: #faf5ea;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: var(--shadow-md);
+  }
+  .ornate-dark-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+  .ornate-dark-card h3 {
+    color: var(--gold-bright);
+    font-family: var(--serif);
+  }
+
+  /* Decorative Badge Icons */
+  .icon-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(212, 162, 76, 0.12);
+    border: 1.5px solid rgba(212, 162, 76, 0.35);
+    display: grid;
+    place-items: center;
+    color: var(--gold-bright);
+    margin-bottom: 24px;
+  }
+  .icon-circle svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Interactive Results Screen */
+  .interactive-result-box {
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-deep));
+    border: 1.5px solid var(--gold);
+    border-radius: 16px;
+    padding: 30px;
+    color: #fff;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Rotating Compass Animation Keyframe */
+  @keyframes compassRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .spinning-compass {
+    animation: compassRotate 60s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Compact and smaller mystic seal design */
+  .mystic-seal {
+    width: 52px;
+    height: 52px;
+    border: 1.8px solid var(--gold);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 16px;
+    color: var(--gold-bright);
+    background: radial-gradient(circle, rgba(212,162,76,0.15) 0%, transparent 80%);
+  }
+  .mystic-seal svg {
+    width: 32px;
+    height: 32px;
+  }
+  footer {
+    background: var(--cosmic-deep);
+    color: #c4bba8;
+    padding: 50px 0 28px;
+  }
+  .foot-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(212, 162, 76, 0.15);
+  }
+  .foot-links {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .foot-links a {
+    color: #c4bba8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+  }
+  .foot-links a:hover { color: var(--gold-bright); }
+  .foot-socials {
+    display: flex;
+    gap: 10px;
+  }
+  .foot-socials a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .foot-socials a:hover { background: var(--gold); color: var(--cosmic-deep); }
+  .foot-socials svg { width: 16px; height: 16px; }
+  .foot-bottom {
+    padding-top: 24px;
+    text-align: center;
+    font-size: 12.5px;
+    color: #7a7060;
+    letter-spacing: 0.5px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    nav ul { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+    .hero-visual { margin: 0 auto; }
+    .hero-ctas { justify-content: center; }
+    .student-row { justify-content: center; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px 0; padding: 28px; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item:nth-child(1), .stat-item:nth-child(2) { padding-bottom: 24px; border-bottom: 1px solid var(--border-light); }
+    .courses-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .journey-steps { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: 1fr; }
+    .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+    .cta-panel { padding: 48px 32px; }
+    .journey-panel { padding: 40px 28px; }
+    .lotus-deco { display: none; }
+    .testi-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  }
+  @media (max-width: 640px) {
+    .container { padding: 0 18px; }
+    .stats-bar-wrap { padding: 0 18px; }
+    .stats-bar { grid-template-columns: 1fr; padding: 24px; }
+    .stat-item { border-right: none !important; padding: 20px 0 !important; border-bottom: 1px solid var(--border-light); }
+    .stat-item:last-child { border-bottom: none; }
+    .courses-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .journey-steps { grid-template-columns: 1fr; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 40px; }
+    .hero-ctas { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .cta-buttons { flex-direction: column; width: 100%; }
+    .nav-right .btn { padding: 8px 14px; font-size: 11px; }
+    .foot-grid { flex-direction: column; text-align: center; }
+    .foot-links { justify-content: center; gap: 18px 24px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+      <img src="image/logo.png" class="img-fluid" style="width: 180px; height: 60px;"/>
+      
+     
+
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about-us.html">About Us</a></li>
+        
+        <!-- FIXED DROPDOWN -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+          </a>
+         <ul class="dropdown-menu dropdown-menu-dark border-0 shadow-lg">
+            <li><a class="dropdown-item" href="Vedic-Astrology.html">Vedic Astrology</a></li>
+            <li><a class="dropdown-item" href="Tarot-Card.html">Tarot Card Reading</a></li>
+            <li><a class="dropdown-item" href="Numerology.html">Numerology</a></li>
+            <li><a class="dropdown-item" href="Palmistry.html">Palmistry</a></li>
+            <li><a class="dropdown-item" href="Vastu-Shastra.html">Vastu Shastra</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item ms-lg-2"><a href="#" class="btn btn-gold">Enroll Now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="course-hero bg-cosmic">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Spatial Energy &amp; Architectural Harmony</span>
+        <h1>Learn <span class="gold-gradient-text">Vastu Shastra</span> Online</h1>
+        <p class="lead mt-4">The Vastu Shastra Course at International Vedic Academy helps students understand the principles of spatial energy, directional balance, and environment-based harmony for homes, offices, and commercial spaces. This course is ideal for learners who want to combine ancient architectural wisdom with practical modern consultation.</p>
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
+          <a href="#interactive-vastu" class="btn btn-gold">Interactive Energy Map</a>
+          <a href="#syllabus" class="btn btn-outline-gold">View Syllabus</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <!-- Self-contained, highly detailed Vastu Mandala / Compass Rose SVG -->
+        <div class="celestial-graphic">
+          <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
+            <!-- Background circles and star map -->
+            <circle cx="200" cy="200" r="190" stroke="#d4a24c" stroke-width="1" opacity="0.2"/>
+            <circle cx="200" cy="200" r="175" stroke="#d4a24c" stroke-dasharray="3, 3" stroke-width="1.2" opacity="0.4"/>
+            <circle cx="200" cy="200" r="150" stroke="#f0c878" stroke-width="0.8" opacity="0.3"/>
+            
+            <!-- Rotating Ornate Outer Compass Dial -->
+            <g class="spinning-compass" stroke="#d4a24c" stroke-width="0.8" opacity="0.6">
+              <circle cx="200" cy="200" r="165" stroke-dasharray="12, 10"/>
+              <!-- Astrological divisions -->
+              <line x1="200" y1="35" x2="200" y2="40" stroke-width="1.5"/>
+              <line x1="200" y1="360" x2="200" y2="365" stroke-width="1.5"/>
+              <line x1="35" y1="200" x2="40" y2="200" stroke-width="1.5"/>
+              <line x1="360" y1="200" x2="365" y2="200" stroke-width="1.5"/>
+            </g>
+
+            <!-- OCCULT VASTU MANDALA GRID / 8 KEY DIRECTIONS MAP -->
+            <g transform="translate(100, 100)" stroke="#d4a24c" stroke-width="1.5" id="vastu-grid">
+              <!-- Grid container box representing the Vastu Purusha site grid -->
+              <rect x="0" y="0" width="200" height="200" rx="6" fill="#130e2b" fill-opacity="0.85" stroke="#d4a24c" stroke-width="2"/>
+              <rect x="4" y="4" width="192" height="192" fill="none" stroke="#f0c878" stroke-width="0.6" opacity="0.4"/>
+              
+              <!-- Directional Dividers -->
+              <line id="line-n-s" class="compass-line" x1="100" y1="0" x2="100" y2="200" />
+              <line id="line-w-e" class="compass-line" x1="0" y1="100" x2="200" y2="100" />
+              <line id="line-nw-se" class="compass-line" x1="0" y1="0" x2="200" y2="200" stroke-dasharray="2, 2" opacity="0.6"/>
+              <line id="line-ne-sw" class="compass-line" x1="200" y1="0" x2="0" y2="200" stroke-dasharray="2, 2" opacity="0.6"/>
+
+              <!-- Central Brahmasthan -->
+              <circle cx="100" cy="100" r="18" stroke="#f0c878" stroke-width="1" fill="#130e2b"/>
+              <circle cx="100" cy="100" r="6" fill="#f0c878"/>
+              <text x="100" y="103" font-family="Fraunces" font-size="8" fill="#130e2b" font-weight="700" text-anchor="middle">CENTER</text>
+
+              <!-- Interactive Direction Nodes -->
+              <!-- North Node (Kubera) -->
+              <circle id="node-n" class="direction-node" cx="100" cy="22" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- North-East Node (Ishan) -->
+              <circle id="node-ne" class="direction-node" cx="178" cy="22" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- East Node (Aditya/Indra) -->
+              <circle id="node-e" class="direction-node" cx="178" cy="100" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- South-East Node (Agni) -->
+              <circle id="node-se" class="direction-node" cx="178" cy="178" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- South Node (Yama) -->
+              <circle id="node-s" class="direction-node" cx="100" cy="178" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- South-West Node (Nairutya) -->
+              <circle id="node-sw" class="direction-node" cx="22" cy="178" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- West Node (Varuna) -->
+              <circle id="node-w" class="direction-node" cx="22" cy="100" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- North-West Node (Vayu) -->
+              <circle id="node-nw" class="direction-node" cx="22" cy="22" r="5" fill="#d4a24c" stroke="#f0c878"/>
+
+              <!-- Outer Directional Text markers -->
+              <g font-family="Fraunces" font-size="11" fill="#f0c878" font-weight="600" text-anchor="middle" dominant-baseline="central">
+                <text x="100" y="-12">NORTH</text>
+                <text x="212" y="-12">NE</text>
+                <text x="215" y="100">EAST</text>
+                <text x="212" y="212">SE</text>
+                <text x="100" y="212">SOUTH</text>
+                <text x="-12" y="212">SW</text>
+                <text x="-15" y="100">WEST</text>
+                <text x="-12" y="-12">NW</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE VASTU DIRECTIONAL MAP -->
+<section id="interactive-vastu" class="section-padding bg-cream-deep">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="custom-card border-gold p-5 text-center">
+          <div class="mystic-seal">
+            <!-- UPDATED COMPASS SEAL: Geometric Ashtakon Star -->
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+              <!-- Outer elegant dotted ring -->
+              <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-dasharray="2 3" opacity="0.6"/>
+              <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="0.8"/>
+              <!-- Interlocking elegant squares (8-pointed star of Lakshmi/Ashtakon) -->
+              <rect x="23" y="23" width="54" height="54" stroke="currentColor" opacity="0.5" transform="rotate(0 50 50)"/>
+              <rect x="23" y="23" width="54" height="54" stroke="currentColor" opacity="0.5" transform="rotate(45 50 50)"/>
+              <!-- Inner cosmic circles -->
+              <circle cx="50" cy="50" r="24" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+              <circle cx="50" cy="50" r="14" stroke="currentColor" stroke-width="1" fill="#130e2b"/>
+              <!-- Central Lotus Petals (Vedic spiritual symbol) -->
+              <g fill="currentColor" opacity="0.9">
+                <path d="M50 36 C52 42 48 42 50 36 Z"/>
+                <path d="M50 64 C52 58 48 58 50 64 Z"/>
+                <path d="M36 50 C42 52 42 48 36 50 Z"/>
+                <path d="M64 50 C58 52 58 48 64 50 Z"/>
+                <path d="M40.1 40.1 C44.3 44.3 42.3 45.3 40.1 40.1 Z"/>
+                <path d="M59.9 40.1 C55.7 44.3 57.7 45.3 59.9 40.1 Z"/>
+                <path d="M40.1 59.9 C44.3 55.7 42.3 54.7 40.1 59.9 Z"/>
+                <path d="M59.9 59.9 C55.7 55.7 57.7 54.7 59.9 59.9 Z"/>
+              </g>
+              <!-- Central Bindu -->
+              <circle cx="50" cy="50" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h2 class="font-serif text-dark mb-2">Interactive Vastu Compass</h2>
+          <p class="text-secondary small mb-4">Click on any directional wedge button below or select the glowing golden nodes directly on the grid above to learn energy orientations and ideal room allocations.</p>
+
+          <!-- Interactive Selection Buttons in English -->
+          <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="n">North (Uttara)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="ne">North-East (Ishan)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="e">East (Purva)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="se">South-East (Agneya)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="s">South (Dakshina)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="sw">South-West (Nairutya)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="w">West (Paschima)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="nw">North-West (Vayavya)</button>
+          </div>
+
+          <!-- Dynamic Output Card -->
+          <div id="readout-box" class="interactive-result-box text-start">
+            <h4 id="readout-title" class="font-serif text-gold-bright mb-2">Select a Direction</h4>
+            <p id="readout-desc" class="small mb-0 opacity-90">Discover the elemental rhapsody, deities, and spatial layouts governing directional zones. Click any direction button above to start.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM SYLLABUS SECTION -->
+<section id="syllabus" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title title-gold-line-center">Our Curriculum</h2>
+        <p class="section-sub">A practical, layout-based approach developed to take you from core directional zones to remedies requiring no structural changes.</p>
+      </div>
+    </div>
+    <div class="row g-5">
+      <!-- What We Teach -->
+      <div class="col-md-6">
+        <div class="custom-card h-100">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="mb-3">What We Teach</h3>
+          <p class="text-secondary mb-0">Students learn directions, elemental zones, energy flow, residential vastu, commercial vastu, layout analysis, common defects, and practical remedies. The emphasis is on understanding how space influences well-being, productivity, and balance.</p>
+        </div>
+      </div>
+      <!-- How We Teach -->
+      <div class="col-md-6">
+        <div class="custom-card h-100">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="mb-3">How We Teach</h3>
+          <p class="text-secondary mb-0">We teach vastu through layout-based learning, practical case studies, directional analysis, and solution-oriented training. Students are trained to understand issues clearly and recommend realistic remedies, including options that do not require major structural change.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES SECTION -->
+<section class="section-padding bg-cosmic text-white">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title text-white title-gold-line-center">Values &amp; Opportunities</h2>
+      </div>
+    </div>
+    <div class="row g-5">
+      <!-- Why Learn Vastu -->
+      <div class="col-md-6">
+        <div class="ornate-dark-card">
+          <h3 class="mb-3">Why Learn Vastu</h3>
+          <p class="text-light opacity-75 mb-0">Vastu Shastra remains highly relevant because people increasingly seek guidance for harmony, productivity, positivity, and energy balance in their personal and work environments. It is especially useful as a profession because it connects spirituality with real estate, interiors, wellness, and practical advisory services.</p>
+        </div>
+      </div>
+      <!-- Career Opportunities -->
+      <div class="col-md-6">
+        <div class="ornate-dark-card">
+          <h3 class="mb-3">Career Opportunities</h3>
+          <p class="text-light opacity-75 mb-0">With proper training, students can work as Vastu consultants, property advisors, wellness consultants, interior guidance specialists, or independent spiritual consultants. The subject has strong professional scope because it serves both individual clients and property-related decision-making.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLLMENT FORM & CALL TO ACTION (Contact form in English) -->
+<section id="enroll" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="custom-card border-gold p-5">
+          <div class="text-center mb-4">
+            <h2 class="font-serif mb-2 text-dark">Enroll in Vastu Shastra</h2>
+            <p class="text-secondary small">Begin your structured pathway into directional space balancing and professional Vastu consultation.</p>
+          </div>
+          <form class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label text-dark small fw-bold">Full Name</label>
+              <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" placeholder="Enter your full name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-dark small fw-bold">Phone Number</label>
+              <input type="tel" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" placeholder="Enter your phone number" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-dark small fw-bold">Email Address</label>
+              <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" placeholder="Enter your email address" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-dark small fw-bold">Prior Vastu Experience (Optional)</label>
+              <select class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
+                <option value="none">Beginner (No prior experience)</option>
+                <option value="intermediate">Intermediate (Basic layout understanding)</option>
+                <option value="advanced">Advanced (Aspirational Professional)</option>
+              </select>
+            </div>
+            <div class="col-12 text-center mt-4">
+              <button type="submit" class="btn btn-gold px-5 py-3">Submit Inquiry</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <!-- <a href="#" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
+          </svg>
+        </div>
+        <div class="logo-text">International<br><span>Vedic Academy</span></div>
+      </a> -->
+
+      <div class="foot-links">
+        <a href="blog.html">Blog</a>
+        <a href="about-us.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        
+      </div>
+
+      <div class="foot-socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="12" height="12" rx="3"/>
+            <circle cx="8" cy="8" r="3"/>
+            <circle cx="11.5" cy="4.5" r="0.6" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="1" y="3" width="14" height="10" rx="2"/>
+            <path d="M6.5 5.5l4 2.5-4 2.5z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9.5 8h2.2l.4-2.4H9.5v-1c0-.6.3-1 1-1H12V1h-2.2c-1.7 0-2.6 1-2.6 2.6v2H5.5V8h1.7v6h2.3V8z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 1a7 7 0 00-6 10.6L1 15l3.4-1A7 7 0 108 1z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="foot-bottom">
+      © 2026 International Vedic Academy · All Rights Reserved · Knowledge · Practice · Profession
+    </div> -->
+  </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Interactive Vastu Compass Database
+  const vastuData = {
+    "n": {
+      title: "North (Uttara) — The Zone of Wealth",
+      desc: "Governed by Lord Kubera and the Water element. It is highly vital for financial growth and career opportunities. Ideal uses: Main entrance, living room, study desk, or treasury safes. Avoid putting kitchens, toilets, or heavy storage structures in this zone."
+    },
+    "ne": {
+      title: "North-East (Ishan) — The Sacred Gateway",
+      desc: "Ruler: Lord Shiva; Element: Water/Ether. It carries the highest level of cosmic and spiritual energy inflow. Ideal uses: Meditation halls, Pooja/Prayer rooms, library, light plants, or main entrance door. Never construct toilets, kitchens, heavy master bedrooms, or storage areas here."
+    },
+    "e": {
+      title: "East (Purva) — The Zone of Social Connections",
+      desc: "Governed by Lord Indra and Lord Surya (Sun); Element: Air. This zone controls fame, social networking, and overall health. Ideal uses: Living rooms, main entrance, open balcony, or bathrooms (without toilet). High walls, heavy storage, and garbage disposal must be avoided."
+    },
+    "se": {
+      title: "South-East (Agneya) — The Fire Hearth",
+      desc: "Ruler: Lord Agni; Element: Fire. It governs physical stamina, health, and cash flow. Ideal uses: Kitchens, boilers, electrical equipment, fuse boxes, and geysers. Strictly avoid locating bedrooms, water reservoirs, or main entrance openings in this high-energy fire zone."
+    },
+    "s": {
+      title: "South (Dakshina) — The Sector of Name and Fame",
+      desc: "Governed by Lord Yama; Element: Fire/Earth. It controls peace of mind and professional name. Ideal uses: Heavy master bedroom, overhead storage, heavy safes, and solid walls. Avoid creating open courtyards, main doors (without specialized remedy), or wells/underground water tanks here."
+    },
+    "sw": {
+      title: "South-West (Nairutya) — The Pillar of Stability",
+      desc: "Ruler: Lord Nirrti; Element: Earth. It governs relationship bonds, financial stability, and skill-learning. Ideal uses: Master bedroom, heavy safe boxes, solid heavy structural storage, and overhead water tanks. Do not build bathrooms, main entrances, kitchens, or septic reservoirs here."
+    },
+    "w": {
+      title: "West (Paschima) — The Zone of Gains and Profits",
+      desc: "Governed by Lord Varuna; Element: Air/Water. It rules general gains, prosperity, and children's welfare. Ideal uses: Dining room, kids' study desk, children's bedroom, or overhead water tanks. Avoid large open courtyards or main entrances without proper remediation."
+    },
+    "nw": {
+      title: "North-West (Vayavya) — The Wind Matrix",
+      desc: "Ruler: Lord Vayu; Element: Air. It governs hospitality, helpful associations, guest relations, and moving assets. Ideal uses: Guest bedrooms, garage space, granaries, animal shelters, or septic reservoirs. Avoid building master bedrooms or keeping heavy locked safes in this zone."
+    }
+  };
+
+  // Helper functions for highlighting and updating descriptions
+  function activateTarget(key) {
+    // 1. Reset all SVG active classes
+    document.querySelectorAll('.direction-node, .compass-line').forEach(el => el.classList.remove('active'));
+    // 2. Reset all buttons
+    document.querySelectorAll('.map-btn').forEach(btn => btn.classList.remove('btn-gold'));
+    document.querySelectorAll('.map-btn').forEach(btn => btn.classList.add('btn-outline-gold'));
+
+    // 3. Highlight SVG node
+    const nodeEl = document.getElementById('node-' + key);
+    if (nodeEl) nodeEl.classList.add('active');
+
+    // 4. Optionally highlight corresponding line guides
+    if (key === 'n' || key === 's') {
+      document.getElementById('line-n-s').classList.add('active');
+    } else if (key === 'e' || key === 'w') {
+      document.getElementById('line-w-e').classList.add('active');
+    } else if (key === 'nw' || key === 'se') {
+      document.getElementById('line-nw-se').classList.add('active');
+    } else if (key === 'ne' || key === 'sw') {
+      document.getElementById('line-ne-sw').classList.add('active');
+    }
+
+    // 5. Highlight button
+    const btnEl = document.querySelector(`.map-btn[data-target="${key}"]`);
+    if (btnEl) {
+      btnEl.classList.remove('btn-outline-gold');
+      btnEl.classList.add('btn-gold');
+    }
+
+    // 6. Update descriptions inside the readout-box
+    const data = vastuData[key];
+    if (data) {
+      document.getElementById('readout-title').textContent = data.title;
+      document.getElementById('readout-desc').textContent = data.desc;
+    }
+  }
+
+  // Bind Click events to buttons
+  document.querySelectorAll('.map-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-target');
+      activateTarget(target);
+      // Smooth scroll to the result readout card
+      document.getElementById('readout-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  // Bind Click events directly to SVG Elements
+  document.querySelectorAll('.direction-node').forEach(item => {
+    item.addEventListener('click', () => {
+      let key = item.id.replace('node-', '');
+      activateTarget(key);
+      document.getElementById('readout-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+</script>
+</body>
+</html>
