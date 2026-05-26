@@ -240,6 +240,24 @@
             background-color: var(--badge-bg);
             color: var(--badge-color);
         }
+        /* === Mobile responsive overrides === */
+        @media (max-width: 768px) {
+            .cosmic-header { padding-top: 2rem !important; padding-bottom: 2rem !important; margin-bottom: 2rem !important; }
+            .cosmic-header h1.display-3 { font-size: clamp(28px, 7vw, 42px); }
+            .cosmic-header .lead { font-size: 14px; }
+            .container.mb-5 { margin-bottom: 2rem !important; }
+            #postsContainer .col-md-6, #postsContainer .col-lg-4 { padding-left: 8px; padding-right: 8px; }
+            .navbar .order-lg-last { gap: 6px !important; }
+            .navbar .order-lg-last .btn { font-size: 13px; padding: 6px 12px; }
+        }
+        @media (max-width: 480px) {
+            .cosmic-header { padding-top: 1.25rem !important; padding-bottom: 1.25rem !important; }
+            .cosmic-header .badge-custom { font-size: 12px; padding: 6px 12px !important; }
+            #addCommentForm { padding: 1rem !important; }
+            #createPostForm input, #createPostForm select, #createPostForm textarea { font-size: 14px; }
+            .modal-dialog { margin: .5rem; }
+            .container { padding-left: 12px; padding-right: 12px; }
+        }
     </style>
 </head>
 <body>
