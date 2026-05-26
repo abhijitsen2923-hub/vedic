@@ -62,6 +62,50 @@ Every content page has been tuned for four breakpoints:
 
 When editing, keep the `@media (max-width: 768px)` and `@media (max-width: 480px)` blocks at the bottom of each page's inline `<style>` in sync.
 
+## Live content editing (Google Sheets)
+
+Marketing numbers, hero copy, contact info, and the footer copyright are wired to a Google Sheet. Edit a cell, save → the site reflects the change within seconds for new visitors (up to ~5 minutes for repeat visitors due to localStorage caching).
+
+### Editable fields (v1)
+
+17 fields in total — see [`content.example.csv`](content.example.csv) for the exact `key` names and current values:
+
+- 4 stat cards (`stats.students.*`, `stats.countries.*`, `stats.mentors.*`, `stats.success.*`)
+- Hero headline (2 parts), subhead, and student badge (`hero.headline.lead`, `hero.headline.gold`, `hero.subhead`, `hero.badge.line1`, `hero.badge.line2`)
+- Contact info on `contact.html` (`contact.phone`, `contact.email`, `contact.address`)
+- Footer copyright shared by 7 pages (`footer.copyright`)
+
+Anything not in this list (FAQ, testimonials, why-choose-us, certificate sample, course modules, govt-recognition dates) is still hard-coded in the HTML for v1.
+
+### One-time setup
+
+1. Open Google Sheets → **File → Import → Upload → select [`content.example.csv`](content.example.csv) from this repo** → "Replace spreadsheet" → Import.
+2. Rename the sheet tab from `content.example` to **`Content`** (case-sensitive, must match the constant in `assets/js/content.js`).
+3. Click **Share** (top right) → **General access** → set to **"Anyone with the link"** → role **Viewer** → Done.
+4. Copy the Sheet ID from the URL — it's the long string between `/d/` and `/edit`:
+   ```
+   https://docs.google.com/spreadsheets/d/THIS_IS_THE_SHEET_ID/edit#gid=0
+   ```
+5. Open [`assets/js/content.js`](assets/js/content.js) and replace `PASTE_SHEET_ID_HERE` with the ID. Commit + push. Done.
+
+### Day-to-day editing
+
+After setup, you never touch the code again for these 17 fields. Just open the Google Sheet, edit a `value` cell, save (Sheets auto-saves). The site fetches the latest values on the next page load.
+
+**Caching note:** `content.js` caches results in browser localStorage for 5 minutes per visitor to avoid hammering the sheet. A returning visitor sees the old value for up to 5 minutes; a new visitor (or anyone who hard-refreshes with Ctrl+Shift+R) sees the latest immediately.
+
+### Safety net
+
+- If the sheet is unreachable (offline, deleted, made private, gviz down) → the HTML default values stay visible. The site never breaks.
+- If a `key` in the sheet doesn't match anything on the page → silently ignored, no error.
+- If a `data-content` attribute on the page doesn't have a matching key in the sheet → the HTML default stays.
+
+### Adding more editable fields later
+
+1. Add a new row in the sheet with a unique `key` (e.g., `cta.button.label`).
+2. In the HTML, find the element you want editable and add `data-content="cta.button.label"` to it (keep the current text as default).
+3. Commit the HTML change. The sheet value takes effect on the next page load.
+
 ## Forms (email delivery)
 
 Contact and enroll forms POST to Formspree. Before first deploy:
