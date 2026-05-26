@@ -8,3 +8,6 @@ Thumbs.db
 .idea/
 dist/
 .cache/
+
+# Local dev notes (not for the public repo)
+MEMORY.md
