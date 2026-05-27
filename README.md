@@ -68,29 +68,30 @@ Marketing numbers, hero copy, contact info, and the footer copyright are wired t
 
 ### Editable fields (v1)
 
-17 fields in total — see [`content.example.csv`](content.example.csv) for the exact `key` names and current values:
+17 fields in total, grouped by key prefix:
 
-- 4 stat cards (`stats.students.*`, `stats.countries.*`, `stats.mentors.*`, `stats.success.*`)
-- Hero headline (2 parts), subhead, and student badge (`hero.headline.lead`, `hero.headline.gold`, `hero.subhead`, `hero.badge.line1`, `hero.badge.line2`)
-- Contact info on `contact.html` (`contact.phone`, `contact.email`, `contact.address`)
-- Footer copyright shared by 7 pages (`footer.copyright`)
+- 4 stat cards — `stats.students.*`, `stats.countries.*`, `stats.mentors.*`, `stats.success.*` (each has `.number` + `.label`)
+- Hero — `hero.headline.lead`, `hero.headline.gold`, `hero.subhead`, `hero.badge.line1`, `hero.badge.line2`
+- Contact (on `contact.html`) — `contact.phone`, `contact.email`, `contact.address`
+- Footer — `footer.copyright` (shared by 7 pages)
 
 Anything not in this list (FAQ, testimonials, why-choose-us, certificate sample, course modules, govt-recognition dates) is still hard-coded in the HTML for v1.
 
-### One-time setup
+### Setup (already done)
 
-1. Open Google Sheets → **File → Import → Upload → select [`content.example.csv`](content.example.csv) from this repo** → "Replace spreadsheet" → Import.
-2. Rename the sheet tab from `content.example` to **`Content`** (case-sensitive, must match the constant in `assets/js/content.js`).
-3. Click **Share** (top right) → **General access** → set to **"Anyone with the link"** → role **Viewer** → Done.
-4. Copy the Sheet ID from the URL — it's the long string between `/d/` and `/edit`:
-   ```
-   https://docs.google.com/spreadsheets/d/THIS_IS_THE_SHEET_ID/edit#gid=0
-   ```
-5. Open [`assets/js/content.js`](assets/js/content.js) and replace `PASTE_SHEET_ID_HERE` with the ID. Commit + push. Done.
+The site is wired to a Google Sheet at the ID set in [`assets/js/content.js`](assets/js/content.js). The sheet uses one tab named **`Content`** with three columns: `key`, `value`, `notes` (the `notes` column is ignored by the loader). The sheet's General Access must be **"Anyone with the link → Viewer"** for the gviz endpoint to work.
+
+If you ever need to **recreate the sheet from scratch** (deleted, lost, switching accounts):
+
+1. Create a new Google Sheet, rename the tab to **`Content`**.
+2. Row 1 (header): `key` | `value` | `notes`.
+3. Fill one row per key listed above. Use the live HTML defaults as starting values — find each one by grepping the codebase for the matching `data-content="<key>"` attribute.
+4. **Share → General access → "Anyone with the link" → Viewer**.
+5. Copy the Sheet ID from the URL (`docs.google.com/spreadsheets/d/<SHEET_ID>/edit`) and paste it into the `SHEET_ID` constant in `assets/js/content.js`. Commit.
 
 ### Day-to-day editing
 
-After setup, you never touch the code again for these 17 fields. Just open the Google Sheet, edit a `value` cell, save (Sheets auto-saves). The site fetches the latest values on the next page load.
+You don't touch the code for these 17 fields — just open the Google Sheet, edit a `value` cell, save (Sheets auto-saves). The site fetches the latest values on the next page load.
 
 **Caching note:** `content.js` caches results in browser localStorage for 5 minutes per visitor to avoid hammering the sheet. A returning visitor sees the old value for up to 5 minutes; a new visitor (or anyone who hard-refreshes with Ctrl+Shift+R) sees the latest immediately.
 
