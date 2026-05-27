@@ -2,7 +2,7 @@
   // Owner: paste your Google Sheet ID here. Get it from the sheet URL:
   // docs.google.com/spreadsheets/d/<SHEET_ID>/edit
   // The sheet must be shared as "Anyone with the link -> Viewer".
-  const SHEET_ID = 'PASTE_SHEET_ID_HERE';
+  const SHEET_ID = '1D1Uh61KEE2As9D0iffeYvIhHlLGtRj33nhJ-T3Kd7lM';
   const SHEET_NAME = 'Content';
   const CACHE_KEY = 'iva-content-cache-v1';
   const CACHE_TTL_MS = 5 * 60 * 1000;
@@ -37,7 +37,7 @@
   function fetchSheet() {
     if (SHEET_ID === 'PASTE_SHEET_ID_HERE') return Promise.resolve(null);
     var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-              '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(SHEET_NAME);
+              '/gviz/tq?tqx=out:json&headers=1&sheet=' + encodeURIComponent(SHEET_NAME);
     return fetch(url, { credentials: 'omit' }).then(function (r) {
       if (!r.ok) throw new Error('sheet fetch failed: ' + r.status);
       return r.text();
