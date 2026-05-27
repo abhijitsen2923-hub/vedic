@@ -2875,7 +2875,11 @@
           </div>
         </div>
 
-        <div class="cta-form-card">
+        <form id="cta-enroll-form" class="cta-form-card" action="https://formspree.io/f/YYYYYYYY" method="POST" novalidate>
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_subject" value="New enrollment from homepage CTA">
+          <input type="hidden" name="source" value="homepage-cta">
+
           <h3>Let's Get Started</h3>
           <div class="sub">Fill out the form and our team will help you choose the right course.</div>
 
@@ -2885,13 +2889,13 @@
                 <circle cx="8" cy="6" r="3"/>
                 <path d="M2 14c0-3 3-5 6-5s6 2 6 5"/>
               </svg>
-              <input type="text" placeholder="Full Name" required />
+              <input type="text" name="name" placeholder="Full Name" required />
             </div>
             <div class="form-input-group">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
                 <path d="M3 3h3l1.5 4-1.5 1.5a8 8 0 003.5 3.5l1.5-1.5 4 1.5v3a1 1 0 01-1 1A12 12 0 011 4a1 1 0 011-1z"/>
               </svg>
-              <input type="tel" placeholder="Phone Number" required />
+              <input type="tel" name="phone" placeholder="Phone Number" required />
             </div>
           </div>
 
@@ -2900,7 +2904,7 @@
               <rect x="2" y="4" width="12" height="9" rx="1"/>
               <path d="M2 5l6 4 6-4"/>
             </svg>
-            <input type="email" placeholder="Email Address" required />
+            <input type="email" name="_replyto" placeholder="Email Address" required />
           </div>
 
           <div class="form-input-group" style="margin-bottom: 16px;">
@@ -2908,7 +2912,7 @@
               <rect x="2" y="3" width="12" height="11" rx="1"/>
               <path d="M5 6h6M5 9h6"/>
             </svg>
-            <select required>
+            <select name="course" required>
               <option value="">Select Course</option>
               <option>Vedic Astrology</option>
               <option>Tarot Card Reading</option>
@@ -2921,8 +2925,28 @@
             </select>
           </div>
 
-          <button class="btn btn-gold cta-submit">Send Message →</button>
-        </div>
+          <button type="submit" class="btn btn-gold cta-submit">Send Message →</button>
+          <p class="form-status mt-3" role="status" aria-live="polite"></p>
+        </form>
+        <script>
+          (function(){
+            var f = document.getElementById('cta-enroll-form'); if (!f) return;
+            var s = f.querySelector('.form-status');
+            f.addEventListener('submit', async function (e) {
+              e.preventDefault();
+              if (f.action.indexOf('YYYYYYYY') !== -1) {
+                s.textContent = 'Form not configured yet. Replace YYYYYYYY with your Formspree enroll form ID.';
+                s.style.color = '#8b1a1a'; return;
+              }
+              s.textContent = 'Sending...'; s.style.color = '';
+              try {
+                var r = await fetch(f.action, { method:'POST', body:new FormData(f), headers:{Accept:'application/json'} });
+                if (r.ok) { s.textContent = 'Thanks — we will contact you shortly.'; s.style.color = '#2d5016'; f.reset(); }
+                else { var d = await r.json().catch(function(){return{};}); s.textContent = (d.errors ? d.errors.map(function(x){return x.message;}).join(', ') : 'Something went wrong.'); s.style.color = '#8b1a1a'; }
+              } catch (err) { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
+            });
+          })();
+        </script>
       </div>
     </div>
   </div>
