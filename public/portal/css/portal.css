@@ -70,6 +70,16 @@ body.auth-page {
   align-items: center;
   gap: 14px;
 }
+.cosmic-side .brand-logo {
+  width: 200px;
+  height: 67px;
+  display: block;
+}
+.app-header .brand-logo {
+  width: 140px;
+  height: 47px;
+  display: block;
+}
 .brand-mark {
   width: 48px; height: 48px;
   border: 1.5px solid var(--gold);
