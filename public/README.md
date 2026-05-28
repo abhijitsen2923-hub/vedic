@@ -20,7 +20,6 @@ public/
 ├── sitemap.xml                lists all marketing pages
 ├── _headers                   security headers + cache rules
 ├── _redirects                 301s for legacy capitalized URLs + .php URLs
-├── content.example.csv        schema for the live-content Google Sheet (reference only)
 ├── assets/
 │   ├── img/                   background.png, subheading.jpg, logo.png
 │   └── js/content.js          fetches a public Google Sheet and live-updates marketing copy
@@ -43,7 +42,7 @@ Editable fields (17 total):
 - Contact (`contact.{phone,email,address}`)
 - Footer (`footer.copyright`)
 
-To recreate the sheet from scratch (deleted, lost, switching accounts): create a new Google Sheet, tab name `Content`, columns `key | value | notes`, fill with the keys above, share as "Anyone with the link → Viewer", paste the new Sheet ID into the `SHEET_ID` constant at the top of `assets/js/content.js`. The `content.example.csv` in this folder is the seed schema.
+To recreate the sheet from scratch (deleted, lost, switching accounts): create a new Google Sheet, tab name `Content`, columns `key | value | notes`, fill with the keys above, share as "Anyone with the link → Viewer", paste the new Sheet ID into the `SHEET_ID` constant at the top of `assets/js/content.js`. The seed schema lives at [`../content.example.csv`](../content.example.csv) (repo root, not deployed) — `File → Import → Upload` it into the new Sheet to skip typing the 17 rows by hand.
 
 ## Forms (Formspree)
 

@@ -10,12 +10,12 @@ Marketing site + student portal for the academy, deployed as a single Cloudflare
 │   ├── *.html             ← marketing pages (index, about-us, blog, contact, 5 courses)
 │   ├── assets/            ← shared images + the live-content loader
 │   ├── portal/            ← student portal frontend (login, dashboard, …)
-│   ├── _headers, _redirects, robots.txt, sitemap.xml, 404.html
-│   └── content.example.csv (Google Sheet schema reference)
+│   └── _headers, _redirects, robots.txt, sitemap.xml, 404.html
 ├── functions/             ← Cloudflare Pages Functions (/api/* endpoints)
 │   ├── _lib/              shared modules (Sheets API, JWT, bcrypt, validators, repos)
 │   └── api/               health + auth/{login,register,me,logout}
 ├── scripts/               ← Node tooling (one-time data migrations)
+├── content.example.csv    seed schema for the marketing-content Google Sheet (reference only)
 ├── package.json           jose + bcryptjs deps, dev/migrate scripts
 ├── .dev.vars.example      template for local function env vars
 ├── .gitignore
