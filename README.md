@@ -135,9 +135,71 @@ Each enroll form tags the submission with a hidden `course` field so you can fil
 
 `assets/img/background.png` (1.6 MB) and `assets/img/subheading.jpg` (2.1 MB) are larger than ideal for a marketing site. Use [squoosh.app](https://squoosh.app) (drag, encode to WebP at ~75 quality, download) and replace the files. Then update CSS `url(assets/img/background.png)` → `url(assets/img/background.webp)` and `<img>` tags accordingly.
 
-## Conventions
+## Student portal (Cloudflare Pages Functions)
+
+A logged-in area for enrolled students lives at `/portal/*`. Phase 1 ships login + register + logout against a **private** Google Sheet ("IVA Portal DB" — different from the marketing-content sheet, not publicly shared).
+
+### Architecture
+
+```
+portal/                  ← static HTML/CSS/JS for the logged-in pages
+├── login.html           (login + register toggle)
+├── dashboard.html       (Phase 1 placeholder; full UI lands in Phase 2)
+├── css/portal.css
+└── js/{api-client,auth,dashboard}.js
+
+functions/               ← Cloudflare Pages Functions (Node-less JS, runs at the edge)
+├── _lib/                shared modules (Sheets API, JWT, bcrypt, validators, repos)
+└── api/
+    ├── health.js                       GET  /api/health
+    ├── auth/login.js                   POST /api/auth/login
+    ├── auth/register.js                POST /api/auth/register
+    ├── auth/me.js                      GET  /api/auth/me
+    └── auth/logout.js                  POST /api/auth/logout
+```
+
+### One-time setup (owner action)
+
+1. **Google Cloud**: create a project → enable **Google Sheets API** → IAM → create a service account `iva-portal-fn` → Keys → add key (JSON) → download.
+2. **Google Sheet**: create a new sheet "IVA Portal DB" (separate from the marketing-content sheet). Share it with the service account's email as **Editor**. Do *not* set it to "Anyone with the link".
+3. **Seed data**: run the bootstrap script locally (Node 18+ required):
+   ```powershell
+   npm install
+   # Place the downloaded JSON key at ./service-account.json (gitignored)
+   $env:IVA_SHEET_ID = "your-sheet-id-here"
+   npm run migrate-sheet
+   ```
+   This reads the 6 `.xlsx` workbooks from `..\astro\astro\backend\data\` and writes them as 6 tabs in the Google Sheet.
+4. **Cloudflare Pages env vars** (Project → Settings → Environment variables → Production):
+   - `GOOGLE_SERVICE_ACCOUNT_JSON` — paste the entire JSON file content.
+   - `IVA_SHEET_ID` — the new Sheet's ID.
+   - `JWT_SECRET` — generate with `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`.
+   - `JWT_EXP_HOURS` — `24`.
+   - `ACADEMY_CODE` — a short shared secret you give to enrolled students so they can self-register.
+5. Push to the Cloudflare-connected git remote. CF builds + deploys. Visit `https://internationalvedicacademy.com/api/health` — should report `sheet_reachable: true` and list the 6 tab names.
+
+### Local development
+
+```powershell
+npm install
+cp .dev.vars.example .dev.vars   # fill in real values
+npx wrangler pages dev .
+```
+
+Open <http://localhost:8788/portal/login.html>. Try the demo account: `riya.sharma@email.com` / `password123` (assuming the migration script seeded it).
+
+### Auth model
+
+- **JWT** signed HS256, payload `{ sub: student_id, iat, exp }`.
+- **Delivery**: httpOnly `iva_token` cookie. Frontend never reads the token.
+- **Passwords**: bcrypt hashes (10 rounds). New registrations and the legacy Flask seed data both validate the same way.
+- **CSRF**: writes require an `X-IVA-Client: portal` header (set automatically by `api-client.js`).
+- **Logout**: clears the cookie. Cookie is `HttpOnly; SameSite=Lax; Secure` in production.
+
+### Conventions
 
 - Use CSS design tokens (`--gold`, `--cosmic-deep`, `--bg-cream`, etc.) — don't hardcode hex.
 - Lowercase, hyphenated filenames (Cloudflare is case-sensitive — `Numerology.html` would 404).
-- No build tooling. If you add a dependency, justify it in the PR.
+- Marketing site stays zero-build (inline CSS/JS per page). Student portal uses separated HTML/CSS/JS files and ES modules.
+- Pages Functions deps live in `package.json` (`jose`, `bcryptjs`). Cloudflare's build runs `npm install`.
 - Match the existing visual language: cream background, cosmic-dark sections, gold accents, serif headings.
