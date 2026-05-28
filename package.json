@@ -5,7 +5,7 @@
   "type": "module",
   "description": "International Vedic Academy — marketing site + student portal on Cloudflare Pages",
   "scripts": {
-    "dev": "wrangler pages dev . --port 8788",
+    "dev": "wrangler pages dev public --port 8788",
     "migrate-sheet": "node scripts/migrate-excel-to-sheet.mjs"
   },
   "dependencies": {
