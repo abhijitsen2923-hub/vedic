@@ -1,0 +1,358 @@
+/* Portal styles — login + register + dashboard chrome.
+   Design tokens mirror the marketing site for visual coherence. */
+
+:root {
+  --bg-cream: #f7f1e3;
+  --bg-cream-deep: #f0e8d3;
+  --bg-white: #ffffff;
+  --ink: #1a1535;
+  --ink-soft: #4a4365;
+  --ink-muted: #7a7290;
+  --cosmic-deep: #0a0618;
+  --cosmic-mid: #1a1535;
+  --cosmic-purple: #2a1f5e;
+  --gold: #d4a24c;
+  --gold-bright: #f0c878;
+  --gold-deep: #a8791f;
+  --border-light: rgba(26, 21, 53, 0.1);
+  --danger: #b54420;
+  --danger-bg: rgba(216, 90, 48, 0.1);
+  --serif: 'Fraunces', Georgia, serif;
+  --serif-display: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg-cream);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ============ Auth page (login / register) ============ */
+
+body.auth-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cosmic-side {
+  background:
+    radial-gradient(ellipse at top right, rgba(74, 47, 142, 0.55), transparent 60%),
+    radial-gradient(ellipse at bottom left, rgba(212, 162, 76, 0.18), transparent 60%),
+    linear-gradient(135deg, var(--cosmic-mid) 0%, var(--cosmic-purple) 60%, var(--cosmic-deep) 100%);
+  color: #faf5ea;
+  padding: 56px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.cosmic-side::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1px 1px at 15% 30%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 80% 50%, rgba(240,200,120,0.5), transparent),
+    radial-gradient(1px 1px at 45% 70%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 90% 20%, rgba(240,200,120,0.5), transparent);
+  background-size: 350px 350px;
+  opacity: 0.7;
+}
+.cosmic-side > * { position: relative; z-index: 1; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-mark {
+  width: 48px; height: 48px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle, rgba(212,162,76,0.2), transparent);
+  flex-shrink: 0;
+}
+.brand-mark svg { width: 26px; height: 26px; color: var(--gold-bright); }
+.brand-text {
+  font-family: var(--serif-display);
+  font-size: 17px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.brand-text span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+.cosmic-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+.cosmic-hero h1 em {
+  font-style: italic;
+  color: var(--gold-bright);
+  font-weight: 400;
+}
+.cosmic-hero p {
+  color: #c4bba8;
+  font-size: 16px;
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+.cosmic-footer {
+  font-size: 12px;
+  color: #8a8170;
+  letter-spacing: 0.4px;
+}
+.cosmic-footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.cosmic-footer a:hover { color: var(--gold-bright); }
+
+.form-side {
+  padding: 56px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form-wrap {
+  max-width: 380px;
+  width: 100%;
+  margin: 0 auto;
+}
+.form-wrap h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+.form-wrap > p {
+  color: var(--ink-muted);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.field[hidden] { display: none; }
+.field label {
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.field input {
+  padding: 12px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: var(--bg-white);
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 162, 76, 0.18);
+}
+.field-hint {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.auth-error {
+  display: none;
+  padding: 10px 14px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.auth-error.visible { display: block; }
+
+.submit-btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color: #1a0f00;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 18px rgba(212, 162, 76, 0.3);
+}
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(212, 162, 76, 0.45);
+}
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.toggle-row {
+  margin-top: 22px;
+  text-align: center;
+  font-size: 13px;
+}
+.toggle-row a {
+  color: var(--gold-deep);
+  text-decoration: none;
+  font-weight: 500;
+}
+.toggle-row a:hover { color: var(--gold); }
+
+@media (max-width: 880px) {
+  body.auth-page { grid-template-columns: 1fr; }
+  .cosmic-side { padding: 40px 32px; min-height: 220px; }
+  .form-side { padding: 40px 32px; }
+}
+
+/* ============ App pages (dashboard, etc.) ============ */
+
+body.app-page {
+  background: var(--bg-cream);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  background: var(--bg-white);
+  border-bottom: 1px solid var(--border-light);
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand-mark--sm { width: 36px; height: 36px; border-color: var(--gold-deep); background: radial-gradient(circle, rgba(212,162,76,0.15), transparent); }
+.brand-mark--sm svg { width: 20px; height: 20px; color: var(--gold-deep); }
+.brand-text--sm {
+  font-family: var(--serif-display);
+  font-size: 14px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+}
+.brand-text--sm span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold-deep);
+  margin-top: 1px;
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.user-greeting {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.ghost-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--ink-soft);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.ghost-btn:hover {
+  background: var(--bg-cream-deep);
+  border-color: var(--gold);
+}
+
+.app-main {
+  flex: 1;
+  padding: 40px 32px;
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.welcome-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(26, 21, 53, 0.06);
+}
+.welcome-card h1 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.welcome-card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.welcome-card .muted {
+  color: var(--ink-muted);
+  font-size: 13px;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.profile-dump {
+  background: var(--bg-cream-deep);
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .app-header { padding: 14px 18px; }
+  .app-main { padding: 24px 18px; }
+  .welcome-card { padding: 22px 18px; }
+  .user-greeting { display: none; }
+}
