@@ -14,3 +14,13 @@ MEMORY.md
 
 # Local preview server helper
 .serve.ps1
+
+# Node / Cloudflare Pages
+node_modules/
+.wrangler/
+
+# Local function env (real env vars live in CF dashboard)
+.dev.vars
+
+# Google service-account key for the migration script (NEVER commit)
+service-account.json
