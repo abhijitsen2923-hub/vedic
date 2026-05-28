@@ -2,6 +2,8 @@
 
 One-off and rare maintenance scripts that run on your machine, not on Cloudflare. Anything here is **not** deployed.
 
+> **No Node installed?** Skip this whole folder — see [`../portal-seed/README.md`](../portal-seed/README.md) for the manual CSV-import path that achieves the same end result without any tooling.
+
 ## `migrate-excel-to-sheet.mjs`
 
 One-time bootstrap: read the legacy Flask app's six Excel workbooks and copy them into the private "IVA Portal DB" Google Sheet (six tabs, one per workbook). Safe to re-run — it clears and rewrites each tab.

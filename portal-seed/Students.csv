@@ -1,0 +1,2 @@
+student_id,name,email,phone,password_hash,tier,avatar_initials,joined_date
+STDNT-001,Riya Sharma,riya.sharma@email.com,+91 98765 43210,$2b$12$XYObZg/X04TvUCmftjVGOu8lnBgTN4xDVbcsZvJiQOvyOlkBaaQnO,Gold,RS,2025-03-15

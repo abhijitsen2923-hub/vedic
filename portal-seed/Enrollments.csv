@@ -1,0 +1,4 @@
+enrollment_id,student_id,course_id,current_module,progress_pct,enrolled_on
+ENRLM-001,STDNT-001,CORSE-001,4,33,2025-03-20
+ENRLM-002,STDNT-001,CORSE-002,6,75,2025-04-01
+ENRLM-003,STDNT-001,CORSE-003,2,18,2025-05-10

@@ -1,0 +1,5 @@
+class_id,course_id,title,module_number,scheduled_at,duration_min,meet_link,status
+CLASS-001,CORSE-001,Birth Chart Analysis - Module 4,4,2026-05-29T18:00:00,90,https://meet.google.com/new,upcoming
+CLASS-002,CORSE-002,Number Patterns Deep Dive,6,2026-05-30T19:00:00,60,https://meet.google.com/new,upcoming
+CLASS-003,CORSE-001,Module 3 - Houses Overview,3,2026-05-26T10:00:00,90,https://meet.google.com/new,ended
+CLASS-004,CORSE-003,Tarot Spreads Workshop,2,2026-05-28T20:00:00,75,https://meet.google.com/new,upcoming

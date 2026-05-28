@@ -15,6 +15,7 @@ Marketing site + student portal for the academy, deployed as a single Cloudflare
 │   ├── _lib/              shared modules (Sheets API, JWT, bcrypt, validators, repos)
 │   └── api/               health + auth/{login,register,me,logout}
 ├── scripts/               ← Node tooling (one-time data migrations)
+├── portal-seed/           ← bootstrap CSVs + bcrypt hash utility for the private "IVA Portal DB" Sheet
 ├── content.example.csv    seed schema for the marketing-content Google Sheet (reference only)
 ├── package.json           jose + bcryptjs deps, dev/migrate scripts
 ├── .dev.vars.example      template for local function env vars
@@ -28,6 +29,7 @@ Per-folder docs:
 - [public/portal/README.md](public/portal/README.md) — student portal frontend.
 - [functions/README.md](functions/README.md) — Pages Functions architecture.
 - [scripts/README.md](scripts/README.md) — Node tooling.
+- [portal-seed/README.md](portal-seed/README.md) — bootstrap the private portal Sheet from CSVs (no Node needed).
 
 ## Tech at a glance
 
