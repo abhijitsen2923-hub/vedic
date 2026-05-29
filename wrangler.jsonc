@@ -1,0 +1,10 @@
+{
+  // Tell Cloudflare to deploy this as a Pages project (static assets in `public/`
+  // + auto-mounted Functions from the sibling `functions/` directory), even though
+  // the dashboard project type is "Worker". The `pages_build_output_dir` key is the
+  // documented migration shim that makes `wrangler deploy` behave as Pages.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vedic",
+  "compatibility_date": "2026-05-29",
+  "pages_build_output_dir": "./public"
+}
