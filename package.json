@@ -1,0 +1,19 @@
+{
+  "name": "iva-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "International Vedic Academy — marketing site + student portal on Cloudflare Pages",
+  "scripts": {
+    "dev": "wrangler pages dev public --port 8788",
+    "migrate-sheet": "node scripts/migrate-excel-to-sheet.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.6"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0",
+    "xlsx": "^0.18.5"
+  }
+}

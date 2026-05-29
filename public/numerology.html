@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Learn Palmistry Online — International Vedic Academy</title>
-<meta name="description" content="Discover how to interpret personality, tendencies, strengths, and life events through hand reading with our professional, certified online Palmistry course." />
+<title>Learn Numerology Online — International Vedic Academy</title>
+<meta name="description" content="Discover how numbers influence personality, destiny, relationships, and success with our comprehensive, certified online Numerology course." />
 <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Google Fonts -->
@@ -48,7 +48,7 @@
   }
 
   /* Core Global Settings */
-body {
+ body {
     font-family: var(--sans);
     background-image: url('./assets/img/background.png');
     background-size: cover;
@@ -198,28 +198,6 @@ body {
     overflow: visible;
   }
 
-  /* Interactive Elements on SVG Map */
-  .interactive-line {
-    transition: stroke-width 0.2s, stroke 0.2s, filter 0.2s;
-    cursor: pointer;
-  }
-  .interactive-line:hover, .interactive-line.active {
-    stroke: var(--gold-bright);
-    stroke-width: 4.5px;
-    filter: drop-shadow(0 0 8px rgba(240, 200, 120, 0.9));
-  }
-
-  .mount-node {
-    transition: r 0.2s, fill 0.2s, stroke 0.2s, filter 0.2s;
-    cursor: pointer;
-  }
-  .mount-node:hover, .mount-node.active {
-    r: 10px;
-    fill: var(--gold-bright);
-    stroke: #ffffff;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
-  }
-
   /* Sections & Card Styles */
   .section-padding {
     padding: 100px 0;
@@ -304,14 +282,47 @@ body {
     height: 26px;
   }
 
-  /* Interactive Results Screen */
-  .interactive-result-box {
+  /* Custom Floating Numbers Animation */
+  @keyframes floatNumber1 {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-15px) rotate(15deg); opacity: 1; }
+    100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+  }
+  @keyframes floatNumber2 {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+    50% { transform: translateY(-20px) rotate(-10deg); opacity: 0.9; }
+    100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  }
+  @keyframes rotateGrid {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .number-node-1 {
+    animation: floatNumber1 6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .number-node-2 {
+    animation: floatNumber2 8s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .rotator-ring {
+    animation: rotateGrid 40s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Live Calculator Interface */
+  .calculator-result-box {
     background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-deep));
-    border: 1.5px solid var(--gold);
-    border-radius: 16px;
-    padding: 30px;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 24px;
     color: #fff;
-    box-shadow: var(--shadow-lg);
+    display: none;
+    box-shadow: var(--shadow-sm);
   }
 
   /* Footer */
@@ -342,6 +353,7 @@ body {
     color: var(--gold);
   }
 
+  /* Custom styling to keep the mystic-seal responsive and centered */
   .mystic-seal {
     width: 80px;
     height: 80px;
@@ -471,9 +483,10 @@ body {
 <body>
 
 <!-- NAVIGATION BAR -->
+<!-- NAVIGATION BAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+   <a class="navbar-brand d-flex align-items-center gap-3" href="#">
       <img src="assets/img/logo.png" class="img-fluid" style="width: 180px; height: 60px;"/>
       
      
@@ -504,6 +517,7 @@ body {
         </li>
 
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
         <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold">Enroll Now</a></li>
       </ul>
     </div>
@@ -515,48 +529,69 @@ body {
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-7 text-center text-lg-start">
-        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Interactive Chiromancy Certification</span>
-        <h1>Learn <span class="gold-gradient-text">Palmistry</span> Online</h1>
-        <p class="lead mt-4">The Palmistry Course at International Vedic Academy teaches students how to interpret personality, tendencies, emotional patterns, strengths, and predictive indicators through hand reading. This ancient science remains relevant because it combines observation, intuition, and interpretive knowledge into a practical guidance skill.</p>
+        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Practical Number-Based Sciences</span>
+        <h1>Learn <span class="gold-gradient-text">Numerology</span> Online</h1>
+        <p class="lead mt-4">The Numerology Course at International Vedic Academy is designed to help students understand how numbers influence personality, life direction, relationships, business decisions, and personal success. This program is ideal for those who want to turn number-based analysis into a practical consulting skill.</p>
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
-          <a href="#interactive-palm" class="btn btn-gold">Try Interactive Palm Map</a>
-          <a href="#syllabus" class="btn btn-outline-gold">View Syllabus</a>
+          <a href="#calculator" class="btn btn-gold">Try Life Path Calculator</a>
+          <a href="#syllabus" class="btn btn-outline-gold">View Course details</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <!-- Self-contained, highly ornate Palmistry Hand Map SVG with custom vector art -->
+        <!-- Self-contained, highly ornate Occult Numerology grid & math dials SVG -->
         <div class="celestial-graphic">
-          <svg viewBox="0 0 400 450" width="100%" height="100%" fill="none" stroke="currentColor">
+          <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
             <!-- Background circles and star map -->
-            <circle cx="200" cy="225" r="190" stroke="#d4a24c" stroke-width="1" opacity="0.3"/>
-            <circle cx="200" cy="225" r="170" stroke="#d4a24c" stroke-dasharray="4, 4" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="200" cy="200" r="190" stroke="#d4a24c" stroke-width="1" opacity="0.3"/>
+            <circle cx="200" cy="200" r="175" stroke="#d4a24c" stroke-dasharray="4, 4" stroke-width="1.5" opacity="0.6"/>
             
-            <!-- Ornate Hand Outline -->
-            <path d="M120,400 C110,360 100,320 100,280 C100,240 105,210 115,180 C110,140 115,100 125,70 C128,60 138,60 140,70 C145,110 148,150 150,175 C152,130 158,85 168,50 C171,40 181,40 183,50 C188,100 190,145 192,175 C195,125 202,75 212,45 C215,35 225,35 227,45 C232,100 232,150 231,180 C236,140 244,100 254,75 C257,65 267,65 268,75 C271,115 268,160 263,205 C275,190 288,180 298,190 C305,195 305,205 300,215 C285,245 275,275 275,310 C275,350 265,390 250,410 Z" fill="#130e2b" fill-opacity="0.9" stroke="#d4a24c" stroke-width="2"/>
+            <!-- Rotating Outer Coordinate Ring -->
+            <g class="rotator-ring" stroke="#f0c878" stroke-width="0.8" opacity="0.5">
+              <circle cx="200" cy="200" r="155" stroke-dasharray="10, 8"/>
+              <line x1="200" y1="35" x2="200" y2="45" stroke-width="2"/>
+              <line x1="200" y1="355" x2="200" y2="365" stroke-width="2"/>
+              <line x1="35" y1="200" x2="45" y2="200" stroke-width="2"/>
+              <line x1="355" y1="200" x2="365" y2="200" stroke-width="2"/>
+            </g>
 
-            <!-- Interactive Lines on Palm (Life, Head, Heart, Fate) -->
-            <!-- Life Line (Ayush Rekha) -->
-            <path id="svg-life-line" class="interactive-line" d="M148,205 Q170,250 170,300 T210,370" stroke="#f0c878" stroke-width="2.5" fill="none"/>
-            <!-- Head Line (Mastishk Rekha) -->
-            <path id="svg-head-line" class="interactive-line" d="M148,205 Q200,225 255,240" stroke="#f0c878" stroke-width="2.5" fill="none"/>
-            <!-- Heart Line (Hridaya Rekha) -->
-            <path id="svg-heart-line" class="interactive-line" d="M135,240 Q190,190 260,195" stroke="#f0c878" stroke-width="2.5" fill="none"/>
-            <!-- Fate Line (Bhagya Rekha) -->
-            <path id="svg-fate-line" class="interactive-line" d="M195,380 L195,210" stroke="#f0c878" stroke-width="1.8" stroke-dasharray="3, 2" fill="none"/>
+            <!-- OCCULT LO SHU MAGIC SQUARE (Traditional 3x3 Numerological Grid) -->
+            <g transform="translate(100, 100)" stroke="#d4a24c" stroke-width="1.5">
+              <!-- Grid background -->
+              <rect x="0" y="0" width="200" height="200" rx="10" fill="#0c0722" fill-opacity="0.9" stroke="#d4a24c" stroke-width="2"/>
+              <rect x="5" y="5" width="190" height="190" rx="8" fill="none" stroke="#f0c878" stroke-width="0.7" opacity="0.5"/>
+              
+              <!-- Divider Lines -->
+              <line x1="66.6" y1="0" x2="66.6" y2="200"/>
+              <line x1="133.3" y1="0" x2="133.3" y2="200"/>
+              <line x1="0" y1="66.6" x2="200" y2="66.6"/>
+              <line x1="0" y1="133.3" x2="200" y2="133.3"/>
 
-            <!-- Astrological Mount Nodes on the Hand -->
-            <!-- Jupiter Mount (under index finger) -->
-            <circle id="node-jupiter" class="mount-node" cx="138" cy="160" r="5" fill="#d4a24c" stroke="#f0c878"/>
-            <!-- Saturn Mount (under middle finger) -->
-            <circle id="node-saturn" class="mount-node" cx="180" cy="145" r="5" fill="#d4a24c" stroke="#f0c878"/>
-            <!-- Apollo/Sun Mount (under ring finger) -->
-            <circle id="node-apollo" class="mount-node" cx="220" cy="150" r="5" fill="#d4a24c" stroke="#f0c878"/>
-            <!-- Mercury Mount (under pinky) -->
-            <circle id="node-mercury" class="mount-node" cx="255" cy="170" r="5" fill="#d4a24c" stroke="#f0c878"/>
-            <!-- Venus Mount (thumb base) -->
-            <circle id="node-venus" class="mount-node" cx="145" cy="300" r="7" fill="#d4a24c" stroke="#f0c878"/>
-            <!-- Moon Mount (lower palm opposite thumb) -->
-            <circle id="node-moon" class="mount-node" cx="245" cy="320" r="7" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- Occult Numbers (Lo Shu Grid mapping) with floating effect -->
+              <g font-family="Fraunces" font-size="28" fill="#f0c878" font-weight="700" text-anchor="middle" dominant-baseline="central">
+                <!-- Row 1: 4, 9, 2 -->
+                <g class="number-node-1" style="transform-origin: 33px 33px;"><text x="33.3" y="33.3">4</text></g>
+                <g class="number-node-2" style="transform-origin: 100px 33px;"><text x="100" y="33.3">9</text></g>
+                <g class="number-node-1" style="transform-origin: 166px 33px;"><text x="166.6" y="33.3">2</text></g>
+
+                <!-- Row 2: 3, 5, 7 -->
+                <g class="number-node-2" style="transform-origin: 33px 100px;"><text x="33.3" y="100">3</text></g>
+                <g class="number-node-1" style="transform-origin: 100px 100px;"><text x="100" y="100">5</text></g>
+                <g class="number-node-2" style="transform-origin: 166px 100px;"><text x="166.6" y="100">7</text></g>
+
+                <!-- Row 3: 8, 1, 6 -->
+                <g class="number-node-1" style="transform-origin: 33px 166px;"><text x="33.3" y="166.6">8</text></g>
+                <g class="number-node-2" style="transform-origin: 100px 166px;"><text x="100" y="166.6">1</text></g>
+                <g class="number-node-1" style="transform-origin: 166px 166px;"><text x="166.6" y="166.6">6</text></g>
+              </g>
+            </g>
+
+            <!-- Outer Floating Occult Symbols & Coordinates -->
+            <g opacity="0.6" stroke="#f0c878" stroke-width="0.8">
+              <circle cx="200" cy="55" r="4" fill="#f0c878"/>
+              <circle cx="200" cy="345" r="4" fill="#f0c878"/>
+              <circle cx="55" cy="200" r="4" fill="#f0c878"/>
+              <circle cx="345" cy="200" r="4" fill="#f0c878"/>
+            </g>
           </svg>
         </div>
       </div>
@@ -564,39 +599,67 @@ body {
   </div>
 </section>
 
-<!-- INTERACTIVE PALM LINE MAP & ATTRIBUTION READOUT -->
-<section id="interactive-palm" class="section-padding bg-cream-deep">
+<!-- INTERACTIVE LIFE PATH CALCULATOR (Immersive experience addition) -->
+<section id="calculator" class="section-padding bg-cream-deep">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-10">
+      <div class="col-lg-8">
         <div class="custom-card border-gold p-5 text-center">
           <div class="mystic-seal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/>
-              <path d="M12 6v12M6 12h12" stroke-dasharray="2, 2"/>
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+              <!-- Outer elegant dotted ring -->
+              <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-dasharray="2 3" opacity="0.6"/>
+              <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="0.8"/>
+              <!-- Interlocking equilateral triangles creating a mystical star / Shatkona -->
+              <polygon points="50,18 78,66 22,66" stroke="currentColor" opacity="0.5"/>
+              <polygon points="50,82 78,34 22,34" stroke="currentColor" opacity="0.5"/>
+              <!-- Small floating nodes (numbers/planets representation) -->
+              <circle cx="50" cy="18" r="3" fill="currentColor"/>
+              <circle cx="78" cy="66" r="3" fill="currentColor"/>
+              <circle cx="22" cy="66" r="3" fill="currentColor"/>
+              <circle cx="50" cy="82" r="3" fill="currentColor"/>
+              <circle cx="78" cy="34" r="3" fill="currentColor"/>
+              <circle cx="22" cy="34" r="3" fill="currentColor"/>
+              <!-- Central radiant sun/sparkle representing the unified source -->
+              <circle cx="50" cy="50" r="10" stroke="currentColor" fill="#ffffff"/>
+              <path d="M50 35 L50 65 M35 50 L65 50" stroke="currentColor" stroke-width="1"/>
+              <circle cx="50" cy="50" r="3" fill="currentColor"/>
             </svg>
           </div>
-          <h2 class="font-serif text-dark mb-2">Interactive Palm Map</h2>
-          <p class="text-secondary small mb-4">Click on the buttons below or click directly on the lines and glowing nodes of the hand graphic above to decode their esoteric characteristics.</p>
-
-          <!-- Interactive Selection Buttons -->
-          <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="life-line">Life Line (Ayush Rekha)</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="head-line">Head Line (Mastishk)</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="heart-line">Heart Line (Hridaya)</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="fate-line">Fate Line (Bhagya)</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="jupiter">Mount of Jupiter</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="saturn">Mount of Saturn</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="apollo">Mount of Apollo</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="mercury">Mount of Mercury</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="venus">Mount of Venus</button>
-            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="moon">Mount of Moon</button>
+          <h2 class="font-serif text-dark mb-2">Interactive Life Path Calculator</h2>
+          <p class="text-secondary small mb-4">Calculate your unique Life Path Number instantly based on your Date of Birth to preview our core teaching methodologies.</p>
+          
+          <div class="row g-3 justify-content-center mb-4">
+            <div class="col-md-4">
+              <select id="calc-day" class="form-select rounded-pill bg-light border-0 py-2.5 px-3 text-center" required></select>
+            </div>
+            <div class="col-md-4">
+              <select id="calc-month" class="form-select rounded-pill bg-light border-0 py-2.5 px-3 text-center" required>
+                <option value="1">January (1)</option>
+                <option value="2">February (2)</option>
+                <option value="3">March (3)</option>
+                <option value="4">April (4)</option>
+                <option value="5">May (5)</option>
+                <option value="6">June (6)</option>
+                <option value="7">July (7)</option>
+                <option value="8">August (8)</option>
+                <option value="9">September (9)</option>
+                <option value="10">October (1)</option>
+                <option value="11">November (11/2)</option>
+                <option value="12">December (3)</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <input type="number" id="calc-year" class="form-control rounded-pill bg-light border-0 py-2.5 px-3 text-center" placeholder="Year (e.g., 1995)" min="1900" max="2026" required>
+            </div>
           </div>
+          
+          <button id="calculate-btn" class="btn btn-gold px-5 mb-4">Discover Your Path</button>
 
-          <!-- Dynamic Output Card -->
-          <div id="readout-box" class="interactive-result-box text-start">
-            <h4 id="readout-title" class="font-serif text-gold-bright mb-2">Select a Line or Mount</h4>
-            <p id="readout-desc" class="small mb-0 opacity-90">Discover how hand features correlate with emotional, physical, and psychological tendencies in Vedic Chiromancy. Click any target above to begin.</p>
+          <!-- Interactive Results Screen -->
+          <div id="calculator-result" class="calculator-result-box text-start">
+            <h4 class="font-serif text-gold-bright mb-2">Your Life Path Number is: <span id="result-number"></span></h4>
+            <p id="result-desc" class="small mb-0 opacity-90"></p>
           </div>
         </div>
       </div>
@@ -610,7 +673,7 @@ body {
     <div class="row justify-content-center mb-5">
       <div class="col-lg-8 text-center">
         <h2 class="section-title title-gold-line-center">Our Curriculum</h2>
-        <p class="section-sub">A practical, structured approach developed to take you from foundational hand observation to accurate personal analysis.</p>
+        <p class="section-sub">A practical, structured approach developed to take you from foundational number basics to advanced numerological analysis.</p>
       </div>
     </div>
     <div class="row g-5">
@@ -623,7 +686,7 @@ body {
             </svg>
           </div>
           <h3 class="mb-3">What We Teach</h3>
-          <p class="text-secondary mb-0">Students learn hand shapes, elemental hand types, major and minor lines, mounts, markings, and interpretive principles used in palm analysis. The course helps learners understand how to observe details carefully and connect them to personality and life tendencies.</p>
+          <p class="text-secondary mb-0">Students learn core numerology concepts such as life path number, destiny number, name number, compatibility analysis, personal traits, and practical applications in business and branding. The course is structured to show how numbers can be interpreted meaningfully for both individuals and professional use cases.</p>
         </div>
       </div>
       <!-- How We Teach -->
@@ -637,14 +700,14 @@ body {
             </svg>
           </div>
           <h3 class="mb-3">How We Teach</h3>
-          <p class="text-secondary mb-0">We teach palmistry through visual examples, guided interpretation, practical exercises, and case-based explanation so students can develop confidence in reading different hand patterns. The focus is on making the student capable of both accurate observation and meaningful interpretation.</p>
+          <p class="text-secondary mb-0">Our teaching method focuses on practical calculations, interpretation frameworks, examples, and step-by-step explanation. Instead of making numerology feel abstract, we simplify the system so students can confidently apply it to real names, dates, personalities, and consultation scenarios.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES SECTION ("Why Learn Palmistry" & "Career Opportunities") -->
+<!-- VALUES SECTION ("Why Learn Numerology" & "Career Opportunities") -->
 <section class="section-padding bg-cosmic text-white">
   <div class="container">
     <div class="row justify-content-center mb-5">
@@ -653,18 +716,18 @@ body {
       </div>
     </div>
     <div class="row g-5">
-      <!-- Why Learn Palmistry -->
+      <!-- Why Learn Numerology -->
       <div class="col-md-6">
         <div class="ornate-dark-card">
-          <h3 class="mb-3">Why Learn Palmistry</h3>
-          <p class="text-light opacity-75 mb-0">Palmistry is a valuable subject because it offers immediate, personal, and visually engaging insight into human nature and life patterns. It can become a powerful spiritual consultation skill for learners who enjoy one-to-one interaction, observation-based analysis, and intuitive guidance.</p>
+          <h3 class="mb-3">Why Learn Numerology</h3>
+          <p class="text-light opacity-75 mb-0">Numerology is powerful because it offers a simple yet insightful framework for understanding patterns in identity, decision-making, compatibility, and timing. It is especially valuable for people who want a spiritual science that can be applied in personal guidance, business naming, brand consultation, and life coaching.</p>
         </div>
       </div>
       <!-- Career Opportunities -->
       <div class="col-md-6">
         <div class="ornate-dark-card">
           <h3 class="mb-3">Career Opportunities</h3>
-          <p class="text-light opacity-75 mb-0">Students can develop a profession as a palmist, spiritual consultant, personality reader, life advisor, or content creator in hand analysis and spiritual guidance. As with other occult sciences, professional opportunity grows when knowledge is paired with communication and practical application.</p>
+          <p class="text-light opacity-75 mb-0">A trained student can work as a numerologist, brand naming consultant, life guidance consultant, spiritual advisor, or content educator. Because numerology is easy to communicate online, it also has strong potential as a digital service and content-led profession.</p>
         </div>
       </div>
     </div>
@@ -678,13 +741,13 @@ body {
       <div class="col-lg-8">
         <div class="custom-card border-gold p-5">
           <div class="text-center mb-4">
-            <h2 class="font-serif mb-2 text-dark">Enroll in Palmistry</h2>
-            <p class="text-secondary small">Begin your structured pathway into observation-based analysis and professional hand-reading consultancies.</p>
+            <h2 class="font-serif mb-2 text-dark">Enroll in Numerology</h2>
+            <p class="text-secondary small">Begin your structured pathway into number-based analysis and professional consulting practice.</p>
           </div>
           <form id="enroll-form" class="row g-3" action="https://formspree.io/f/YYYYYYYY" method="POST" novalidate>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-            <input type="hidden" name="_subject" value="New enrollment - Palmistry">
-            <input type="hidden" name="course" value="Palmistry">
+            <input type="hidden" name="_subject" value="New enrollment - Numerology">
+            <input type="hidden" name="course" value="Numerology">
             <div class="col-md-6">
               <label class="form-label text-dark small fw-bold">Full Name</label>
               <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="name" placeholder="Enter your full name" required>
@@ -698,10 +761,10 @@ body {
               <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="_replyto" placeholder="Enter your email address" required>
             </div>
             <div class="col-12">
-              <label class="form-label text-dark small fw-bold">Prior Palmistry Experience (Optional)</label>
+              <label class="form-label text-dark small fw-bold">Prior Numerology Experience (Optional)</label>
               <select name="experience" class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
                 <option value="none">Beginner (No prior experience)</option>
-                <option value="intermediate">Intermediate (Basic line identification)</option>
+                <option value="intermediate">Intermediate (Basic grid knowledge)</option>
                 <option value="advanced">Advanced (Aspirational Professional)</option>
               </select>
             </div>
@@ -787,94 +850,89 @@ body {
 </script>
 
 <script>
-  // Interactive Palm Reader database
-  const palmData = {
-    "life-line": {
-      title: "Life Line (Ayush Rekha)",
-      desc: "This line curves around the base of the thumb. In Vedic Chiromancy, it indicates vital life force, overall physical constitution, major life transformations, and general energy levels. Contrary to popular belief, it highlights quality of energy rather than exact lifespan."
-    },
-    "head-line": {
-      title: "Head Line (Mastishk Rekha)",
-      desc: "Stretching horizontally across the middle of the palm, this line represents intellect, cognitive styles, mental stamina, and decision-making approaches. A deeply grooved line signifies high concentration, while split endings suggest specialized artistic or analytical talents."
-    },
-    "heart-line": {
-      title: "Heart Line (Hridaya Rekha)",
-      desc: "Running near the top of the palm, it governs emotions, interpersonal relationships, empathy, and intuitive responses. Its length and end position (often terminating near the Jupiter or Saturn mounts) illustrate how openly you express affection and process deep feelings."
-    },
-    "fate-line": {
-      title: "Fate Line (Bhagya Rekha)",
-      desc: "A vertical line originating from the wrist up to the middle finger. It indicates life paths, professional choices, external influences affecting career milestones, and career stability. A strong line indicates highly structured life focus, while its absence suggests free-form self-exploration."
-    },
-    "jupiter": {
-      title: "Mount of Jupiter (Guru Parvat)",
-      desc: "Located at the base of the index finger. It represents leadership qualities, ambition, administrative capabilities, spiritual inclinations, and self-confidence. A prominent mount denotes a natural educator, public speaker, or visionary leader."
-    },
-    "saturn": {
-      title: "Mount of Saturn (Shani Parvat)",
-      desc: "Located under the middle finger. It governs discipline, wisdom, philosophical inclinations, work ethics, and the realization of karmic lessons. Balance on this mount indicates focus, caution, and research skills."
-    },
-    "apollo": {
-      title: "Mount of Apollo/Sun (Surya Parvat)",
-      desc: "Located under the ring finger. It rules creativity, fame, reputation, artistic intellect, aesthetic sense, and public recognition. A well-developed Apollo mount brings charm, expressive talent, and appreciation for fine arts."
-    },
-    "mercury": {
-      title: "Mount of Mercury (Budha Parvat)",
-      desc: "Located beneath the pinky finger. It represents eloquence, business acumen, scientific curiosity, strategic planning, and interpersonal communication. This mount is highly vital for traders, consultants, and writers."
-    },
-    "venus": {
-      title: "Mount of Venus (Shukra Parvat)",
-      desc: "The heavy fleshy base at the thumb. It rules physical vitality, luxury, passion, affection, aesthetic pleasures, and personal charisma. In Vedic Palmistry, a strong Venus mount brings magnetic attraction and rich creativity."
-    },
-    "moon": {
-      title: "Mount of Moon (Chandra Parvat)",
-      desc: "Located opposite the thumb at the outer palm base. It governs intuition, subconscious thoughts, travel, fertile imagination, writing capability, and emotional sensitivity. A well-marked Moon mount indicates strong creative writing or psychic potential."
-    }
-  };
-
-  // Helper functions for highlighting and updating descriptions
-  function activateTarget(key) {
-    // 1. Reset all SVG active classes
-    document.querySelectorAll('.interactive-line, .mount-node').forEach(el => el.classList.remove('active'));
-    // 2. Reset all buttons
-    document.querySelectorAll('.map-btn').forEach(btn => btn.classList.remove('btn-gold'));
-    document.querySelectorAll('.map-btn').forEach(btn => btn.classList.add('btn-outline-gold'));
-
-    // 3. Highlight SVG element
-    const svgEl = document.getElementById('svg-' + key) || document.getElementById('node-' + key);
-    if (svgEl) svgEl.classList.add('active');
-
-    // 4. Highlight button
-    const btnEl = document.querySelector(`.map-btn[data-target="${key}"]`);
-    if (btnEl) {
-      btnEl.classList.remove('btn-outline-gold');
-      btnEl.classList.add('btn-gold');
-    }
-
-    // 5. Update descriptions inside the readout-box
-    const data = palmData[key];
-    if (data) {
-      document.getElementById('readout-title').textContent = data.title;
-      document.getElementById('readout-desc').textContent = data.desc;
-    }
+  // Dynamically populate days select
+  const daySelect = document.getElementById('calc-day');
+  for (let i = 1; i <= 31; i++) {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = i;
+    daySelect.appendChild(opt);
   }
 
-  // Bind Click events to buttons
-  document.querySelectorAll('.map-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const target = button.getAttribute('data-target');
-      activateTarget(target);
-      // Smooth scroll to the result readout card for mobile friendliness
-      document.getElementById('readout-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-  });
+  // Interactive Life Path Number Calculator Logic
+  const profiles = {
+    1: "The Leader: Independent, pioneering, courageous, and driven to innovate and initiate.",
+    2: "The Peacemaker: Harmonious, intuitive, cooperative, supportive, and highly diplomatic.",
+    3: "The Creator: Expressive, artistic, social, optimistic, and highly communicative.",
+    4: "The Builder: Methodical, practical, reliable, organized, and structurally grounded.",
+    5: "The Explorer: Adaptable, versatile, freedom-loving, adventurous, and progress-oriented.",
+    6: "The Nurturer: Responsible, loving, protective, family-oriented, and deeply caring.",
+    7: "The Seeker: Analytical, philosophical, intuitive, solitary, and spiritually inclined.",
+    8: "The Executive: Ambitious, practical, financially focused, authoritative, and strong.",
+    9: "The Humanitarian: Compassionate, generous, idealistic, global-minded, and creative.",
+    11: "Master Number 11 (The Visionary): Extremely intuitive, spiritually illuminated, and an inspirational channel.",
+    22: "Master Number 22 (The Master Builder): Capable of turning grand spiritual visions into physical, practical realities."
+  };
 
-  // Bind Click events directly to SVG Elements
-  document.querySelectorAll('.interactive-line, .mount-node').forEach(item => {
-    item.addEventListener('click', () => {
-      let key = item.id.replace('svg-', '').replace('node-', '');
-      activateTarget(key);
-      document.getElementById('readout-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
+  function reduceToSingleOrMaster(num) {
+    if (num === 11 || num === 22 || num === 33) {
+      return num; // Keep master numbers intact initially
+    }
+    let sum = 0;
+    while (num > 0 || sum > 9) {
+      if (num === 0) {
+        num = sum;
+        sum = 0;
+      }
+      sum += num % 10;
+      num = Math.floor(num / 10);
+    }
+    return sum;
+  }
+
+  document.getElementById('calculate-btn').addEventListener('click', function() {
+    const day = parseInt(document.getElementById('calc-day').value);
+    const month = parseInt(document.getElementById('calc-month').value);
+    const yearInput = document.getElementById('calc-year').value;
+
+    if (!yearInput) {
+      alert("Please enter a valid birth year.");
+      return;
+    }
+
+    const year = parseInt(yearInput);
+    if (year < 1800 || year > 2026) {
+      alert("Please enter a realistic year (1800-2026).");
+      return;
+    }
+
+    // Standard numerology calculation method: Reduce day, month, and year individually first
+    const dayRed = reduceToSingleOrMaster(day);
+    const monthRed = reduceToSingleOrMaster(month);
+    const yearRed = reduceToSingleOrMaster(year);
+
+    let sum = dayRed + monthRed + yearRed;
+    
+    // Final reduction (preserving master numbers 11, 22)
+    let finalPath = sum;
+    if (finalPath !== 11 && finalPath !== 22) {
+      finalPath = reduceToSingleOrMaster(sum);
+    }
+
+    // Fallback if the final calculation yields something like 33 (which reduces to 6)
+    if (finalPath > 9 && finalPath !== 11 && finalPath !== 22) {
+      finalPath = reduceToSingleOrMaster(finalPath);
+    }
+
+    const resultBox = document.getElementById('calculator-result');
+    const resultNum = document.getElementById('result-number');
+    const resultDesc = document.getElementById('result-desc');
+
+    resultNum.textContent = finalPath;
+    resultDesc.textContent = profiles[finalPath] || "A highly mystical and unique spiritual path. Explore our curriculum to discover detailed personal analyses.";
+    
+    resultBox.style.display = 'block';
+    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 </script>
 </body>

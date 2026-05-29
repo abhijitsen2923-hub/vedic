@@ -1,0 +1,6 @@
+resource_id,course_id,title,type,format,url_or_location,uploaded_by,upload_date
+RESRC-001,CORSE-001,Module 3 Recording - Birth Chart Basics,Lecture,MP4,https://www.youtube.com/results?search_query=vedic+astrology+birth+chart+basics,Acharya Vikram Sharma,2026-05-27
+RESRC-002,CORSE-002,Numerology Module 5 - Study Notes,Reading,PDF,https://en.wikipedia.org/wiki/Numerology,Dr. Priya Joshi,2026-05-26
+RESRC-003,CORSE-003,Tarot Practice Worksheet,Assignment,XLSX,https://docs.google.com/spreadsheets/create,Mira Khanna,2026-05-28
+RESRC-004,CORSE-002,Module 2 Recording - Number Patterns,Lecture,MP4,https://www.youtube.com/results?search_query=numerology+number+patterns,Dr. Priya Joshi,2026-05-23
+RESRC-005,CORSE-003,Tarot Major Arcana - Reference Guide,Reference,PDF,https://en.wikipedia.org/wiki/Major_Arcana,Mira Khanna,2026-05-24

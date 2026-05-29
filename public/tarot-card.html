@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Learn Numerology Online — International Vedic Academy</title>
-<meta name="description" content="Discover how numbers influence personality, destiny, relationships, and success with our comprehensive, certified online Numerology course." />
+<title>Learn Tarot Card Reading Online — International Vedic Academy</title>
+<meta name="description" content="Master intuitive Tarot Card Reading, Major and Minor Arcana, spreads, and energy understanding with our career-oriented online Tarot course." />
 <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Google Fonts -->
@@ -48,7 +48,7 @@
   }
 
   /* Core Global Settings */
- body {
+  body {
     font-family: var(--sans);
     background-image: url('./assets/img/background.png');
     background-size: cover;
@@ -195,7 +195,7 @@
     filter: drop-shadow(0 15px 35px rgba(10, 6, 24, 0.5));
   }
   .celestial-graphic svg {
-    overflow: visible;
+    overflow: visible; /* Cards ko side se cut hone se rokne ke liye */
   }
 
   /* Sections & Card Styles */
@@ -282,47 +282,37 @@
     height: 26px;
   }
 
-  /* Custom Floating Numbers Animation */
-  @keyframes floatNumber1 {
-    0% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
-    50% { transform: translateY(-15px) rotate(15deg); opacity: 1; }
-    100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+  /* Ornate Floating Cards Keyframes Animation */
+  @keyframes floatCard1 {
+    0% { transform: translateY(0px) rotate(-6deg); }
+    50% { transform: translateY(-8px) rotate(-4deg); }
+    100% { transform: translateY(0px) rotate(-6deg); }
   }
-  @keyframes floatNumber2 {
-    0% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-    50% { transform: translateY(-20px) rotate(-10deg); opacity: 0.9; }
-    100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  @keyframes floatCard2 {
+    0% { transform: translateY(0px) rotate(4deg); }
+    50% { transform: translateY(-12px) rotate(6deg); }
+    100% { transform: translateY(0px) rotate(4deg); }
   }
-  @keyframes rotateGrid {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  .number-node-1 {
-    animation: floatNumber1 6s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-  .number-node-2 {
-    animation: floatNumber2 8s ease-in-out infinite;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-  .rotator-ring {
-    animation: rotateGrid 40s linear infinite;
-    transform-box: fill-box;
-    transform-origin: center;
+  @keyframes floatCard3 {
+    0% { transform: translateY(0px) rotate(14deg); }
+    50% { transform: translateY(-7px) rotate(12deg); }
+    100% { transform: translateY(0px) rotate(14deg); }
   }
 
-  /* Live Calculator Interface */
-  .calculator-result-box {
-    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-deep));
-    border: 1px solid var(--gold);
-    border-radius: 12px;
-    padding: 24px;
-    color: #fff;
-    display: none;
-    box-shadow: var(--shadow-sm);
+  .floating-card-1 {
+    animation: floatCard1 5s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .floating-card-2 {
+    animation: floatCard2 6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .floating-card-3 {
+    animation: floatCard3 4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
   }
 
   /* Footer */
@@ -352,24 +342,6 @@
     letter-spacing: 4px;
     color: var(--gold);
   }
-
-  /* Custom styling to keep the mystic-seal responsive and centered */
-  .mystic-seal {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2.5px solid var(--gold);
-    display: grid;
-    place-items: center;
-    margin: 0 auto 24px;
-    color: var(--gold-bright);
-    background: radial-gradient(circle, rgba(212,162,76,0.15) 0%, transparent 80%);
-  }
-  .mystic-seal svg {
-    width: 44px;
-    height: 44px;
-  }
-
   footer {
     background: var(--cosmic-deep);
     color: #c4bba8;
@@ -483,16 +455,14 @@
 <body>
 
 <!-- NAVIGATION BAR -->
-<!-- NAVIGATION BAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
   <div class="container">
-   <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="#">
       <img src="assets/img/logo.png" class="img-fluid" style="width: 180px; height: 60px;"/>
       
      
 
     </a>
-
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -517,6 +487,7 @@
         </li>
 
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
         <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold">Enroll Now</a></li>
       </ul>
     </div>
@@ -528,68 +499,91 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-7 text-center text-lg-start">
-        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Practical Number-Based Sciences</span>
-        <h1>Learn <span class="gold-gradient-text">Numerology</span> Online</h1>
-        <p class="lead mt-4">The Numerology Course at International Vedic Academy is designed to help students understand how numbers influence personality, life direction, relationships, business decisions, and personal success. This program is ideal for those who want to turn number-based analysis into a practical consulting skill.</p>
+        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Intuitive &amp; Occult Arts Certification</span>
+        <h1>Learn <span class="gold-gradient-text">Tarot Card Reading</span> Online</h1>
+        <p class="lead mt-4">The Tarot Card Reading Course at International Vedic Academy helps students develop both intuitive understanding and structured reading skills so they can perform meaningful and professional tarot consultations. This course is suited for beginners as well as learners who want to turn tarot into a spiritual service or independent profession.</p>
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
-          <a href="#calculator" class="btn btn-gold">Try Life Path Calculator</a>
-          <a href="#syllabus" class="btn btn-outline-gold">View Course details</a>
+          <a href="#enroll" class="btn btn-gold">Enroll in Course</a>
+          <a href="#syllabus" class="btn btn-outline-gold">View Syllabus</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <!-- Self-contained, highly ornate Occult Numerology grid & math dials SVG -->
+        <!-- Self-contained, highly ornate Tarot Spread and Arcana SVG -->
         <div class="celestial-graphic">
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
             <!-- Background circles and star map -->
             <circle cx="200" cy="200" r="190" stroke="#d4a24c" stroke-width="1" opacity="0.3"/>
             <circle cx="200" cy="200" r="175" stroke="#d4a24c" stroke-dasharray="4, 4" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="200" cy="200" r="145" stroke="#f0c878" stroke-width="0.8" opacity="0.4"/>
             
-            <!-- Rotating Outer Coordinate Ring -->
-            <g class="rotator-ring" stroke="#f0c878" stroke-width="0.8" opacity="0.5">
-              <circle cx="200" cy="200" r="155" stroke-dasharray="10, 8"/>
-              <line x1="200" y1="35" x2="200" y2="45" stroke-width="2"/>
-              <line x1="200" y1="355" x2="200" y2="365" stroke-width="2"/>
-              <line x1="35" y1="200" x2="45" y2="200" stroke-width="2"/>
-              <line x1="355" y1="200" x2="365" y2="200" stroke-width="2"/>
+            <!-- Ornate Outer Star / Compass Points -->
+            <g stroke="#f0c878" stroke-width="1" opacity="0.7">
+              <line x1="200" y1="10" x2="200" y2="390"/>
+              <line x1="10" y1="200" x2="390" y2="200"/>
+              <line x1="65" y1="65" x2="335" y2="335"/>
+              <line x1="335" y1="65" x2="65" y2="335"/>
             </g>
 
-            <!-- OCCULT LO SHU MAGIC SQUARE (Traditional 3x3 Numerological Grid) -->
-            <g transform="translate(100, 100)" stroke="#d4a24c" stroke-width="1.5">
-              <!-- Grid background -->
-              <rect x="0" y="0" width="200" height="200" rx="10" fill="#0c0722" fill-opacity="0.9" stroke="#d4a24c" stroke-width="2"/>
-              <rect x="5" y="5" width="190" height="190" rx="8" fill="none" stroke="#f0c878" stroke-width="0.7" opacity="0.5"/>
+            <!-- Decorative Star constellations behind the Spread -->
+            <g opacity="0.5" stroke="#f0c878" stroke-width="0.8">
+              <circle cx="80" cy="80" r="2.5" fill="#f0c878"/>
+              <circle cx="120" cy="50" r="1.5" fill="#fff"/>
+              <line x1="80" y1="80" x2="120" y2="50"/>
               
-              <!-- Divider Lines -->
-              <line x1="66.6" y1="0" x2="66.6" y2="200"/>
-              <line x1="133.3" y1="0" x2="133.3" y2="200"/>
-              <line x1="0" y1="66.6" x2="200" y2="66.6"/>
-              <line x1="0" y1="133.3" x2="200" y2="133.3"/>
+              <circle cx="320" cy="320" r="2" fill="#fff"/>
+              <circle cx="280" cy="350" r="2.5" fill="#f0c878"/>
+              <line x1="320" y1="320" x2="280" y2="350"/>
+            </g>
 
-              <!-- Occult Numbers (Lo Shu Grid mapping) with floating effect -->
-              <g font-family="Fraunces" font-size="28" fill="#f0c878" font-weight="700" text-anchor="middle" dominant-baseline="central">
-                <!-- Row 1: 4, 9, 2 -->
-                <g class="number-node-1" style="transform-origin: 33px 33px;"><text x="33.3" y="33.3">4</text></g>
-                <g class="number-node-2" style="transform-origin: 100px 33px;"><text x="100" y="33.3">9</text></g>
-                <g class="number-node-1" style="transform-origin: 166px 33px;"><text x="166.6" y="33.3">2</text></g>
-
-                <!-- Row 2: 3, 5, 7 -->
-                <g class="number-node-2" style="transform-origin: 33px 100px;"><text x="33.3" y="100">3</text></g>
-                <g class="number-node-1" style="transform-origin: 100px 100px;"><text x="100" y="100">5</text></g>
-                <g class="number-node-2" style="transform-origin: 166px 100px;"><text x="166.6" y="100">7</text></g>
-
-                <!-- Row 3: 8, 1, 6 -->
-                <g class="number-node-1" style="transform-origin: 33px 166px;"><text x="33.3" y="166.6">8</text></g>
-                <g class="number-node-2" style="transform-origin: 100px 166px;"><text x="100" y="166.6">1</text></g>
-                <g class="number-node-1" style="transform-origin: 166px 166px;"><text x="166.6" y="166.6">6</text></g>
+            <!-- Tarot Card 1 (Major Arcana: The Sun / Mystic Star) -->
+            <g transform="translate(60, 110)">
+              <g class="floating-card-1">
+                <!-- Card Base -->
+                <rect x="0" y="0" width="80" height="130" rx="8" fill="#130e2b" fill-opacity="0.9" stroke="#d4a24c" stroke-width="1.8"/>
+                <rect x="4" y="4" width="72" height="122" rx="6" fill="none" stroke="#f0c878" stroke-width="0.7" opacity="0.6"/>
+                <!-- Occult Symbolism inside Card -->
+                <circle cx="40" cy="55" r="18" stroke="#d4a24c" stroke-width="1"/>
+                <circle cx="40" cy="55" r="12" stroke="#f0c878" stroke-dasharray="2, 2"/>
+                <path d="M40 30 L40 35 M40 75 L40 80 M20 55 L25 55 M55 55 L60 55" stroke="#f0c878" stroke-width="1"/>
+                <path d="M29 44 L32 47 M51 66 L48 63 M29 66 L32 63 M51 44 L48 47" stroke="#f0c878" stroke-width="1"/>
+                <!-- Card Emblem/Glow -->
+                <circle cx="40" cy="55" r="5" fill="#f0c878"/>
+                <!-- Title Text -->
+                <text x="40" y="110" font-family="Fraunces" font-size="9" fill="#f0c878" font-weight="600" text-anchor="middle" letter-spacing="1">THE SUN</text>
               </g>
             </g>
 
-            <!-- Outer Floating Occult Symbols & Coordinates -->
-            <g opacity="0.6" stroke="#f0c878" stroke-width="0.8">
-              <circle cx="200" cy="55" r="4" fill="#f0c878"/>
-              <circle cx="200" cy="345" r="4" fill="#f0c878"/>
-              <circle cx="55" cy="200" r="4" fill="#f0c878"/>
-              <circle cx="345" cy="200" r="4" fill="#f0c878"/>
+            <!-- Tarot Card 2 (Major Arcana: The High Priestess / Crescent Moon) -->
+            <g transform="translate(155, 95)">
+              <g class="floating-card-2">
+                <!-- Card Base -->
+                <rect x="0" y="0" width="90" height="145" rx="8" fill="#0f0a21" fill-opacity="0.95" stroke="#d4a24c" stroke-width="2"/>
+                <rect x="5" y="5" width="80" height="135" rx="6" fill="none" stroke="#f0c878" stroke-width="0.8" opacity="0.6"/>
+                <!-- Moon Arcana Graphic -->
+                <circle cx="45" cy="65" r="22" stroke="#d4a24c" stroke-width="1"/>
+                <path d="M35 48 C55 48 55 82 35 82 C48 82 52 48 35 48 Z" fill="#f0c878" stroke="#f0c878" stroke-width="1"/>
+                <!-- Pillars representation -->
+                <line x1="20" y1="35" x2="20" y2="95" stroke="#d4a24c" stroke-width="1.5"/>
+                <line x1="70" y1="35" x2="70" y2="95" stroke="#d4a24c" stroke-width="1.5"/>
+                <!-- Title Text -->
+                <text x="45" y="125" font-family="Fraunces" font-size="10" fill="#f0c878" font-weight="600" text-anchor="middle" letter-spacing="1.5">PRIESTESS</text>
+              </g>
+            </g>
+
+            <!-- Tarot Card 3 (Major Arcana: The Star / Ornate Chalice) -->
+            <g transform="translate(260, 130)">
+              <g class="floating-card-3">
+                <!-- Card Base -->
+                <rect x="0" y="0" width="80" height="130" rx="8" fill="#130e2b" fill-opacity="0.9" stroke="#d4a24c" stroke-width="1.8"/>
+                <rect x="4" y="4" width="72" height="122" rx="6" fill="none" stroke="#f0c878" stroke-width="0.7" opacity="0.6"/>
+                <!-- Occult Star/Chalice Graphic -->
+                <path d="M40 32 L43 42 L53 42 L45 48 L48 58 L40 52 L32 58 L35 48 L27 42 L37 42 Z" fill="#f0c878" opacity="0.9"/>
+                <path d="M30 65 C30 75 50 75 50 65 L45 80 L35 80 Z" stroke="#d4a24c" stroke-width="1"/>
+                <!-- Water streams -->
+                <path d="M32 68 Q24 72 26 80 M48 68 Q56 72 54 80" stroke="#f0c878" stroke-width="0.8" opacity="0.7"/>
+                <!-- Title Text -->
+                <text x="40" y="110" font-family="Fraunces" font-size="9" fill="#f0c878" font-weight="600" text-anchor="middle" letter-spacing="1">THE STAR</text>
+              </g>
             </g>
           </svg>
         </div>
@@ -598,81 +592,13 @@
   </div>
 </section>
 
-<!-- INTERACTIVE LIFE PATH CALCULATOR (Immersive experience addition) -->
-<section id="calculator" class="section-padding bg-cream-deep">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="custom-card border-gold p-5 text-center">
-          <div class="mystic-seal">
-            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
-              <!-- Outer elegant dotted ring -->
-              <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-dasharray="2 3" opacity="0.6"/>
-              <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="0.8"/>
-              <!-- Interlocking equilateral triangles creating a mystical star / Shatkona -->
-              <polygon points="50,18 78,66 22,66" stroke="currentColor" opacity="0.5"/>
-              <polygon points="50,82 78,34 22,34" stroke="currentColor" opacity="0.5"/>
-              <!-- Small floating nodes (numbers/planets representation) -->
-              <circle cx="50" cy="18" r="3" fill="currentColor"/>
-              <circle cx="78" cy="66" r="3" fill="currentColor"/>
-              <circle cx="22" cy="66" r="3" fill="currentColor"/>
-              <circle cx="50" cy="82" r="3" fill="currentColor"/>
-              <circle cx="78" cy="34" r="3" fill="currentColor"/>
-              <circle cx="22" cy="34" r="3" fill="currentColor"/>
-              <!-- Central radiant sun/sparkle representing the unified source -->
-              <circle cx="50" cy="50" r="10" stroke="currentColor" fill="#ffffff"/>
-              <path d="M50 35 L50 65 M35 50 L65 50" stroke="currentColor" stroke-width="1"/>
-              <circle cx="50" cy="50" r="3" fill="currentColor"/>
-            </svg>
-          </div>
-          <h2 class="font-serif text-dark mb-2">Interactive Life Path Calculator</h2>
-          <p class="text-secondary small mb-4">Calculate your unique Life Path Number instantly based on your Date of Birth to preview our core teaching methodologies.</p>
-          
-          <div class="row g-3 justify-content-center mb-4">
-            <div class="col-md-4">
-              <select id="calc-day" class="form-select rounded-pill bg-light border-0 py-2.5 px-3 text-center" required></select>
-            </div>
-            <div class="col-md-4">
-              <select id="calc-month" class="form-select rounded-pill bg-light border-0 py-2.5 px-3 text-center" required>
-                <option value="1">January (1)</option>
-                <option value="2">February (2)</option>
-                <option value="3">March (3)</option>
-                <option value="4">April (4)</option>
-                <option value="5">May (5)</option>
-                <option value="6">June (6)</option>
-                <option value="7">July (7)</option>
-                <option value="8">August (8)</option>
-                <option value="9">September (9)</option>
-                <option value="10">October (1)</option>
-                <option value="11">November (11/2)</option>
-                <option value="12">December (3)</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <input type="number" id="calc-year" class="form-control rounded-pill bg-light border-0 py-2.5 px-3 text-center" placeholder="Year (e.g., 1995)" min="1900" max="2026" required>
-            </div>
-          </div>
-          
-          <button id="calculate-btn" class="btn btn-gold px-5 mb-4">Discover Your Path</button>
-
-          <!-- Interactive Results Screen -->
-          <div id="calculator-result" class="calculator-result-box text-start">
-            <h4 class="font-serif text-gold-bright mb-2">Your Life Path Number is: <span id="result-number"></span></h4>
-            <p id="result-desc" class="small mb-0 opacity-90"></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CURRICULUM SYLLABUS SECTION ("What We Teach" & "How We Teach") -->
-<section id="syllabus" class="section-padding">
+<section id="syllabus" class="section-padding bg-cream-deep">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-8 text-center">
         <h2 class="section-title title-gold-line-center">Our Curriculum</h2>
-        <p class="section-sub">A practical, structured approach developed to take you from foundational number basics to advanced numerological analysis.</p>
+        <p class="section-sub">A practical, structured approach developed to take you from foundational card basics to intuitive, professional readings.</p>
       </div>
     </div>
     <div class="row g-5">
@@ -685,7 +611,7 @@
             </svg>
           </div>
           <h3 class="mb-3">What We Teach</h3>
-          <p class="text-secondary mb-0">Students learn core numerology concepts such as life path number, destiny number, name number, compatibility analysis, personal traits, and practical applications in business and branding. The course is structured to show how numbers can be interpreted meaningfully for both individuals and professional use cases.</p>
+          <p class="text-secondary mb-0">Students learn card meanings, Major and Minor Arcana, upright and reversed interpretations, spreads, intuitive reading methods, symbolism, energy understanding, and client reading structure. The course is designed to build both technical card knowledge and confidence in interpretation.</p>
         </div>
       </div>
       <!-- How We Teach -->
@@ -699,14 +625,14 @@
             </svg>
           </div>
           <h3 class="mb-3">How We Teach</h3>
-          <p class="text-secondary mb-0">Our teaching method focuses on practical calculations, interpretation frameworks, examples, and step-by-step explanation. Instead of making numerology feel abstract, we simplify the system so students can confidently apply it to real names, dates, personalities, and consultation scenarios.</p>
+          <p class="text-secondary mb-0">We teach tarot through practical reading exercises, guided demonstrations, interpretation training, and real scenario-based practice. This approach helps students move beyond memorizing meanings and learn how to conduct readings with flow, empathy, and professional clarity.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES SECTION ("Why Learn Numerology" & "Career Opportunities") -->
+<!-- VALUES SECTION ("Why Learn Tarot" & "Career Opportunities") -->
 <section class="section-padding bg-cosmic text-white">
   <div class="container">
     <div class="row justify-content-center mb-5">
@@ -715,18 +641,18 @@
       </div>
     </div>
     <div class="row g-5">
-      <!-- Why Learn Numerology -->
+      <!-- Why Learn Tarot -->
       <div class="col-md-6">
         <div class="ornate-dark-card">
-          <h3 class="mb-3">Why Learn Numerology</h3>
-          <p class="text-light opacity-75 mb-0">Numerology is powerful because it offers a simple yet insightful framework for understanding patterns in identity, decision-making, compatibility, and timing. It is especially valuable for people who want a spiritual science that can be applied in personal guidance, business naming, brand consultation, and life coaching.</p>
+          <h3 class="mb-3">Why Learn Tarot</h3>
+          <p class="text-light opacity-75 mb-0">Tarot is valuable because it blends intuition, symbolism, psychology, and spiritual insight into a tool that can help people gain perspective and direction. It is also one of the most accessible spiritual skills to learn and can be transformed into a modern profession through private consultations, workshops, digital sessions, and social media content.</p>
         </div>
       </div>
       <!-- Career Opportunities -->
       <div class="col-md-6">
         <div class="ornate-dark-card">
           <h3 class="mb-3">Career Opportunities</h3>
-          <p class="text-light opacity-75 mb-0">A trained student can work as a numerologist, brand naming consultant, life guidance consultant, spiritual advisor, or content educator. Because numerology is easy to communicate online, it also has strong potential as a digital service and content-led profession.</p>
+          <p class="text-light opacity-75 mb-0">With the right training, students can build careers as tarot readers, spiritual coaches, intuitive consultants, workshop hosts, and content creators. Online spiritual learning businesses increasingly position tarot as both a personal development tool and a self-employment skill.</p>
         </div>
       </div>
     </div>
@@ -740,13 +666,13 @@
       <div class="col-lg-8">
         <div class="custom-card border-gold p-5">
           <div class="text-center mb-4">
-            <h2 class="font-serif mb-2 text-dark">Enroll in Numerology</h2>
-            <p class="text-secondary small">Begin your structured pathway into number-based analysis and professional consulting practice.</p>
+            <h2 class="font-serif mb-2 text-dark">Enroll in Tarot Card Reading</h2>
+            <p class="text-secondary small">Begin your structured pathway into intuitive card reading and professional tarot practice.</p>
           </div>
           <form id="enroll-form" class="row g-3" action="https://formspree.io/f/YYYYYYYY" method="POST" novalidate>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-            <input type="hidden" name="_subject" value="New enrollment - Numerology">
-            <input type="hidden" name="course" value="Numerology">
+            <input type="hidden" name="_subject" value="New enrollment - Tarot Card Reading">
+            <input type="hidden" name="course" value="Tarot Card Reading">
             <div class="col-md-6">
               <label class="form-label text-dark small fw-bold">Full Name</label>
               <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="name" placeholder="Enter your full name" required>
@@ -760,10 +686,10 @@
               <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="_replyto" placeholder="Enter your email address" required>
             </div>
             <div class="col-12">
-              <label class="form-label text-dark small fw-bold">Prior Numerology Experience (Optional)</label>
+              <label class="form-label text-dark small fw-bold">Prior Tarot Experience (Optional)</label>
               <select name="experience" class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
                 <option value="none">Beginner (No prior experience)</option>
-                <option value="intermediate">Intermediate (Basic grid knowledge)</option>
+                <option value="intermediate">Intermediate (Basic spread knowledge)</option>
                 <option value="advanced">Advanced (Aspirational Professional)</option>
               </select>
             </div>
@@ -846,93 +772,6 @@
       } catch { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
     });
   })();
-</script>
-
-<script>
-  // Dynamically populate days select
-  const daySelect = document.getElementById('calc-day');
-  for (let i = 1; i <= 31; i++) {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = i;
-    daySelect.appendChild(opt);
-  }
-
-  // Interactive Life Path Number Calculator Logic
-  const profiles = {
-    1: "The Leader: Independent, pioneering, courageous, and driven to innovate and initiate.",
-    2: "The Peacemaker: Harmonious, intuitive, cooperative, supportive, and highly diplomatic.",
-    3: "The Creator: Expressive, artistic, social, optimistic, and highly communicative.",
-    4: "The Builder: Methodical, practical, reliable, organized, and structurally grounded.",
-    5: "The Explorer: Adaptable, versatile, freedom-loving, adventurous, and progress-oriented.",
-    6: "The Nurturer: Responsible, loving, protective, family-oriented, and deeply caring.",
-    7: "The Seeker: Analytical, philosophical, intuitive, solitary, and spiritually inclined.",
-    8: "The Executive: Ambitious, practical, financially focused, authoritative, and strong.",
-    9: "The Humanitarian: Compassionate, generous, idealistic, global-minded, and creative.",
-    11: "Master Number 11 (The Visionary): Extremely intuitive, spiritually illuminated, and an inspirational channel.",
-    22: "Master Number 22 (The Master Builder): Capable of turning grand spiritual visions into physical, practical realities."
-  };
-
-  function reduceToSingleOrMaster(num) {
-    if (num === 11 || num === 22 || num === 33) {
-      return num; // Keep master numbers intact initially
-    }
-    let sum = 0;
-    while (num > 0 || sum > 9) {
-      if (num === 0) {
-        num = sum;
-        sum = 0;
-      }
-      sum += num % 10;
-      num = Math.floor(num / 10);
-    }
-    return sum;
-  }
-
-  document.getElementById('calculate-btn').addEventListener('click', function() {
-    const day = parseInt(document.getElementById('calc-day').value);
-    const month = parseInt(document.getElementById('calc-month').value);
-    const yearInput = document.getElementById('calc-year').value;
-
-    if (!yearInput) {
-      alert("Please enter a valid birth year.");
-      return;
-    }
-
-    const year = parseInt(yearInput);
-    if (year < 1800 || year > 2026) {
-      alert("Please enter a realistic year (1800-2026).");
-      return;
-    }
-
-    // Standard numerology calculation method: Reduce day, month, and year individually first
-    const dayRed = reduceToSingleOrMaster(day);
-    const monthRed = reduceToSingleOrMaster(month);
-    const yearRed = reduceToSingleOrMaster(year);
-
-    let sum = dayRed + monthRed + yearRed;
-    
-    // Final reduction (preserving master numbers 11, 22)
-    let finalPath = sum;
-    if (finalPath !== 11 && finalPath !== 22) {
-      finalPath = reduceToSingleOrMaster(sum);
-    }
-
-    // Fallback if the final calculation yields something like 33 (which reduces to 6)
-    if (finalPath > 9 && finalPath !== 11 && finalPath !== 22) {
-      finalPath = reduceToSingleOrMaster(finalPath);
-    }
-
-    const resultBox = document.getElementById('calculator-result');
-    const resultNum = document.getElementById('result-number');
-    const resultDesc = document.getElementById('result-desc');
-
-    resultNum.textContent = finalPath;
-    resultDesc.textContent = profiles[finalPath] || "A highly mystical and unique spiritual path. Explore our curriculum to discover detailed personal analyses.";
-    
-    resultBox.style.display = 'block';
-    resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  });
 </script>
 </body>
 </html>

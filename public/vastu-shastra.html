@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Learn Vedic Astrology Online — International Vedic Academy</title>
-<meta name="description" content="Master Kundli analysis, planetary influences, yogas, and dashas with our comprehensive, career-focused online Vedic Astrology course." />
+<title>Learn Vastu Shastra Online — International Vedic Academy</title>
+<meta name="description" content="Discover how to balance spatial energy, directional elements, and cosmic harmony for homes and offices with our professional online Vastu Shastra course." />
 <!-- Bootstrap 5 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Google Fonts -->
@@ -194,6 +194,30 @@
     margin: 0 auto;
     filter: drop-shadow(0 15px 35px rgba(10, 6, 24, 0.5));
   }
+  .celestial-graphic svg {
+    overflow: visible;
+  }
+
+  /* Interactive Elements on SVG Compass */
+  .direction-node {
+    transition: r 0.25s, fill 0.25s, stroke 0.25s, filter 0.25s;
+    cursor: pointer;
+  }
+  .direction-node:hover, .direction-node.active {
+    r: 10px;
+    fill: var(--gold-bright);
+    stroke: #ffffff;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1));
+  }
+  
+  .compass-line {
+    transition: stroke-width 0.2s, opacity 0.2s, stroke 0.2s;
+  }
+  .compass-line.active {
+    stroke: var(--gold-bright);
+    stroke-width: 2px;
+    opacity: 0.9;
+  }
 
   /* Sections & Card Styles */
   .section-padding {
@@ -279,34 +303,43 @@
     height: 26px;
   }
 
-  /* Footer */
-  footer {
-    background: var(--cosmic-deep);
-    color: #c4bba8;
-    padding: 60px 0 24px;
-  }
-  footer a {
-    color: #c4bba8;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  footer a:hover {
-    color: var(--gold-bright);
-  }
-  footer .footer-logo-text {
-    font-family: var(--serif-display);
-    text-transform: uppercase;
-    font-size: 17px;
-    letter-spacing: 2px;
+  /* Interactive Results Screen */
+  .interactive-result-box {
+    background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-deep));
+    border: 1.5px solid var(--gold);
+    border-radius: 16px;
+    padding: 30px;
     color: #fff;
+    box-shadow: var(--shadow-lg);
   }
-  footer .footer-logo-text span {
-    display: block;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--gold);
+
+  /* Rotating Compass Animation Keyframe */
+  @keyframes compassRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
-   footer {
+  .spinning-compass {
+    animation: compassRotate 60s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  /* Compact and smaller mystic seal design */
+  .mystic-seal {
+    width: 52px;
+    height: 52px;
+    border: 1.8px solid var(--gold);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 16px;
+    color: var(--gold-bright);
+    background: radial-gradient(circle, rgba(212,162,76,0.15) 0%, transparent 80%);
+  }
+  .mystic-seal svg {
+    width: 32px;
+    height: 32px;
+  }
+  footer {
     background: var(--cosmic-deep);
     color: #c4bba8;
     padding: 50px 0 28px;
@@ -452,6 +485,7 @@
         </li>
 
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
         <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold">Enroll Now</a></li>
       </ul>
     </div>
@@ -463,111 +497,78 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-7 text-center text-lg-start">
-        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Professional Certification Course</span>
-        <h1>Learn <span class="gold-gradient-text">Vedic Astrology</span> Online</h1>
-        <p class="lead mt-4">The Vedic Astrology Course at International Vedic Academy is designed to help students understand the science of kundli analysis, planetary influences, houses, dashas, yogas, and predictive techniques in a practical and structured manner. This course is ideal for anyone who wants to learn how life patterns can be interpreted through birth chart analysis and how astrology can be used responsibly for guidance, clarity, and consultation.</p>
+        <span class="text-uppercase tracking-wider small text-gold-bright fw-bold d-block mb-3" style="letter-spacing: 3px;">Spatial Energy &amp; Architectural Harmony</span>
+        <h1>Learn <span class="gold-gradient-text">Vastu Shastra</span> Online</h1>
+        <p class="lead mt-4">The Vastu Shastra Course at International Vedic Academy helps students understand the principles of spatial energy, directional balance, and environment-based harmony for homes, offices, and commercial spaces. This course is ideal for learners who want to combine ancient architectural wisdom with practical modern consultation.</p>
         <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
-          <a href="#enroll" class="btn btn-gold">Enroll in Course</a>
+          <a href="#interactive-vastu" class="btn btn-gold">Interactive Energy Map</a>
           <a href="#syllabus" class="btn btn-outline-gold">View Syllabus</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <!-- Self-contained, highly ornate Vedic Birth Chart (Kundli) SVG -->
+        <!-- Self-contained, highly detailed Vastu Mandala / Compass Rose SVG -->
         <div class="celestial-graphic">
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
             <!-- Background circles and star map -->
-            <circle cx="200" cy="200" r="190" stroke="#d4a24c" stroke-width="1" opacity="0.3"/>
-            <circle cx="200" cy="200" r="175" stroke="#d4a24c" stroke-dasharray="4, 4" stroke-width="1.5" opacity="0.6"/>
-            <circle cx="200" cy="200" r="145" stroke="#f0c878" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="200" cy="200" r="190" stroke="#d4a24c" stroke-width="1" opacity="0.2"/>
+            <circle cx="200" cy="200" r="175" stroke="#d4a24c" stroke-dasharray="3, 3" stroke-width="1.2" opacity="0.4"/>
+            <circle cx="200" cy="200" r="150" stroke="#f0c878" stroke-width="0.8" opacity="0.3"/>
             
-            <!-- Compass directions labels -->
-            <text x="200" y="42" text-anchor="middle" font-family="Fraunces" font-size="10" fill="#f0c878" opacity="0.8">NORTH</text>
-            <text x="200" y="368" text-anchor="middle" font-family="Fraunces" font-size="10" fill="#f0c878" opacity="0.8">SOUTH</text>
-            <text x="38" y="203" text-anchor="middle" font-family="Fraunces" font-size="10" fill="#f0c878" opacity="0.8">EAST</text>
-            <text x="362" y="203" text-anchor="middle" font-family="Fraunces" font-size="10" fill="#f0c878" opacity="0.8">WEST</text>
-
-            <!-- Decorative Star constellations behind the Kundli -->
-            <g opacity="0.5" stroke="#f0c878" stroke-width="0.8">
-              <line x1="80" y1="120" x2="105" y2="100" />
-              <line x1="105" y1="100" x2="140" y2="110" />
-              <circle cx="80" cy="120" r="2" fill="#fff"/>
-              <circle cx="105" cy="100" r="2.5" fill="#f0c878"/>
-              <circle cx="140" cy="110" r="2" fill="#fff"/>
-              
-              <line x1="280" y1="280" x2="310" y2="300" />
-              <line x1="310" y1="300" x2="295" y2="325" />
-              <circle cx="280" cy="280" r="2" fill="#fff"/>
-              <circle cx="310" cy="300" r="2.5" fill="#f0c878"/>
-              <circle cx="295" cy="325" r="2" fill="#fff"/>
+            <!-- Rotating Ornate Outer Compass Dial -->
+            <g class="spinning-compass" stroke="#d4a24c" stroke-width="0.8" opacity="0.6">
+              <circle cx="200" cy="200" r="165" stroke-dasharray="12, 10"/>
+              <!-- Astrological divisions -->
+              <line x1="200" y1="35" x2="200" y2="40" stroke-width="1.5"/>
+              <line x1="200" y1="360" x2="200" y2="365" stroke-width="1.5"/>
+              <line x1="35" y1="200" x2="40" y2="200" stroke-width="1.5"/>
+              <line x1="360" y1="200" x2="365" y2="200" stroke-width="1.5"/>
             </g>
 
-            <!-- Traditional North Indian style Kundli grid (Ornate Gold) -->
-            <g transform="translate(75, 75)" stroke="#d4a24c" stroke-width="1.8" id="kundli-grid">
-              <!-- Outer Square border with double-line styling -->
-              <rect x="0" y="0" width="250" height="250" fill="#130e2b" fill-opacity="0.85" rx="8" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.5))"/>
-              <rect x="4" y="4" width="242" height="242" stroke="#d4a24c" stroke-width="0.8" rx="6" fill="none"/>
+            <!-- OCCULT VASTU MANDALA GRID / 8 KEY DIRECTIONS MAP -->
+            <g transform="translate(100, 100)" stroke="#d4a24c" stroke-width="1.5" id="vastu-grid">
+              <!-- Grid container box representing the Vastu Purusha site grid -->
+              <rect x="0" y="0" width="200" height="200" rx="6" fill="#130e2b" fill-opacity="0.85" stroke="#d4a24c" stroke-width="2"/>
+              <rect x="4" y="4" width="192" height="192" fill="none" stroke="#f0c878" stroke-width="0.6" opacity="0.4"/>
               
-              <!-- Crossing Diagonal lines -->
-              <line x1="0" y1="0" x2="250" y2="250" />
-              <line x1="250" y1="0" x2="0" y2="250" />
-              
-              <!-- Inner Diamond lines -->
-              <line x1="125" y1="0" x2="250" y2="125" />
-              <line x1="250" y1="125" x2="125" y2="250" />
-              <line x1="125" y1="250" x2="0" y2="125" />
-              <line x1="0" y1="125" x2="125" y2="0" />
+              <!-- Directional Dividers -->
+              <line id="line-n-s" class="compass-line" x1="100" y1="0" x2="100" y2="200" />
+              <line id="line-w-e" class="compass-line" x1="0" y1="100" x2="200" y2="100" />
+              <line id="line-nw-se" class="compass-line" x1="0" y1="0" x2="200" y2="200" stroke-dasharray="2, 2" opacity="0.6"/>
+              <line id="line-ne-sw" class="compass-line" x1="200" y1="0" x2="0" y2="200" stroke-dasharray="2, 2" opacity="0.6"/>
 
-              <!-- Decorative center element -->
-              <circle cx="125" cy="125" r="10" fill="#130e2b" stroke="#f0c878" stroke-width="1"/>
-              <circle cx="125" cy="125" r="4" fill="#f0c878"/>
+              <!-- Central Brahmasthan -->
+              <circle cx="100" cy="100" r="18" stroke="#f0c878" stroke-width="1" fill="#130e2b"/>
+              <circle cx="100" cy="100" r="6" fill="#f0c878"/>
+              <text x="100" y="103" font-family="Fraunces" font-size="8" fill="#130e2b" font-weight="700" text-anchor="middle">CENTER</text>
 
-              <!-- Houses Numbers and Planetary placements (Occult Symbols/labels) -->
-              <g font-family="Fraunces" font-size="12" fill="#f0c878" font-weight="600" text-anchor="middle">
-                <!-- 1st House (Ascendant / Lagna) -->
-                <text x="125" y="55">1</text>
-                <text x="125" y="75" font-size="10" fill="#fff" font-weight="400">ASC (La)</text>
-                <text x="125" y="90" font-size="9" fill="#d4a24c">Ju</text>
+              <!-- Interactive Direction Nodes -->
+              <!-- North Node (Kubera) -->
+              <circle id="node-n" class="direction-node" cx="100" cy="22" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- North-East Node (Ishan) -->
+              <circle id="node-ne" class="direction-node" cx="178" cy="22" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- East Node (Aditya/Indra) -->
+              <circle id="node-e" class="direction-node" cx="178" cy="100" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- South-East Node (Agni) -->
+              <circle id="node-se" class="direction-node" cx="178" cy="178" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- South Node (Yama) -->
+              <circle id="node-s" class="direction-node" cx="100" cy="178" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- South-West Node (Nairutya) -->
+              <circle id="node-sw" class="direction-node" cx="22" cy="178" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- West Node (Varuna) -->
+              <circle id="node-w" class="direction-node" cx="22" cy="100" r="5" fill="#d4a24c" stroke="#f0c878"/>
+              <!-- North-West Node (Vayu) -->
+              <circle id="node-nw" class="direction-node" cx="22" cy="22" r="5" fill="#d4a24c" stroke="#f0c878"/>
 
-                <!-- 2nd House -->
-                <text x="75" y="35">2</text>
-                <text x="65" y="50" font-size="9" fill="#d4a24c">Su</text>
-
-                <!-- 3rd House -->
-                <text x="35" y="75">3</text>
-                <text x="35" y="95" font-size="9" fill="#d4a24c">Me</text>
-
-                <!-- 4th House -->
-                <text x="65" y="130">4</text>
-                <text x="65" y="150" font-size="9" fill="#d4a24c">Mo</text>
-
-                <!-- 5th House -->
-                <text x="35" y="185">5</text>
-
-                <!-- 6th House -->
-                <text x="75" y="225">6</text>
-                <text x="65" y="210" font-size="9" fill="#d4a24c">Ra</text>
-
-                <!-- 7th House -->
-                <text x="125" y="205">7</text>
-                <text x="125" y="185" font-size="9" fill="#d4a24c">Sa</text>
-
-                <!-- 8th House -->
-                <text x="175" y="225">8</text>
-
-                <!-- 9th House -->
-                <text x="215" y="185">9</text>
-                <text x="215" y="165" font-size="9" fill="#d4a24c">Ke</text>
-
-                <!-- 10th House -->
-                <text x="185" y="130">10</text>
-                <text x="185" y="150" font-size="9" fill="#d4a24c">Ma</text>
-
-                <!-- 11th House -->
-                <text x="215" y="75">11</text>
-
-                <!-- 12th House -->
-                <text x="175" y="35">12</text>
-                <text x="185" y="50" font-size="9" fill="#d4a24c">Ve</text>
+              <!-- Outer Directional Text markers -->
+              <g font-family="Fraunces" font-size="11" fill="#f0c878" font-weight="600" text-anchor="middle" dominant-baseline="central">
+                <text x="100" y="-12">NORTH</text>
+                <text x="212" y="-12">NE</text>
+                <text x="215" y="100">EAST</text>
+                <text x="212" y="212">SE</text>
+                <text x="100" y="212">SOUTH</text>
+                <text x="-12" y="212">SW</text>
+                <text x="-15" y="100">WEST</text>
+                <text x="-12" y="-12">NW</text>
               </g>
             </g>
           </svg>
@@ -577,13 +578,72 @@
   </div>
 </section>
 
-<!-- CURRICULUM SYLLABUS SECTION ("What We Teach" & "How We Teach") -->
-<section id="syllabus" class="section-padding bg-cream-deep">
+<!-- INTERACTIVE VASTU DIRECTIONAL MAP -->
+<section id="interactive-vastu" class="section-padding bg-cream-deep">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="custom-card border-gold p-5 text-center">
+          <div class="mystic-seal">
+            <!-- UPDATED COMPASS SEAL: Geometric Ashtakon Star -->
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2">
+              <!-- Outer elegant dotted ring -->
+              <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-dasharray="2 3" opacity="0.6"/>
+              <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="0.8"/>
+              <!-- Interlocking elegant squares (8-pointed star of Lakshmi/Ashtakon) -->
+              <rect x="23" y="23" width="54" height="54" stroke="currentColor" opacity="0.5" transform="rotate(0 50 50)"/>
+              <rect x="23" y="23" width="54" height="54" stroke="currentColor" opacity="0.5" transform="rotate(45 50 50)"/>
+              <!-- Inner cosmic circles -->
+              <circle cx="50" cy="50" r="24" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+              <circle cx="50" cy="50" r="14" stroke="currentColor" stroke-width="1" fill="#130e2b"/>
+              <!-- Central Lotus Petals (Vedic spiritual symbol) -->
+              <g fill="currentColor" opacity="0.9">
+                <path d="M50 36 C52 42 48 42 50 36 Z"/>
+                <path d="M50 64 C52 58 48 58 50 64 Z"/>
+                <path d="M36 50 C42 52 42 48 36 50 Z"/>
+                <path d="M64 50 C58 52 58 48 64 50 Z"/>
+                <path d="M40.1 40.1 C44.3 44.3 42.3 45.3 40.1 40.1 Z"/>
+                <path d="M59.9 40.1 C55.7 44.3 57.7 45.3 59.9 40.1 Z"/>
+                <path d="M40.1 59.9 C44.3 55.7 42.3 54.7 40.1 59.9 Z"/>
+                <path d="M59.9 59.9 C55.7 55.7 57.7 54.7 59.9 59.9 Z"/>
+              </g>
+              <!-- Central Bindu -->
+              <circle cx="50" cy="50" r="2.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h2 class="font-serif text-dark mb-2">Interactive Vastu Compass</h2>
+          <p class="text-secondary small mb-4">Click on any directional wedge button below or select the glowing golden nodes directly on the grid above to learn energy orientations and ideal room allocations.</p>
+
+          <!-- Interactive Selection Buttons in English -->
+          <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="n">North (Uttara)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="ne">North-East (Ishan)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="e">East (Purva)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="se">South-East (Agneya)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="s">South (Dakshina)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="sw">South-West (Nairutya)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="w">West (Paschima)</button>
+            <button class="btn btn-outline-gold px-3 py-1.5 fs-7 map-btn" data-target="nw">North-West (Vayavya)</button>
+          </div>
+
+          <!-- Dynamic Output Card -->
+          <div id="readout-box" class="interactive-result-box text-start">
+            <h4 id="readout-title" class="font-serif text-gold-bright mb-2">Select a Direction</h4>
+            <p id="readout-desc" class="small mb-0 opacity-90">Discover the elemental rhapsody, deities, and spatial layouts governing directional zones. Click any direction button above to start.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM SYLLABUS SECTION -->
+<section id="syllabus" class="section-padding">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-lg-8 text-center">
         <h2 class="section-title title-gold-line-center">Our Curriculum</h2>
-        <p class="section-sub">A practical, structured approach developed to take you from foundational basics to expert analysis.</p>
+        <p class="section-sub">A practical, layout-based approach developed to take you from core directional zones to remedies requiring no structural changes.</p>
       </div>
     </div>
     <div class="row g-5">
@@ -596,7 +656,7 @@
             </svg>
           </div>
           <h3 class="mb-3">What We Teach</h3>
-          <p class="text-secondary mb-0">We teach the foundations of Vedic astrology in a step-by-step way, including zodiac signs, houses, planets, ascendant, chart interpretation, yogas, dashas, transits, and remedies. Students also learn how to study charts for important life areas such as career, marriage, finances, relationships, and personal growth.</p>
+          <p class="text-secondary mb-0">Students learn directions, elemental zones, energy flow, residential vastu, commercial vastu, layout analysis, common defects, and practical remedies. The emphasis is on understanding how space influences well-being, productivity, and balance.</p>
         </div>
       </div>
       <!-- How We Teach -->
@@ -610,14 +670,14 @@
             </svg>
           </div>
           <h3 class="mb-3">How We Teach</h3>
-          <p class="text-secondary mb-0">Our teaching approach focuses on live explanation, chart-based practice, and real interpretation methods instead of only theoretical study. Through guided sessions, examples, and practical analysis, students learn how to read charts with accuracy, confidence, and clarity.</p>
+          <p class="text-secondary mb-0">We teach vastu through layout-based learning, practical case studies, directional analysis, and solution-oriented training. Students are trained to understand issues clearly and recommend realistic remedies, including options that do not require major structural change.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES SECTION ("Why Learn Astrology" & "Career Opportunities") -->
+<!-- VALUES SECTION -->
 <section class="section-padding bg-cosmic text-white">
   <div class="container">
     <div class="row justify-content-center mb-5">
@@ -626,38 +686,38 @@
       </div>
     </div>
     <div class="row g-5">
-      <!-- Why Learn Astrology -->
+      <!-- Why Learn Vastu -->
       <div class="col-md-6">
         <div class="ornate-dark-card">
-          <h3 class="mb-3">Why Learn Astrology</h3>
-          <p class="text-light opacity-75 mb-0">Vedic astrology is one of the most respected spiritual sciences because it helps decode patterns of time, personality, potential, and life events through an established system of analysis. For learners, it offers both inner understanding and a highly valuable consultation skill that can be used in personal guidance, spiritual advisory work, and digital content creation.</p>
+          <h3 class="mb-3">Why Learn Vastu</h3>
+          <p class="text-light opacity-75 mb-0">Vastu Shastra remains highly relevant because people increasingly seek guidance for harmony, productivity, positivity, and energy balance in their personal and work environments. It is especially useful as a profession because it connects spirituality with real estate, interiors, wellness, and practical advisory services.</p>
         </div>
       </div>
       <!-- Career Opportunities -->
       <div class="col-md-6">
         <div class="ornate-dark-card">
           <h3 class="mb-3">Career Opportunities</h3>
-          <p class="text-light opacity-75 mb-0">After gaining proper knowledge and practice, students can build a profession as a professional astrologer, online consultant, spiritual advisor, teacher, or astrology content creator. With the rise of digital consultations and self-employment-focused learning platforms, astrology has become a viable profession for those who combine authentic knowledge with communication and client-handling skills.</p>
+          <p class="text-light opacity-75 mb-0">With proper training, students can work as Vastu consultants, property advisors, wellness consultants, interior guidance specialists, or independent spiritual consultants. The subject has strong professional scope because it serves both individual clients and property-related decision-making.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ENROLLMENT FORM & CALL TO ACTION -->
+<!-- ENROLLMENT FORM & CALL TO ACTION (Contact form in English) -->
 <section id="enroll" class="section-padding">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="custom-card border-gold p-5">
           <div class="text-center mb-4">
-            <h2 class="font-serif mb-2 text-dark">Enroll in Vedic Astrology</h2>
-            <p class="text-secondary small">Begin your structured pathway into predictive star sciences and professional astrology practice.</p>
+            <h2 class="font-serif mb-2 text-dark">Enroll in Vastu Shastra</h2>
+            <p class="text-secondary small">Begin your structured pathway into directional space balancing and professional Vastu consultation.</p>
           </div>
           <form id="enroll-form" class="row g-3" action="https://formspree.io/f/YYYYYYYY" method="POST" novalidate>
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-            <input type="hidden" name="_subject" value="New enrollment - Vedic Astrology">
-            <input type="hidden" name="course" value="Vedic Astrology">
+            <input type="hidden" name="_subject" value="New enrollment - Vastu Shastra">
+            <input type="hidden" name="course" value="Vastu Shastra">
             <div class="col-md-6">
               <label class="form-label text-dark small fw-bold">Full Name</label>
               <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="name" placeholder="Enter your full name" required>
@@ -671,10 +731,10 @@
               <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="_replyto" placeholder="Enter your email address" required>
             </div>
             <div class="col-12">
-              <label class="form-label text-dark small fw-bold">Prior Astrology Experience (Optional)</label>
+              <label class="form-label text-dark small fw-bold">Prior Vastu Experience (Optional)</label>
               <select name="experience" class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
                 <option value="none">Beginner (No prior experience)</option>
-                <option value="intermediate">Intermediate (Basic chart knowledge)</option>
+                <option value="intermediate">Intermediate (Basic layout understanding)</option>
                 <option value="advanced">Advanced (Aspirational Professional)</option>
               </select>
             </div>
@@ -757,6 +817,101 @@
       } catch { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
     });
   })();
+</script>
+
+<script>
+  // Interactive Vastu Compass Database
+  const vastuData = {
+    "n": {
+      title: "North (Uttara) — The Zone of Wealth",
+      desc: "Governed by Lord Kubera and the Water element. It is highly vital for financial growth and career opportunities. Ideal uses: Main entrance, living room, study desk, or treasury safes. Avoid putting kitchens, toilets, or heavy storage structures in this zone."
+    },
+    "ne": {
+      title: "North-East (Ishan) — The Sacred Gateway",
+      desc: "Ruler: Lord Shiva; Element: Water/Ether. It carries the highest level of cosmic and spiritual energy inflow. Ideal uses: Meditation halls, Pooja/Prayer rooms, library, light plants, or main entrance door. Never construct toilets, kitchens, heavy master bedrooms, or storage areas here."
+    },
+    "e": {
+      title: "East (Purva) — The Zone of Social Connections",
+      desc: "Governed by Lord Indra and Lord Surya (Sun); Element: Air. This zone controls fame, social networking, and overall health. Ideal uses: Living rooms, main entrance, open balcony, or bathrooms (without toilet). High walls, heavy storage, and garbage disposal must be avoided."
+    },
+    "se": {
+      title: "South-East (Agneya) — The Fire Hearth",
+      desc: "Ruler: Lord Agni; Element: Fire. It governs physical stamina, health, and cash flow. Ideal uses: Kitchens, boilers, electrical equipment, fuse boxes, and geysers. Strictly avoid locating bedrooms, water reservoirs, or main entrance openings in this high-energy fire zone."
+    },
+    "s": {
+      title: "South (Dakshina) — The Sector of Name and Fame",
+      desc: "Governed by Lord Yama; Element: Fire/Earth. It controls peace of mind and professional name. Ideal uses: Heavy master bedroom, overhead storage, heavy safes, and solid walls. Avoid creating open courtyards, main doors (without specialized remedy), or wells/underground water tanks here."
+    },
+    "sw": {
+      title: "South-West (Nairutya) — The Pillar of Stability",
+      desc: "Ruler: Lord Nirrti; Element: Earth. It governs relationship bonds, financial stability, and skill-learning. Ideal uses: Master bedroom, heavy safe boxes, solid heavy structural storage, and overhead water tanks. Do not build bathrooms, main entrances, kitchens, or septic reservoirs here."
+    },
+    "w": {
+      title: "West (Paschima) — The Zone of Gains and Profits",
+      desc: "Governed by Lord Varuna; Element: Air/Water. It rules general gains, prosperity, and children's welfare. Ideal uses: Dining room, kids' study desk, children's bedroom, or overhead water tanks. Avoid large open courtyards or main entrances without proper remediation."
+    },
+    "nw": {
+      title: "North-West (Vayavya) — The Wind Matrix",
+      desc: "Ruler: Lord Vayu; Element: Air. It governs hospitality, helpful associations, guest relations, and moving assets. Ideal uses: Guest bedrooms, garage space, granaries, animal shelters, or septic reservoirs. Avoid building master bedrooms or keeping heavy locked safes in this zone."
+    }
+  };
+
+  // Helper functions for highlighting and updating descriptions
+  function activateTarget(key) {
+    // 1. Reset all SVG active classes
+    document.querySelectorAll('.direction-node, .compass-line').forEach(el => el.classList.remove('active'));
+    // 2. Reset all buttons
+    document.querySelectorAll('.map-btn').forEach(btn => btn.classList.remove('btn-gold'));
+    document.querySelectorAll('.map-btn').forEach(btn => btn.classList.add('btn-outline-gold'));
+
+    // 3. Highlight SVG node
+    const nodeEl = document.getElementById('node-' + key);
+    if (nodeEl) nodeEl.classList.add('active');
+
+    // 4. Optionally highlight corresponding line guides
+    if (key === 'n' || key === 's') {
+      document.getElementById('line-n-s').classList.add('active');
+    } else if (key === 'e' || key === 'w') {
+      document.getElementById('line-w-e').classList.add('active');
+    } else if (key === 'nw' || key === 'se') {
+      document.getElementById('line-nw-se').classList.add('active');
+    } else if (key === 'ne' || key === 'sw') {
+      document.getElementById('line-ne-sw').classList.add('active');
+    }
+
+    // 5. Highlight button
+    const btnEl = document.querySelector(`.map-btn[data-target="${key}"]`);
+    if (btnEl) {
+      btnEl.classList.remove('btn-outline-gold');
+      btnEl.classList.add('btn-gold');
+    }
+
+    // 6. Update descriptions inside the readout-box
+    const data = vastuData[key];
+    if (data) {
+      document.getElementById('readout-title').textContent = data.title;
+      document.getElementById('readout-desc').textContent = data.desc;
+    }
+  }
+
+  // Bind Click events to buttons
+  document.querySelectorAll('.map-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-target');
+      activateTarget(target);
+      // Smooth scroll to the result readout card
+      document.getElementById('readout-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  // Bind Click events directly to SVG Elements
+  document.querySelectorAll('.direction-node').forEach(item => {
+    item.addEventListener('click', () => {
+      let key = item.id.replace('node-', '');
+      activateTarget(key);
+      document.getElementById('readout-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
 </script>
 </body>
 </html>

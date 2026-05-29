@@ -1,0 +1,2 @@
+attendance_id,student_id,class_id,joined_at,left_at,counted
+ATTND-001,STDNT-001,CLASS-003,2026-05-26T10:00:00,,TRUE
