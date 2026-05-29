@@ -1,0 +1,24 @@
+{
+  // Cloudflare Workers + Static Assets config.
+  //
+  // - `assets.directory` serves everything under `public/` as static files
+  //   (marketing pages, portal HTML/CSS/JS, images).
+  // - `main` points at a single Worker entrypoint that handles `/api/*` by
+  //   dispatching to the existing handlers under `functions/api/`. Everything
+  //   non-API falls through to the asset binding.
+  // - `assets.not_found_handling: "404-page"` makes Cloudflare serve
+  //   `public/404.html` for any URL the asset binding can't resolve.
+  //
+  // The `functions/_lib/*` modules and the per-endpoint handlers are reused
+  // unchanged — only the transport layer (Pages auto-mount → manual Worker
+  // dispatch) is new.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vedic",
+  "compatibility_date": "2026-05-29",
+  "main": "src/index.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  }
+}
