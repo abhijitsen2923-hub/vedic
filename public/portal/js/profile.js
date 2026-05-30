@@ -1,7 +1,7 @@
 // Profile — show read-only fields and let the student edit name + phone.
 
 import { initShell, formatDate } from "./portal-shell.js";
-import { api } from "./api-client.js";
+import { api, cacheStudent } from "./api-client.js";
 
 const form = document.getElementById("profile-form");
 const nameInput = document.getElementById("name");
@@ -18,6 +18,8 @@ function fill(student) {
     : "—";
   nameInput.value = student.name || "";
   phoneInput.value = student.phone || "";
+  // Keep the cached profile (header greeting) in sync after edits.
+  cacheStudent(student);
 }
 
 function showError(msg) {
