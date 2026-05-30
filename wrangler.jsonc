@@ -20,5 +20,31 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page"
+  },
+  // Non-sensitive plaintext vars live here so `wrangler deploy` (run from the
+  // GitHub Actions workflow) doesn't drop them. The sensitive values
+  // (GOOGLE_SERVICE_ACCOUNT_JSON, JWT_SECRET, IVA_SHEET_ID, ACADEMY_CODE) stay
+  // as Cloudflare Secrets — those are preserved across deploys and must never
+  // be committed here.
+  "vars": {
+    "ENVIRONMENT": "production",
+    "JWT_EXP_HOURS": "24"
+  },
+  // Observability — keep in sync with the dashboard so settings persist across
+  // deploys. Logs are enabled + persisted (invocation logs on); traces off.
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
   }
 }
