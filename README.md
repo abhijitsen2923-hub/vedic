@@ -36,7 +36,7 @@ Per-folder docs:
 - Static HTML + Bootstrap 5.3.3 (CDN) for the marketing site
 - Vanilla ES modules for the portal frontend
 - Cloudflare Pages Functions (no separate backend) for `/api/*`
-- Google Sheets as the data layer: a **public** sheet for live marketing content + a **private** sheet (service-account access only) for student records
+- Google Sheets as the data layer: a **single private** sheet (service-account access only) holding both student records and the marketing-content `Content` tab — the browser never reads the sheet directly; marketing copy is served via `GET /api/content`
 - Form submissions → Formspree (placeholder IDs to be substituted before launch)
 - Auth → bcrypt-hashed passwords + JWT in an httpOnly cookie
 - Free tier: hundreds of students fit comfortably

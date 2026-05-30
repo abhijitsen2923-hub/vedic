@@ -6,15 +6,28 @@ The logged-in area for enrolled students. Mounted at `/portal/*` (e.g. <https://
 
 ```
 portal/
-├── login.html            login + register toggle (one page, two modes)
-├── dashboard.html        Phase 1 placeholder — full UI lands in Phase 2
+├── login.html            login-only (signup UI hidden — see below)
+├── dashboard.html        summary: next class, attendance, course progress
+├── courses.html          enrolled courses + progress
+├── classes.html          upcoming (with join link) + past classes
+├── attendance.html       attendance tally + table
+├── resources.html        recordings / readings, grouped by course
+├── profile.html          view + edit name/phone
 ├── css/
 │   └── portal.css        shared design tokens, auth-page layout, app-page chrome
 └── js/
     ├── api-client.js     single fetch wrapper (cookie auth, error shape, 401 handling)
-    ├── auth.js           login + register form controller
-    └── dashboard.js      placeholder: requires auth, shows profile JSON
+    ├── portal-shell.js   initShell(active): requireAuth + renders header/nav + logout
+    ├── auth.js           login form controller (login-only)
+    ├── dashboard.js      ┐
+    ├── courses.js        │ one controller per page; each does
+    ├── classes.js        │   `const student = await initShell("<key>");`
+    ├── attendance.js     │   then fetches its data via api.* and renders
+    ├── resources.js      │
+    └── profile.js        ┘
 ```
+
+Every logged-in page has an empty `<header class="app-header" id="app-header">` that `portal-shell.js` fills with the brand + nav (Dashboard · Courses · Classes · Attendance · Resources · Profile) + Sign out. Add a new page by copying any page's HTML skeleton + a small `js/<page>.js` that calls `initShell("<key>")`.
 
 ## Conventions
 
@@ -30,26 +43,37 @@ portal/
 import { api, requireAuth } from "./api-client.js";
 
 await api.login(email, password);      // → sets cookie via Set-Cookie
-await api.register({ name, email, password, phone, academy_code });
 await api.me();                        // → { student }
 await api.logout();                    // → clears cookie
+
+// Portal data (all scoped server-side to the logged-in student):
+await api.dashboard();                 // → { courses, nextClass, attendance }
+await api.courses();                   // → { courses }
+await api.classes();                   // → { upcoming, past }
+await api.attendance();                // → { records, summary }
+await api.resources();                 // → { resources }
+await api.profile();                   // → { student }
+await api.updateProfile({ name, phone }); // PATCH → { student }
 
 await requireAuth();                   // hits /api/auth/me, redirects to login on 401
 ```
 
-Errors throw `Error` instances with `.status`, `.code`, and `.details` populated from the Function's JSON error response. A 401 from a protected endpoint redirects the browser to `/portal/login.html` (except when already on the login page).
+`api.register(...)` still exists but the signup UI is hidden (see below). Errors throw `Error` instances with `.status`, `.code`, and `.details` populated from the Function's JSON error response. A 401 from a protected endpoint redirects the browser to `/portal/login.html` (except when already on the login page).
 
-## Phase 1 (shipped) vs roadmap
+## Data freshness
 
-Shipped: login, register, logout, /api/auth/me round-trip; dashboard placeholder.
+Portal pages fetch on load and the endpoints read the sheet live (no caching), so any edit to the sheet (new enrollment, updated progress, new class/resource row) appears on the **next page load/refresh** — no redeploy. Keep the header row / column names and the ID foreign keys (`student_id`, `course_id`, `class_id`) intact or joins silently drop rows.
 
-Pending phases (see `C:\Users\kisho\.claude\plans\…` for detail):
-- **Phase 2** — dashboard data, my-courses, profile (read + edit)
-- **Phase 3** — classes (next + join), attendance summary + log
-- **Phase 4** — resources + recordings + remaining mostly-static pages
-- **Phase 5** — rate limiting, password change, sitemap/robots tweaks for `/portal/*`
+## Signup disabled (login-only)
 
-Until those land, do not link from marketing pages to portal sub-pages other than `/portal/login.html`.
+Students are created owner-side (append a row to the `Students` tab + hash the password with `portal-seed/hash-password.html`), so self-signup is hidden: `login.html` shows only Email + Password, and `auth.js` only logs in. The `POST /api/auth/register` endpoint and `api.register()` are still present, so re-enabling is just restoring the toggle link + register fields in `login.html` and the register branch in `auth.js`.
+
+## Roadmap
+
+Shipped: login/logout, dashboard, courses, classes, attendance, resources, profile (read + edit).
+- **Phase 5 (next)** — rate limiting, password change, sitemap/robots tweaks for `/portal/*`.
+
+You can now link students to `/portal/login.html`; the rest is reachable after sign-in via the nav.
 
 ## Visual coherence with the marketing site
 

@@ -12,12 +12,19 @@ functions/
 │   ├── sheets.js             Google Sheets REST API client (service-account JWT exchange + readers/writers)
 │   ├── auth.js               JWT sign/verify, bcrypt compare, cookie helpers, JSON response helpers
 │   ├── validate.js           input validators (email, password, profile patch) + small utilities
-│   └── repos.js              domain accessors (Students; Courses/Enrollments/etc. arrive in Phase 2)
+│   └── repos.js              domain accessors (Students + site Content; Courses/Enrollments/etc. arrive in Phase 2)
 └── api/
     ├── health.js             GET  /api/health
+    ├── content.js            GET  /api/content     (public marketing copy from the Content tab)
+    ├── dashboard.js          GET  /api/dashboard   (student summary: courses, next class, attendance)
+    ├── courses.js            GET  /api/courses     (student's enrolled courses + progress)
+    ├── classes.js            GET  /api/classes     (upcoming + past classes for enrolled courses)
+    ├── attendance.js         GET  /api/attendance  (student's attendance records + tally)
+    ├── resources.js          GET  /api/resources   (resources for enrolled courses)
+    ├── profile.js            GET + PATCH /api/profile (read / edit name+phone)
     └── auth/
         ├── login.js          POST /api/auth/login
-        ├── register.js       POST /api/auth/register
+        ├── register.js       POST /api/auth/register  (live, but signup UI is hidden — see portal README)
         ├── me.js             GET  /api/auth/me
         └── logout.js         POST /api/auth/logout
 ```
@@ -87,7 +94,7 @@ All set in **Cloudflare Pages → Settings → Environment variables** (Producti
 | Variable | What it is |
 |---|---|
 | `GOOGLE_SERVICE_ACCOUNT_JSON` | Full JSON of the service-account key. The function parses it on first request and caches the access token in memory (per Worker isolate). |
-| `IVA_SHEET_ID` | The private "IVA Portal DB" Sheet ID. Different from the public marketing-content sheet. |
+| `IVA_SHEET_ID` | The single private "IVA Portal DB" Sheet ID. Holds **all** tabs — student data **and** the `Content` tab that drives the marketing pages. There is no separate public marketing sheet. Required for live marketing content (pages fall back to HTML defaults if unset). |
 | `JWT_SECRET` | 64+ hex chars. Generate once: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. Never rotate without invalidating all sessions. |
 | `JWT_EXP_HOURS` | Session length. Default `24`. |
 | `ACADEMY_CODE` | Shared signup secret. Owner gives this to enrolled students so they can self-register; gates `POST /api/auth/register`. Changeable any time from the CF dashboard (applies on next request). |
@@ -96,7 +103,7 @@ All set in **Cloudflare Pages → Settings → Environment variables** (Producti
 ## Phase status
 
 Phase 1 (shipped) — auth surface + health.
-Phase 2 (next) — `/api/dashboard`, `/api/courses`, `/api/profile`.
-Phase 3 — classes + attendance. Phase 4 — resources/recordings. Phase 5 — rate limiting + password change.
+Phase 2–4 (shipped) — `/api/dashboard`, `/api/courses`, `/api/classes`, `/api/attendance`, `/api/resources`, `/api/profile` (GET + PATCH). All are auth-gated and scoped to the logged-in student (id from the cookie, never a request param), read-only except profile (name/phone). Reads are live (no caching) so sheet edits show on the next page load.
+Phase 5 (next) — rate limiting + password change.
 
 See [../public/portal/README.md](../public/portal/README.md) for the matching UI side.

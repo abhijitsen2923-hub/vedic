@@ -12,17 +12,35 @@
 // auth + health surface in Phase 1 we don't need it.
 
 import { onRequestGet as healthGet } from "../functions/api/health.js";
+import { onRequestGet as contentGet } from "../functions/api/content.js";
 import { onRequestPost as loginPost } from "../functions/api/auth/login.js";
 import { onRequestPost as registerPost } from "../functions/api/auth/register.js";
 import { onRequestGet as meGet } from "../functions/api/auth/me.js";
 import { onRequestPost as logoutPost } from "../functions/api/auth/logout.js";
+import { onRequestGet as dashboardGet } from "../functions/api/dashboard.js";
+import { onRequestGet as coursesGet } from "../functions/api/courses.js";
+import { onRequestGet as classesGet } from "../functions/api/classes.js";
+import { onRequestGet as attendanceGet } from "../functions/api/attendance.js";
+import { onRequestGet as resourcesGet } from "../functions/api/resources.js";
+import {
+  onRequestGet as profileGet,
+  onRequestPatch as profilePatch,
+} from "../functions/api/profile.js";
 
 const routes = {
   "GET /api/health":         healthGet,
+  "GET /api/content":        contentGet,
   "POST /api/auth/login":    loginPost,
   "POST /api/auth/register": registerPost,
   "GET /api/auth/me":        meGet,
   "POST /api/auth/logout":   logoutPost,
+  "GET /api/dashboard":      dashboardGet,
+  "GET /api/courses":        coursesGet,
+  "GET /api/classes":        classesGet,
+  "GET /api/attendance":     attendanceGet,
+  "GET /api/resources":      resourcesGet,
+  "GET /api/profile":        profileGet,
+  "PATCH /api/profile":      profilePatch,
 };
 
 export default {

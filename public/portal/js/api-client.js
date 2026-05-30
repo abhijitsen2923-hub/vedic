@@ -48,10 +48,20 @@ async function request(path, { method = "GET", body } = {}) {
 export const api = {
   login: (email, password) =>
     request("/api/auth/login", { method: "POST", body: { email, password } }),
+  // register() is kept for easy re-enable; the signup UI is currently hidden.
   register: (payload) =>
     request("/api/auth/register", { method: "POST", body: payload }),
   logout: () => request("/api/auth/logout", { method: "POST" }),
   me: () => request("/api/auth/me"),
+
+  // Portal data (all scoped server-side to the logged-in student).
+  dashboard: () => request("/api/dashboard"),
+  courses: () => request("/api/courses"),
+  classes: () => request("/api/classes"),
+  attendance: () => request("/api/attendance"),
+  resources: () => request("/api/resources"),
+  profile: () => request("/api/profile"),
+  updateProfile: (patch) => request("/api/profile", { method: "PATCH", body: patch }),
 };
 
 // Helper for protected pages to enforce auth client-side.

@@ -33,34 +33,17 @@
     <div class="auth-error" id="auth-error" role="alert" aria-live="polite"></div>
 
     <form id="auth-form" novalidate>
-      <div class="field" id="name-field" hidden>
-        <label for="name">Full name</label>
-        <input type="text" id="name" name="name" autocomplete="name" />
-      </div>
       <div class="field">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" autocomplete="email" required />
-      </div>
-      <div class="field" id="phone-field" hidden>
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel" />
       </div>
       <div class="field">
         <label for="password">Password</label>
         <input type="password" id="password" name="password" autocomplete="current-password" required minlength="6" />
       </div>
-      <div class="field" id="academy-code-field" hidden>
-        <label for="academy_code">Academy code</label>
-        <input type="text" id="academy_code" name="academy_code" autocomplete="off" />
-        <span class="field-hint">Provided by your academy when you enrolled.</span>
-      </div>
 
       <button type="submit" class="submit-btn" id="auth-submit">Sign in</button>
     </form>
-
-    <div class="toggle-row">
-      <a href="#" id="toggle-mode">New here? Create an account</a>
-    </div>
   </div>
 </main>
 

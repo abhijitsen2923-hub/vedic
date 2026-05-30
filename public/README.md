@@ -22,7 +22,7 @@ public/
 ├── _redirects                 301s for legacy capitalized URLs + .php URLs
 ├── assets/
 │   ├── img/                   background.png, subheading.jpg, logo.png
-│   └── js/content.js          fetches a public Google Sheet and live-updates marketing copy
+│   └── js/content.js          fetches /api/content and live-updates marketing copy
 └── portal/                    student portal (separate readme inside)
 ```
 
@@ -34,7 +34,9 @@ Shared design tokens (`--gold`, `--cosmic-deep`, …) are copied across each pag
 
 ## Live content editing
 
-`assets/js/content.js` fetches a Google Sheet (public, "Anyone with link → Viewer") via the `gviz/tq` endpoint, parses 17 key/value rows, and swaps `textContent` on any element tagged with `data-content="<key>"`. Caches 5 min in `localStorage`. Falls back gracefully to the HTML defaults on any failure.
+`assets/js/content.js` fetches **our own same-origin endpoint `/api/content`** (no Google Sheet ID in the browser), parses the returned `{ content: { key: value } }` map, and swaps `textContent` on any element tagged with `data-content="<key>"`. Caches 5 min in `localStorage`. Falls back gracefully to the HTML defaults on any failure.
+
+Behind that endpoint, the Worker reads the `Content` tab of the **single private** "IVA Portal DB" Google Sheet via the service account (see [../functions/README.md](../functions/README.md)). The sheet is never exposed publicly, and the marketing content lives in the same workbook as the student data — just a different tab.
 
 Editable fields (17 total):
 - 4 stat cards (`stats.{students,countries,mentors,success}.{number,label}`)
@@ -42,7 +44,7 @@ Editable fields (17 total):
 - Contact (`contact.{phone,email,address}`)
 - Footer (`footer.copyright`)
 
-To recreate the sheet from scratch (deleted, lost, switching accounts): create a new Google Sheet, tab name `Content`, columns `key | value | notes`, fill with the keys above, share as "Anyone with the link → Viewer", paste the new Sheet ID into the `SHEET_ID` constant at the top of `assets/js/content.js`. The seed schema lives at [`../content.example.csv`](../content.example.csv) (repo root, not deployed) — `File → Import → Upload` it into the new Sheet to skip typing the 17 rows by hand.
+To recreate the content from scratch: in the "IVA Portal DB" sheet add a tab named `Content` with columns `key | value | notes` and the keys above. The seed schema lives at [`../content.example.csv`](../content.example.csv) and [`../portal-seed/Content.csv`](../portal-seed/Content.csv) (repo root, not deployed) — `File → Import → Upload` either into the sheet as a new tab to skip typing the 17 rows by hand. No code change is needed; the browser only ever calls `/api/content`.
 
 ## Forms (Formspree)
 
