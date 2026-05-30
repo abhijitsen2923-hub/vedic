@@ -1,32 +1,54 @@
-// Dashboard placeholder. Phase 1 only confirms the auth round-trip works —
-// shows the student's public profile + provides a logout button.
+// Dashboard — summary of the student's next class, attendance, and course progress.
 
-import { api, requireAuth } from "./api-client.js";
+import { initShell, escapeHtml, formatDateTime } from "./portal-shell.js";
+import { api } from "./api-client.js";
 
-const greeting = document.getElementById("user-greeting");
-const welcomeTitle = document.getElementById("welcome-title");
-const profileDump = document.getElementById("profile-dump");
-const logoutBtn = document.getElementById("logout-btn");
-
-logoutBtn.addEventListener("click", async () => {
-  logoutBtn.disabled = true;
-  try {
-    await api.logout();
-  } catch {
-    /* even if the request fails, the cookie is httpOnly so the user can't manually clear it.
-       The redirect below puts them at the login page; next attempted protected call will 401. */
-  }
-  location.href = "/portal/login.html";
-});
+function courseCard(enrollment) {
+  const c = enrollment.course || {};
+  const pct = Math.max(0, Math.min(100, Number(enrollment.progress_pct) || 0));
+  const total = c.total_modules || "—";
+  const current = enrollment.current_module || 0;
+  return `
+    <article class="course-card">
+      <span class="badge">${escapeHtml(c.category || "Course")}</span>
+      <h3>${escapeHtml(c.title || "Untitled course")}</h3>
+      <p class="muted">${escapeHtml(c.instructor_name || "")}</p>
+      <div class="progress"><div class="progress__bar" style="width:${pct}%"></div></div>
+      <p class="course-card__meta">Module ${escapeHtml(current)} of ${escapeHtml(total)} · ${pct}%</p>
+    </article>`;
+}
 
 (async () => {
+  const student = await initShell("dashboard");
+  const first = (student.name || "").split(" ")[0] || "there";
+  document.getElementById("welcome").textContent = `Welcome back, ${first}.`;
+
   try {
-    const student = await requireAuth();
-    const firstName = (student.name || "").split(" ")[0] || "there";
-    greeting.textContent = `Hi, ${firstName}`;
-    welcomeTitle.textContent = `Welcome back, ${firstName}.`;
-    profileDump.textContent = JSON.stringify(student, null, 2);
+    const { courses, nextClass, attendance } = await api.dashboard();
+
+    const nc = document.getElementById("next-class");
+    if (nextClass) {
+      nc.innerHTML = `
+        <p class="stat-card__value">${escapeHtml(nextClass.title || "Class")}</p>
+        <p class="muted">${escapeHtml(nextClass.course_title || "")}</p>
+        <p class="muted">${formatDateTime(nextClass.scheduled_at)}</p>`;
+    } else {
+      nc.innerHTML = `<p class="muted">No upcoming classes scheduled.</p>`;
+    }
+
+    const att = attendance || { attended: 0, total: 0 };
+    document.getElementById("attendance-summary").innerHTML =
+      `<p class="stat-card__value">${att.attended} / ${att.total}</p>
+       <p class="muted">classes attended</p>`;
+
+    const grid = document.getElementById("courses");
+    grid.innerHTML = courses && courses.length
+      ? courses.map(courseCard).join("")
+      : `<p class="empty-state">You're not enrolled in any courses yet.</p>`;
   } catch {
-    profileDump.textContent = "Could not load your profile.";
+    document.getElementById("dash-error").hidden = false;
+    document.getElementById("next-class").innerHTML = "";
+    document.getElementById("attendance-summary").innerHTML = "";
+    document.getElementById("courses").innerHTML = "";
   }
 })();

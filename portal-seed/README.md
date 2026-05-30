@@ -1,6 +1,8 @@
 # portal-seed/ — bootstrap the private "IVA Portal DB" Google Sheet
 
-Drop the seven CSVs in this folder into Google Sheets as tabs of one workbook, set up the `icon_type` dropdown, and the student portal has data to read. None of these files are deployed — they live at the repo root, not under `public/`.
+Drop the eight CSVs in this folder into Google Sheets as tabs of one workbook, set up the `icon_type` dropdown, and both the student portal **and** the marketing site's live content have data to read. None of these files are deployed — they live at the repo root, not under `public/`.
+
+This is now the **single** spreadsheet for the whole site: the portal tabs (student data) plus the `Content` tab that drives the marketing pages' editable copy. The site never reads it from the browser — the Worker reads every tab server-side via the service account, so the file stays private.
 
 ## Files
 
@@ -13,19 +15,20 @@ Drop the seven CSVs in this folder into Google Sheets as tabs of one workbook, s
 | `Attendance.csv` | 1 attendance row for the ended class | `Attendance` |
 | `Resources.csv` | 5 demo lecture/reading links | `Resources` |
 | `IconTypes.csv` | Reference list for the `icon_type` dropdown | `IconTypes` |
+| `Content.csv` | Editable marketing copy (stats, hero, contact, footer) served via `/api/content` | `Content` |
 | `hash-password.html` | Local-only bcrypt utility — open in browser | *(not imported)* |
 
 ## One-time setup — import into ONE workbook
 
-1. Go to <https://sheets.new>. Name the spreadsheet **"IVA Portal DB"**. This is **one** Google Sheet (workbook). All seven tabs will live inside it. Different from the marketing-content sheet — this one stays **private**.
+1. Go to <https://sheets.new>. Name the spreadsheet **"IVA Portal DB"**. This is **one** Google Sheet (workbook). All eight tabs will live inside it — both student data and marketing content. The whole file stays **private**; nothing is shared publicly.
 2. Leave the default `Sheet1` for now; you can't delete the only tab.
-3. For **each** CSV in this folder (7 imports total, all into the same workbook):
+3. For **each** CSV in this folder (8 imports total, all into the same workbook):
    - `File → Import → Upload` → drop the CSV.
    - **Import location**: `Insert new sheet(s)` ← this adds a tab to the current workbook; do not pick "Create new spreadsheet".
    - **Separator type**: `Detect automatically` (or `Comma`).
    - **Convert text to numbers, dates, and formulas**: ✓ checked.
    - Click **Import data**.
-4. You'll now have 7 tabs named `Students`, `Courses`, `Enrollments`, `Classes`, `Attendance`, `Resources`, `IconTypes` (Google Sheets preserves the file capitalization). Delete the original `Sheet1`.
+4. You'll now have 8 tabs named `Students`, `Courses`, `Enrollments`, `Classes`, `Attendance`, `Resources`, `IconTypes`, `Content` (Google Sheets preserves the file capitalization). Delete the original `Sheet1`.
 5. Set up the `icon_type` dropdown (one-time):
    - Open the `Courses` tab → select column **F** from row 2 onward (`F2:F`).
    - `Data → Data validation → Add rule`.
@@ -37,7 +40,11 @@ Drop the seven CSVs in this folder into Google Sheets as tabs of one workbook, s
 7. Copy the Sheet ID from the URL (the long string between `/d/` and `/edit`).
 8. Paste it into the Cloudflare Pages environment variable `IVA_SHEET_ID` (Project → Settings → Environment variables → Production).
 
-Verify at `https://internationalvedicacademy.com/api/health` — expect `sheet_reachable: true` and the 7 tab names in `sheet_tabs`.
+Verify at `https://internationalvedicacademy.com/api/health` — expect `sheet_reachable: true` and the 8 tab names in `sheet_tabs`. Then hit `https://internationalvedicacademy.com/api/content` — expect a JSON `{ "content": { … } }` map of the marketing copy.
+
+### Editing marketing copy later
+
+The `Content` tab is the live source for editable site text. Edit a `value` cell and the change appears on the site within ~5–10 min (edge cache + the browser's 5-min local cache). Keep the `key` column unchanged — those map to `data-content="…"` attributes in the HTML.
 
 ## Demo login
 

@@ -1,9 +1,8 @@
 (function () {
-  // Owner: paste your Google Sheet ID here. Get it from the sheet URL:
-  // docs.google.com/spreadsheets/d/<SHEET_ID>/edit
-  // The sheet must be shared as "Anyone with the link -> Viewer".
-  const SHEET_ID = '1D1Uh61KEE2As9D0iffeYvIhHlLGtRj33nhJ-T3Kd7lM';
-  const SHEET_NAME = 'Content';
+  // Live marketing copy is served by our own same-origin endpoint, which reads
+  // the `Content` tab of the (private) Google Sheet via the service account.
+  // No sheet ID lives in the browser — see functions/api/content.js.
+  const CONTENT_URL = '/api/content';
   const CACHE_KEY = 'iva-content-cache-v1';
   const CACHE_TTL_MS = 5 * 60 * 1000;
 
@@ -34,34 +33,27 @@
     } catch (e) { /* quota or disabled - ignore */ }
   }
 
-  function fetchSheet() {
-    if (SHEET_ID === 'PASTE_SHEET_ID_HERE') return Promise.resolve(null);
-    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-              '/gviz/tq?tqx=out:json&headers=1&sheet=' + encodeURIComponent(SHEET_NAME);
-    return fetch(url, { credentials: 'omit' }).then(function (r) {
-      if (!r.ok) throw new Error('sheet fetch failed: ' + r.status);
-      return r.text();
-    }).then(function (text) {
-      var m = text.match(/setResponse\(([\s\S]+)\);?\s*$/);
-      if (!m) throw new Error('unexpected gviz response shape');
-      var json = JSON.parse(m[1]);
-      var rows = (json.table && json.table.rows) || [];
-      var map = new Map();
-      for (var i = 0; i < rows.length; i++) {
-        var cells = rows[i].c || [];
-        var k = cells[0] && cells[0].v;
-        var v = cells[1] && cells[1].v;
-        if (k && v != null) map.set(String(k).trim(), String(v));
-      }
-      return map;
-    });
+  function fetchContent() {
+    return fetch(CONTENT_URL, { headers: { Accept: 'application/json' } })
+      .then(function (r) {
+        if (!r.ok) throw new Error('content fetch failed: ' + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        var obj = (data && data.content) || {};
+        var map = new Map();
+        Object.keys(obj).forEach(function (k) {
+          if (obj[k] != null) map.set(String(k).trim(), String(obj[k]));
+        });
+        return map;
+      });
   }
 
   function run() {
     var cached = fromCache();
     if (cached) apply(cached);
 
-    fetchSheet().then(function (map) {
+    fetchContent().then(function (map) {
       if (map && map.size) { apply(map); toCache(map); }
     }).catch(function () { /* network/parse error - defaults stay */ });
   }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dashboard — International Vedic Academy</title>
+<title>My Courses — International Vedic Academy</title>
 <meta name="robots" content="noindex, nofollow" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,24 +15,11 @@
 <header class="app-header" id="app-header"></header>
 
 <main class="app-main">
-  <h1 class="page-title" id="welcome">Welcome back</h1>
-  <div class="alert alert--error" id="dash-error" hidden>Could not load your dashboard. Please refresh.</div>
-
-  <div class="summary-row">
-    <section class="stat-card" id="next-class-card">
-      <span class="stat-card__label">Next class</span>
-      <div id="next-class"><span class="muted">Loading…</span></div>
-    </section>
-    <section class="stat-card" id="attendance-card">
-      <span class="stat-card__label">Attendance</span>
-      <div id="attendance-summary"><span class="muted">Loading…</span></div>
-    </section>
-  </div>
-
-  <h2 class="section-title">My courses</h2>
+  <h1 class="page-title">My courses</h1>
+  <div class="alert alert--error" id="page-error" hidden>Could not load your courses. Please refresh.</div>
   <div class="card-grid" id="courses"><span class="muted">Loading…</span></div>
 </main>
 
-<script type="module" src="js/dashboard.js"></script>
+<script type="module" src="js/courses.js"></script>
 </body>
 </html>
