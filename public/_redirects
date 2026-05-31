@@ -7,6 +7,10 @@
 /about.php             /about-us.html         301
 /Numerology.php        /numerology.html       301
 
+# Blog — hidden for now (temporary; remove these two lines to re-enable)
+/blog.html              /                      302
+/blog                   /                      302
+
 # Student portal — clean URLs
 /portal                 /portal/login.html     302
 /portal/                /portal/login.html     302

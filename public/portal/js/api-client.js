@@ -69,9 +69,32 @@ export const api = {
 export async function requireAuth() {
   try {
     const data = await api.me();
+    cacheStudent(data.student);
     return data.student;
   } catch (err) {
     if (err.status === 401) location.href = "/portal/login.html";
     throw err;
   }
+}
+
+// Lightweight per-tab cache of the student profile, so portal pages can paint
+// the header/greeting instantly (and skip a redundant /api/auth/me round-trip)
+// right after login. Auth is still enforced server-side: every data endpoint
+// returns 401 when the cookie is missing/expired, which redirects to login.
+const STUDENT_CACHE_KEY = "iva_student_v1";
+
+export function cacheStudent(student) {
+  try {
+    if (student) sessionStorage.setItem(STUDENT_CACHE_KEY, JSON.stringify(student));
+  } catch { /* storage disabled — ignore */ }
+}
+
+export function getCachedStudent() {
+  try {
+    return JSON.parse(sessionStorage.getItem(STUDENT_CACHE_KEY) || "null");
+  } catch { return null; }
+}
+
+export function clearCachedStudent() {
+  try { sessionStorage.removeItem(STUDENT_CACHE_KEY); } catch { /* ignore */ }
 }

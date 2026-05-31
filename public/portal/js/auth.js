@@ -4,7 +4,7 @@
 // api.register() still exist; to re-enable signup, restore the toggle + fields in
 // login.html and the register branch here.
 
-import { api } from "./api-client.js";
+import { api, cacheStudent } from "./api-client.js";
 
 const form = document.getElementById("auth-form");
 const errorBox = document.getElementById("auth-error");
@@ -27,13 +27,15 @@ form.addEventListener("submit", async (e) => {
   hideError();
   submitBtn.disabled = true;
   const previousLabel = submitBtn.textContent;
-  submitBtn.textContent = "Signing in…";
+  submitBtn.innerHTML = '<span class="spinner spinner--btn"></span>Signing in…';
 
   const email = emailInput.value.trim();
   const password = passwordInput.value;
 
   try {
-    await api.login(email, password);
+    const res = await api.login(email, password);
+    // Cache the profile so the dashboard paints instantly without re-fetching.
+    if (res && res.student) cacheStudent(res.student);
     location.href = "/portal/dashboard.html";
   } catch (err) {
     showError(err.message);

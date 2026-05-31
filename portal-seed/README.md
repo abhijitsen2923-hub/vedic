@@ -16,7 +16,8 @@ This is now the **single** spreadsheet for the whole site: the portal tabs (stud
 | `Resources.csv` | 5 demo lecture/reading links | `Resources` |
 | `IconTypes.csv` | Reference list for the `icon_type` dropdown | `IconTypes` |
 | `Content.csv` | Editable marketing copy (stats, hero, contact, footer) served via `/api/content` | `Content` |
-| `hash-password.html` | Local-only bcrypt utility — open in browser | *(not imported)* |
+| `set-password.gs` | Apps Script for the sheet's **IVA → Set/reset password** menu (PBKDF2 via the Worker) | *(paste into Apps Script)* |
+| `hash-password.html` | Local-only PBKDF2 hasher — open in browser (offline fallback) | *(not imported)* |
 
 ## One-time setup — import into ONE workbook
 
@@ -53,15 +54,27 @@ After the import + service-account share:
 - Email: `riya.sharma@email.com`
 - Password: `password123`
 
-The `password_hash` in `Students.csv` is the real bcrypt hash for `password123` (extracted from the legacy Flask app, committed here so the demo works out of the box).
+The `password_hash` in `Students.csv` is a real bcrypt hash for `password123` (from the legacy Flask app, committed so the demo works out of the box). Bcrypt hashes still log in; new/reset passwords use the faster PBKDF2 format (`pbkdf2$…`).
 
-## Add new students later — sheet-driven workflow
+## In-sheet password tool (recommended) — `set-password.gs`
 
-There's no self-signup. To enroll a new student, **you add the row to the Students tab**. Workflow:
+Set or reset any student's password without leaving the Sheet.
 
-1. Open `portal-seed/hash-password.html` (double-click it; opens in your browser as a `file://` URL).
-2. Type the password you want to give the student → click **Hash it** → click **Copy hash**.
-3. Open the `Students` tab in the Google Sheet → append a new row:
+**One-time setup:**
+1. Open the "IVA Portal DB" sheet → **Extensions → Apps Script**.
+2. Paste the contents of [`set-password.gs`](set-password.gs) into the editor (replace the default `Code.gs`) → **Save**. (This is a paste, not a CSV import.)
+3. **Project Settings → Script properties** → add:
+   - `WORKER_URL` = `https://internationalvedicacademy.com` (no trailing slash)
+   - `ADMIN_TOKEN` = the same value as the Worker's `ADMIN_TOKEN` secret
+4. Reload the sheet → an **IVA** menu appears.
+
+**Use:** on the `Students` tab, click any cell in a student's row → **IVA → Set / reset password (selected row)** → type the new password. It's hashed (PBKDF2, via the Worker) and written into that row's `password_hash`. Tell the student the new password. **Forgot password = just set a new one here** (hashes can't be decrypted).
+
+## Add new students — sheet-driven workflow
+
+There's no self-signup. To enroll a new student, **you add the row to the Students tab**:
+
+1. Append a new row to the `Students` tab (leave `password_hash` blank for now):
 
 | Column | Example |
 |---|---|
@@ -69,13 +82,14 @@ There's no self-signup. To enroll a new student, **you add the row to the Studen
 | `name` | `Jane Doe` |
 | `email` | `jane.doe@example.com` |
 | `phone` | `+91 98700 12345` |
-| `password_hash` | *(paste the bcrypt hash from step 2)* |
+| `password_hash` | *(set in step 2)* |
 | `tier` | `Bronze` / `Silver` / `Gold` |
 | `avatar_initials` | `JD` |
 | `joined_date` | `2026-05-28` |
 
-4. Tell the student their email + the plaintext password you picked. Don't save the plaintext anywhere; bcrypt is one-way so you can't recover it if you forget.
-5. Student goes to `/portal/login.html` and logs in.
+2. Select that row → **IVA → Set / reset password** → type their password (fills `password_hash`). *(Offline alternative: open `portal-seed/hash-password.html`, hash the password, paste it into `password_hash`.)*
+3. Tell the student their email + password privately. Don't save the plaintext — it can't be recovered, only reset.
+4. Student goes to `/portal/login.html` and logs in.
 
 To enroll the new student in a course, add a row to the `Enrollments` tab linking the new `student_id` to a `course_id`.
 
