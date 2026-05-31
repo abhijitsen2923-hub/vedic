@@ -22,5 +22,11 @@ JWT_EXP_HOURS=24
 # Change at any time in the Cloudflare dashboard; new value applies on next function call.
 ACADEMY_CODE=
 
+# Long random secret that gates POST /api/admin/hash (the in-sheet "Set/reset
+# password" tool sends this in the X-Admin-Token header). Generate like JWT_SECRET:
+#   node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+# Store the SAME value in the sheet's Apps Script (Project Settings -> Script properties).
+ADMIN_TOKEN=
+
 # Marker so the function code knows it's running locally (relaxes Secure cookie flag).
 ENVIRONMENT=development

@@ -22,6 +22,8 @@ functions/
     ├── attendance.js         GET  /api/attendance  (student's attendance records + tally)
     ├── resources.js          GET  /api/resources   (resources for enrolled courses)
     ├── profile.js            GET + PATCH /api/profile (read / edit name+phone)
+    ├── admin/
+    │   └── hash.js           POST /api/admin/hash  (X-Admin-Token; hashes a password for the in-sheet tool)
     └── auth/
         ├── login.js          POST /api/auth/login
         ├── register.js       POST /api/auth/register  (live, but signup UI is hidden — see portal README)
@@ -98,7 +100,12 @@ All set in **Cloudflare Pages → Settings → Environment variables** (Producti
 | `JWT_SECRET` | 64+ hex chars. Generate once: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. Never rotate without invalidating all sessions. |
 | `JWT_EXP_HOURS` | Session length. Default `24`. |
 | `ACADEMY_CODE` | Shared signup secret. Owner gives this to enrolled students so they can self-register; gates `POST /api/auth/register`. Changeable any time from the CF dashboard (applies on next request). |
+| `ADMIN_TOKEN` | Long random secret gating `POST /api/admin/hash`. The sheet's "Set/reset password" Apps Script sends it as `X-Admin-Token`. Store the same value in the Apps Script's Script properties. |
 | `ENVIRONMENT` | `development` for local (relaxes `Secure` cookie flag); leave unset or `production` in prod. |
+
+## Passwords
+
+Hashing uses **PBKDF2 via Web Crypto** (`crypto.subtle`, SHA-256, 100k iterations) — native and fast in the Worker. Stored format: `pbkdf2$<iterations>$<saltB64>$<hashB64>`. Legacy **bcrypt** hashes (`$2a/$2b/$2y$…`) are still verified (via `bcryptjs`) so older rows keep working; they upgrade to PBKDF2 the next time the password is reset. Hashes are one-way — a forgotten password is **reset**, never recovered. Set/reset a password from the sheet's **IVA → Set / reset password** menu, or with `portal-seed/hash-password.html` (offline). Both produce the identical PBKDF2 format the Worker verifies.
 
 ## Phase status
 

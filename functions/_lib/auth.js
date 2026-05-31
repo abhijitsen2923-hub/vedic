@@ -36,13 +36,69 @@ export async function verifyToken(env, token) {
   }
 }
 
+// --- Password hashing: PBKDF2 via Web Crypto (native, fast in Workers) ---
+// New hashes use the format  pbkdf2$<iterations>$<saltB64>$<hashB64>.
+// Legacy bcrypt hashes ($2a/$2b/$2y$...) are still VERIFIED via bcryptjs so
+// existing rows keep working; they upgrade to PBKDF2 whenever the password is reset.
+const PBKDF2_ITERS = 100000;
+const PBKDF2_KEYLEN = 32; // bytes (256-bit)
+
+function bytesToB64(bytes) {
+  let bin = "";
+  const arr = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  for (let i = 0; i < arr.length; i++) bin += String.fromCharCode(arr[i]);
+  return btoa(bin);
+}
+
+function b64ToBytes(b64) {
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+async function pbkdf2Bits(plain, salt, iterations) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(plain),
+    "PBKDF2",
+    false,
+    ["deriveBits"],
+  );
+  const bits = await crypto.subtle.deriveBits(
+    { name: "PBKDF2", salt, iterations, hash: "SHA-256" },
+    key,
+    PBKDF2_KEYLEN * 8,
+  );
+  return new Uint8Array(bits);
+}
+
+// Constant-time string compare (avoids leaking match position via timing).
+function timingSafeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
 export async function hashPassword(plain) {
-  // 10 rounds — same default as the prior Flask app (bcrypt.gensalt() default).
-  return bcrypt.hash(plain, 10);
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const bits = await pbkdf2Bits(plain, salt, PBKDF2_ITERS);
+  return `pbkdf2$${PBKDF2_ITERS}$${bytesToB64(salt)}$${bytesToB64(bits)}`;
 }
 
 export async function comparePassword(plain, hash) {
   if (!hash) return false;
+  if (hash.startsWith("pbkdf2$")) {
+    const parts = hash.split("$");
+    if (parts.length !== 4) return false;
+    const iterations = Number(parts[1]);
+    if (!Number.isInteger(iterations) || iterations < 1) return false;
+    const salt = b64ToBytes(parts[2]);
+    const bits = await pbkdf2Bits(plain, salt, iterations);
+    return timingSafeEqual(bytesToB64(bits), parts[3]);
+  }
+  // Legacy bcrypt verification (pre-PBKDF2 rows).
   return bcrypt.compare(plain, hash);
 }
 
