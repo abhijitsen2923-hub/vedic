@@ -11,13 +11,15 @@ Marketing site + student portal for the academy, deployed as a single Cloudflare
 │   ├── assets/            ← shared images + the live-content loader
 │   ├── portal/            ← student portal frontend (login, dashboard, …)
 │   └── _headers, _redirects, robots.txt, sitemap.xml, 404.html
-├── functions/             ← Cloudflare Pages Functions (/api/* endpoints)
-│   ├── _lib/              shared modules (Sheets API, JWT, bcrypt, validators, repos)
-│   └── api/               health + auth/{login,register,me,logout}
+├── functions/             ← Cloudflare Worker endpoints (/api/*) imported by src/index.js
+│   ├── _lib/              shared modules (Sheets API, JWT, validators, repos)
+│   └── api/               health + content + dashboard/courses/classes/attendance/resources/profile + auth/{login,register,me,logout}
+├── src/index.js           single entry-point Worker (dispatches /api/*)
+├── wrangler.jsonc         Worker config (assets dir, main, observability)
 ├── scripts/               ← Node tooling (one-time data migrations)
-├── portal-seed/           ← bootstrap CSVs + bcrypt hash utility for the private "IVA Portal DB" Sheet
+├── portal-seed/           ← bootstrap CSVs for the private "IVA Portal DB" Sheet
 ├── content.example.csv    seed schema for the marketing-content Google Sheet (reference only)
-├── package.json           jose + bcryptjs deps, dev/migrate scripts
+├── package.json           jose dep, dev/migrate scripts
 ├── .dev.vars.example      template for local function env vars
 ├── .gitignore
 ├── .serve.ps1             (gitignored) PowerShell static-file server for local preview
@@ -38,7 +40,7 @@ Per-folder docs:
 - Cloudflare Pages Functions (no separate backend) for `/api/*`
 - Google Sheets as the data layer: a **single private** sheet (service-account access only) holding both student records and the marketing-content `Content` tab — the browser never reads the sheet directly; marketing copy is served via `GET /api/content`
 - Form submissions → Formspree (placeholder IDs to be substituted before launch)
-- Auth → bcrypt-hashed passwords + JWT in an httpOnly cookie
+- Auth → plaintext passwords stored in the Sheet's `password` column, owner-managed; timing-safe equality check at login; JWT session in an httpOnly cookie
 - Free tier: hundreds of students fit comfortably
 
 ## Run locally

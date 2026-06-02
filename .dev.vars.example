@@ -1,7 +1,7 @@
-# Template for local Cloudflare Pages Functions development.
-# Copy to `.dev.vars` (gitignored), fill in real values, then run `wrangler pages dev .`.
-# In production, the same keys are set in the Cloudflare Pages dashboard
-# (Project → Settings → Environment variables).
+# Template for local Cloudflare Worker development.
+# Copy to `.dev.vars` (gitignored), fill in real values, then run `npm run dev`.
+# In production, the same keys are set in the Cloudflare Worker dashboard
+# (Settings -> Variables and Secrets -> runtime).
 
 # The full JSON content of the Google service-account key, on a single line
 # (escape any internal newlines as \n inside the private_key).
@@ -18,15 +18,9 @@ JWT_SECRET=
 # How long a session lasts (default 24)
 JWT_EXP_HOURS=24
 
-# Shared signup code — give this to each enrolled student so they can self-register.
-# Change at any time in the Cloudflare dashboard; new value applies on next function call.
+# Shared signup code -- gates /api/auth/register (currently unused since the
+# self-signup UI is removed; endpoint is left in place for easy re-enable).
 ACADEMY_CODE=
-
-# Long random secret that gates POST /api/admin/hash (the in-sheet "Set/reset
-# password" tool sends this in the X-Admin-Token header). Generate like JWT_SECRET:
-#   node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
-# Store the SAME value in the sheet's Apps Script (Project Settings -> Script properties).
-ADMIN_TOKEN=
 
 # Marker so the function code knows it's running locally (relaxes Secure cookie flag).
 ENVIRONMENT=development

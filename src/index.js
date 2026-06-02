@@ -26,8 +26,6 @@ import {
   onRequestGet as profileGet,
   onRequestPatch as profilePatch,
 } from "../functions/api/profile.js";
-import { onRequestPost as adminHashPost } from "../functions/api/admin/hash.js";
-
 const routes = {
   "GET /api/health":         healthGet,
   "GET /api/content":        contentGet,
@@ -42,7 +40,6 @@ const routes = {
   "GET /api/resources":      resourcesGet,
   "GET /api/profile":        profileGet,
   "PATCH /api/profile":      profilePatch,
-  "POST /api/admin/hash":    adminHashPost,
 };
 
 export default {

@@ -10,7 +10,7 @@ Functions live at the **repo root** (not inside `public/`), as per Cloudflare's 
 functions/
 ├── _lib/                     shared modules (underscore prefix = not routed)
 │   ├── sheets.js             Google Sheets REST API client (service-account JWT exchange + readers/writers)
-│   ├── auth.js               JWT sign/verify, bcrypt compare, cookie helpers, JSON response helpers
+│   ├── auth.js               JWT sign/verify, timingSafeEqual, cookie helpers, JSON response helpers
 │   ├── validate.js           input validators (email, password, profile patch) + small utilities
 │   └── repos.js              domain accessors (Students + site Content; Courses/Enrollments/etc. arrive in Phase 2)
 └── api/
@@ -22,8 +22,6 @@ functions/
     ├── attendance.js         GET  /api/attendance  (student's attendance records + tally)
     ├── resources.js          GET  /api/resources   (resources for enrolled courses)
     ├── profile.js            GET + PATCH /api/profile (read / edit name+phone)
-    ├── admin/
-    │   └── hash.js           POST /api/admin/hash  (X-Admin-Token; hashes a password for the in-sheet tool)
     └── auth/
         ├── login.js          POST /api/auth/login
         ├── register.js       POST /api/auth/register  (live, but signup UI is hidden — see portal README)
@@ -99,13 +97,17 @@ All set in **Cloudflare Pages → Settings → Environment variables** (Producti
 | `IVA_SHEET_ID` | The single private "IVA Portal DB" Sheet ID. Holds **all** tabs — student data **and** the `Content` tab that drives the marketing pages. There is no separate public marketing sheet. Required for live marketing content (pages fall back to HTML defaults if unset). |
 | `JWT_SECRET` | 64+ hex chars. Generate once: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`. Never rotate without invalidating all sessions. |
 | `JWT_EXP_HOURS` | Session length. Default `24`. |
-| `ACADEMY_CODE` | Shared signup secret. Owner gives this to enrolled students so they can self-register; gates `POST /api/auth/register`. Changeable any time from the CF dashboard (applies on next request). |
-| `ADMIN_TOKEN` | Long random secret gating `POST /api/admin/hash`. The sheet's "Set/reset password" Apps Script sends it as `X-Admin-Token`. Store the same value in the Apps Script's Script properties. |
+| `ACADEMY_CODE` | Shared signup secret that gates `POST /api/auth/register`. The self-signup UI is hidden, so this is unused at the moment but kept for easy re-enable. Changeable any time. |
 | `ENVIRONMENT` | `development` for local (relaxes `Secure` cookie flag); leave unset or `production` in prod. |
 
 ## Passwords
 
-Hashing uses **PBKDF2 via Web Crypto** (`crypto.subtle`, SHA-256, 100k iterations) — native and fast in the Worker. Stored format: `pbkdf2$<iterations>$<saltB64>$<hashB64>`. Legacy **bcrypt** hashes (`$2a/$2b/$2y$…`) are still verified (via `bcryptjs`) so older rows keep working; they upgrade to PBKDF2 the next time the password is reset. Hashes are one-way — a forgotten password is **reset**, never recovered. Set/reset a password from the sheet's **IVA → Set / reset password** menu, or with `portal-seed/hash-password.html` (offline). Both produce the identical PBKDF2 format the Worker verifies.
+Passwords are stored as **plaintext** in the Students tab's `password` column (column E). Login does a **timing-safe equality check** between the submitted password and the cell value — no hashing, no salt, no derive step. The owner manages passwords by typing them into the sheet:
+
+- **New student**: append a row, type the password, tell the student.
+- **Reset**: overwrite the `password` cell, tell the student.
+
+This trades the "stolen hash can't be cracked to plaintext" property of bcrypt/PBKDF2 for sheet-edit simplicity. The sheet must stay **Restricted** (only the service account + owner can read). The login endpoint also falls back to a legacy `password_hash` column name if present, so a sheet that hasn't been renamed yet still authenticates while the owner renames the header.
 
 ## Phase status
 

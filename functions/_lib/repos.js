@@ -10,10 +10,12 @@ import { normalizeEmail } from "./validate.js";
 export const STUDENTS_TAB = "Students";
 
 export function publicProfile(student) {
-  // Strip the password hash and any internal fields before returning to the client.
+  // Strip the password (and any legacy `password_hash` cell still around) before
+  // returning to the client. Frontend never sees the credential.
   if (!student) return null;
   const {
-    password_hash, // eslint-disable-line no-unused-vars
+    password, // eslint-disable-line no-unused-vars
+    password_hash, // eslint-disable-line no-unused-vars  (legacy column name, dropped silently if present)
     ...rest
   } = student;
   return rest;

@@ -1,11 +1,15 @@
 // POST /api/auth/login — validates email + password, sets the iva_token cookie.
+//
+// Passwords are stored as plaintext in the Sheet's `password` column. We do a
+// timing-safe equality check (avoids leaking match-position via response time)
+// rather than a hash compare.
 
 import {
   json,
   error,
   issueToken,
   buildAuthCookie,
-  comparePassword,
+  timingSafeEqual,
   requireClientHeader,
 } from "../../_lib/auth.js";
 import { validateLogin, normalizeEmail } from "../../_lib/validate.js";
@@ -34,8 +38,13 @@ export const onRequestPost = async ({ request, env }) => {
   }
 
   if (!student) return error("Invalid credentials", 401);
-  const ok = await comparePassword(body.password, student.password_hash);
-  if (!ok) return error("Invalid credentials", 401);
+
+  // The Sheet column is `password`. Fall back to legacy `password_hash` so an
+  // un-renamed sheet still authenticates while the owner migrates the header.
+  const stored = student.password ?? student.password_hash;
+  if (!timingSafeEqual(body.password, stored)) {
+    return error("Invalid credentials", 401);
+  }
 
   const token = await issueToken(env, student.student_id);
   return json(

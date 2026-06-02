@@ -2,7 +2,7 @@
 
 Drop the eight CSVs in this folder into Google Sheets as tabs of one workbook, set up the `icon_type` dropdown, and both the student portal **and** the marketing site's live content have data to read. None of these files are deployed — they live at the repo root, not under `public/`.
 
-This is now the **single** spreadsheet for the whole site: the portal tabs (student data) plus the `Content` tab that drives the marketing pages' editable copy. The site never reads it from the browser — the Worker reads every tab server-side via the service account, so the file stays private.
+This is the **single** spreadsheet for the whole site: the portal tabs (student data) plus the `Content` tab that drives the marketing pages' editable copy. The site never reads it from the browser — the Worker reads every tab server-side via the service account, so the file stays private.
 
 ## Files
 
@@ -16,8 +16,18 @@ This is now the **single** spreadsheet for the whole site: the portal tabs (stud
 | `Resources.csv` | 5 demo lecture/reading links | `Resources` |
 | `IconTypes.csv` | Reference list for the `icon_type` dropdown | `IconTypes` |
 | `Content.csv` | Editable marketing copy (stats, hero, contact, footer) served via `/api/content` | `Content` |
-| `set-password.gs` | Apps Script for the sheet's **IVA → Set/reset password** menu (PBKDF2 via the Worker) | *(paste into Apps Script)* |
-| `hash-password.html` | Local-only PBKDF2 hasher — open in browser (offline fallback) | *(not imported)* |
+
+## Password model — plaintext, owner-managed in the sheet
+
+The **Students** tab has a `password` column (column E). It stores the student's password **as plaintext**, exactly what the student will type at login. The login endpoint reads it and does a timing-safe equality check.
+
+This is intentional: it makes onboarding "type a row in the sheet, hand the credentials to the student" — no hashing tool, no Apps Script, no admin endpoint. The trade-off is that anyone with read access to the sheet sees every password, so:
+
+- Keep the sheet's General access at **Restricted**. Only the service account + you should have access.
+- Don't reuse a student's portal password for anything else (assume any single-leak exposes it).
+- "Forgot password" → just open the sheet, type a new value in the `password` cell, tell the student.
+
+If you ever want to re-enable hashing, the Worker side is one swap: `functions/_lib/auth.js` was where the PBKDF2 code lived — the commit history has the previous version.
 
 ## One-time setup — import into ONE workbook
 
@@ -39,7 +49,7 @@ This is now the **single** spreadsheet for the whole site: the portal tabs (stud
    - Click **Done**. Every cell in `icon_type` now shows a dropdown of the 8 valid keys.
 6. Share with the service account: click **Share** → paste the service-account email (e.g., `iva-portal-fn@<project>.iam.gserviceaccount.com`) → role **Editor** → uncheck "Notify". Sheet stays restricted.
 7. Copy the Sheet ID from the URL (the long string between `/d/` and `/edit`).
-8. Paste it into the Cloudflare Pages environment variable `IVA_SHEET_ID` (Project → Settings → Environment variables → Production).
+8. Paste it into the Cloudflare Worker environment variable `IVA_SHEET_ID` (Settings → Variables and Secrets → runtime).
 
 Verify at `https://internationalvedicacademy.com/api/health` — expect `sheet_reachable: true` and the 8 tab names in `sheet_tabs`. Then hit `https://internationalvedicacademy.com/api/content` — expect a JSON `{ "content": { … } }` map of the marketing copy.
 
@@ -54,27 +64,11 @@ After the import + service-account share:
 - Email: `riya.sharma@email.com`
 - Password: `password123`
 
-The `password_hash` in `Students.csv` is a real bcrypt hash for `password123` (from the legacy Flask app, committed so the demo works out of the box). Bcrypt hashes still log in; new/reset passwords use the faster PBKDF2 format (`pbkdf2$…`).
+The `password` cell for Riya is the literal string `password123` (column E of row 2).
 
-## In-sheet password tool (recommended) — `set-password.gs`
+## Add new students — type in the sheet
 
-Set or reset any student's password without leaving the Sheet.
-
-**One-time setup:**
-1. Open the "IVA Portal DB" sheet → **Extensions → Apps Script**.
-2. Paste the contents of [`set-password.gs`](set-password.gs) into the editor (replace the default `Code.gs`) → **Save**. (This is a paste, not a CSV import.)
-3. **Project Settings → Script properties** → add:
-   - `WORKER_URL` = `https://internationalvedicacademy.com` (no trailing slash)
-   - `ADMIN_TOKEN` = the same value as the Worker's `ADMIN_TOKEN` secret
-4. Reload the sheet → an **IVA** menu appears.
-
-**Use:** on the `Students` tab, click any cell in a student's row → **IVA → Set / reset password (selected row)** → type the new password. It's hashed (PBKDF2, via the Worker) and written into that row's `password_hash`. Tell the student the new password. **Forgot password = just set a new one here** (hashes can't be decrypted).
-
-## Add new students — sheet-driven workflow
-
-There's no self-signup. To enroll a new student, **you add the row to the Students tab**:
-
-1. Append a new row to the `Students` tab (leave `password_hash` blank for now):
+There's no self-signup. To enroll a new student, open the `Students` tab and append a row:
 
 | Column | Example |
 |---|---|
@@ -82,16 +76,16 @@ There's no self-signup. To enroll a new student, **you add the row to the Studen
 | `name` | `Jane Doe` |
 | `email` | `jane.doe@example.com` |
 | `phone` | `+91 98700 12345` |
-| `password_hash` | *(set in step 2)* |
+| `password` | (pick a password and type it directly, e.g. `Welcome@2026`) |
 | `tier` | `Bronze` / `Silver` / `Gold` |
 | `avatar_initials` | `JD` |
-| `joined_date` | `2026-05-28` |
+| `joined_date` | today's date as `YYYY-MM-DD` |
 
-2. Select that row → **IVA → Set / reset password** → type their password (fills `password_hash`). *(Offline alternative: open `portal-seed/hash-password.html`, hash the password, paste it into `password_hash`.)*
-3. Tell the student their email + password privately. Don't save the plaintext — it can't be recovered, only reset.
-4. Student goes to `/portal/login.html` and logs in.
+Then tell the student their email + password privately. The change is live on the next login attempt (the Worker reads the sheet on every login request).
 
-To enroll the new student in a course, add a row to the `Enrollments` tab linking the new `student_id` to a `course_id`.
+## Resetting a password
+
+Open the `Students` tab → find the row → overwrite the `password` cell with the new value → tell the student. No code, no deploy, no Apps Script.
 
 ## Refreshing stale dates
 
@@ -99,4 +93,4 @@ The `Classes.csv` rows have fixed dates in late May 2026 to give a sane demo. On
 
 ## Alternative: the migration script (if you ever install Node)
 
-`scripts/migrate-excel-to-sheet.mjs` reads the legacy Flask Excel files and writes them to the Sheet in one command. Same end result as importing the CSVs by hand, just one step instead of seven. Use whichever fits your workflow. Until Node is installed, the CSVs above are the path.
+`scripts/migrate-excel-to-sheet.mjs` reads the legacy Flask Excel files and writes them to the Sheet in one command. Same end result as importing the CSVs by hand, just one step instead of eight. Use whichever fits your workflow. Until Node is installed, the CSVs above are the path.

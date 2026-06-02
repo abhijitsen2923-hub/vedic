@@ -1,12 +1,16 @@
 // POST /api/auth/register — gates self-signup by env.ACADEMY_CODE,
 // appends a row to the Students tab, sets the iva_token cookie.
+//
+// The login.html UI no longer exposes this (owner-driven student creation),
+// but the endpoint is kept for easy re-enable. Stores the password as plaintext
+// in the Sheet's `password` column — matching the model documented in
+// portal-seed/README.md.
 
 import {
   json,
   error,
   issueToken,
   buildAuthCookie,
-  hashPassword,
   requireClientHeader,
 } from "../../_lib/auth.js";
 import {
@@ -52,14 +56,13 @@ export const onRequestPost = async ({ request, env }) => {
 
   const name = trim(body.name);
   const phone = trim(body.phone);
-  const password_hash = await hashPassword(body.password);
 
   const student = {
     student_id: newId("STDNT"),
     name,
     email,
     phone,
-    password_hash,
+    password: body.password, // plaintext, owner-managed sheet column
     tier: "Bronze",
     avatar_initials: avatarInitials(name),
     joined_date: new Date().toISOString().slice(0, 10),

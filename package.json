@@ -9,7 +9,6 @@
     "migrate-sheet": "node scripts/migrate-excel-to-sheet.mjs"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "jose": "^5.9.6"
   },
   "devDependencies": {
