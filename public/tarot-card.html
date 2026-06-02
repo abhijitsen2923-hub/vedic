@@ -452,7 +452,63 @@
     .container { padding-left: 16px; padding-right: 16px; }
     .form-row-2 { grid-template-columns: 1fr; gap: 12px; }
   }
-</style>
+
+  /* ============ VALUE PROP STRIPE ============ */
+  .features-stripe {
+    background: linear-gradient(135deg, var(--cosmic-mid) 0%, var(--cosmic-purple) 50%, var(--cosmic-deep) 100%);
+    padding: 56px 0;
+    color: #faf5ea;
+    position: relative;
+  }
+  .features-stripe::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1px 1px at 18% 30%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 60%, rgba(240,200,120,0.45), transparent),
+      radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.3), transparent);
+    background-size: 360px 360px;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .features-stripe .container { position: relative; z-index: 1; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    text-align: center;
+  }
+  .feature-cell { padding: 8px 4px; }
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    color: #ffffff;
+  }
+  .feature-icon svg { width: 100%; height: 100%; }
+  .feature-headline {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gold-bright);
+    letter-spacing: 0.2px;
+    margin-bottom: 4px;
+  }
+  .feature-sub {
+    font-size: 14px;
+    color: #e8e0d0;
+    letter-spacing: 0.4px;
+  }
+  @media (max-width: 992px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; }
+  }
+  @media (max-width: 480px) {
+    .features-stripe { padding: 40px 0; }
+    .features-grid { grid-template-columns: 1fr; gap: 28px; }
+    .feature-icon { width: 56px; height: 56px; margin-bottom: 10px; }
+    .feature-headline { font-size: 20px; }
+  }</style>
 </head>
 <body>
 
@@ -595,6 +651,62 @@
 </section>
 
 <!-- CURRICULUM SYLLABUS SECTION ("What We Teach" & "How We Teach") -->
+<!-- ============ VALUE PROP STRIPE ============ -->
+<section class="features-stripe">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22 L32 12 L58 22 L32 32 Z"/>
+            <path d="M16 26 V40 C16 44 24 48 32 48 C40 48 48 44 48 40 V26"/>
+            <path d="M58 22 V36"/>
+            <circle cx="58" cy="38" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="feature-headline">Professional</div>
+        <div class="feature-sub">Certification</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="14" width="44" height="28" rx="2"/>
+            <path d="M6 46 H58 L60 50 H4 Z" fill="currentColor" stroke="none"/>
+            <circle cx="32" cy="28" r="6"/>
+            <path d="M30 24 L36 28 L30 32 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="feature-headline">100% Live</div>
+        <div class="feature-sub">Online Classes</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="22" r="6"/>
+            <path d="M10 42 C10 36 16 32 22 32 C28 32 34 36 34 42"/>
+            <circle cx="42" cy="22" r="5"/>
+            <path d="M36 42 C36 36 42 32 48 32"/>
+            <circle cx="46" cy="46" r="6"/>
+            <path d="M50 50 L56 56"/>
+          </svg>
+        </div>
+        <div class="feature-headline">100% Placement</div>
+        <div class="feature-sub">Support</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="20" r="6"/>
+            <path d="M22 28 V44 M14 50 L22 44 L30 50 M22 36 L28 32"/>
+            <path d="M48 14 L51 22 L59 23 L53 28 L55 36 L48 32 L41 36 L43 28 L37 23 L45 22 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="feature-headline">1 On 1</div>
+        <div class="feature-sub">Mentorship</div>
+      </div>
+    </div>
+  </div>
+</section>
 <section id="syllabus" class="section-padding bg-cream-deep">
   <div class="container">
     <div class="row justify-content-center mb-5">
