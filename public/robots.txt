@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /portal/
 
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://internationalvedicacademy.com/sitemap.xml
