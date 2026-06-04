@@ -603,7 +603,7 @@
 
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
-        <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold">Enroll Now</a></li>
+        <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold" data-enroll-modal>Enroll Now</a></li>
       </ul>
     </div>
   </div>
@@ -974,6 +974,7 @@
 <!-- Bootstrap 5 JS Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script defer src="assets/js/content.js"></script>
+<script defer src="assets/js/enroll-modal.js"></script>
 <script>
   (function(){
     const f = document.getElementById('enroll-form'); if (!f) return;
@@ -981,6 +982,14 @@
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (f.action.includes('YYYYYYYY')) { s.textContent = 'Form not configured yet. Replace YYYYYYYY with your Formspree enroll form ID.'; s.style.color = '#8b1a1a'; return; }
+      const bad = Array.from(f.querySelectorAll('[required]')).filter(el => {
+        const v = (el.value || '').trim();
+        if (!v) return true;
+        if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return true;
+        if (el.type === 'tel' && v.replace(/\D/g, '').length < 7) return true;
+        return false;
+      });
+      if (bad.length) { s.textContent = 'Please fill all required fields correctly.'; s.style.color = '#8b1a1a'; try { bad[0].focus(); } catch (_) {} return; }
       s.textContent = 'Sending...'; s.style.color = '';
       try {
         const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } });

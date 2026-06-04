@@ -11,6 +11,10 @@
       var key = el.getAttribute('data-content');
       if (map.has(key)) el.textContent = map.get(key);
     });
+    document.querySelectorAll('[data-content-href]').forEach(function (el) {
+      var key = el.getAttribute('data-content-href');
+      if (map.has(key)) el.setAttribute('href', map.get(key));
+    });
   }
 
   function fromCache() {
