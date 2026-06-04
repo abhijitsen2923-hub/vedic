@@ -95,6 +95,37 @@ async function googleFetch(env, url, init = {}) {
   return r.json();
 }
 
+// Columns that should be parsed as numbers (Sheets API returns every cell as a
+// string). Single source of truth so downstream code can do real comparisons
+// like `module_number > current_module` without "10" sorting before "2".
+const NUMERIC_COLUMNS = {
+  Courses: ["total_modules"],
+  Enrollments: ["current_module", "progress_pct"],
+  Classes: ["module_number", "duration_min"],
+  Resources: ["module_number"],
+};
+
+function coerceRow(tab, headers, row) {
+  const numeric = NUMERIC_COLUMNS[tab];
+  const obj = {};
+  for (let i = 0; i < headers.length; i++) {
+    const h = headers[i];
+    const raw = row[i] ?? "";
+    if (numeric && numeric.indexOf(h) !== -1) {
+      const trimmed = String(raw).trim();
+      if (trimmed === "") {
+        obj[h] = null;
+      } else {
+        const n = Number(trimmed);
+        obj[h] = Number.isFinite(n) ? n : null;
+      }
+    } else {
+      obj[h] = raw;
+    }
+  }
+  return obj;
+}
+
 // Returns rows as objects keyed by the header row.
 // `tab` is the tab name; we fetch the entire tab range.
 export async function readTab(env, tab) {
@@ -102,13 +133,7 @@ export async function readTab(env, tab) {
   const values = data.values || [];
   if (values.length < 1) return [];
   const headers = values[0];
-  return values.slice(1).map((row) => {
-    const obj = {};
-    headers.forEach((h, i) => {
-      obj[h] = row[i] ?? "";
-    });
-    return obj;
-  });
+  return values.slice(1).map((row) => coerceRow(tab, headers, row));
 }
 
 // Append a row to a tab. `record` keys must match the header row of the tab.

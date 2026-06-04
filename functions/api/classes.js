@@ -1,9 +1,10 @@
-// GET /api/classes — the student's classes, split into upcoming vs past by
-// comparing scheduled_at to the current time (more reliable than the stored
-// `status` column, which can go stale).
+// GET /api/classes — the student's classes (already filtered to modules the
+// student hasn't completed; see listStudentClasses), split into upcoming vs
+// past. The Classes.status column overrides the timestamp split when set to
+// "upcoming" or "ended"; otherwise scheduled_at vs now decides.
 
 import { json, error, studentIdFromRequest } from "../_lib/auth.js";
-import { listStudentClasses } from "../_lib/repos.js";
+import { listStudentClasses, isClassUpcoming } from "../_lib/repos.js";
 
 export const onRequestGet = async ({ request, env }) => {
   const studentId = await studentIdFromRequest(env, request);
@@ -15,8 +16,7 @@ export const onRequestGet = async ({ request, env }) => {
     const upcoming = [];
     const past = [];
     for (const c of all) {
-      const ts = Date.parse(c.scheduled_at);
-      (!Number.isNaN(ts) && ts >= now ? upcoming : past).push(c);
+      (isClassUpcoming(c, now) ? upcoming : past).push(c);
     }
     upcoming.sort((a, b) => Date.parse(a.scheduled_at) - Date.parse(b.scheduled_at));
     past.sort((a, b) => Date.parse(b.scheduled_at) - Date.parse(a.scheduled_at));

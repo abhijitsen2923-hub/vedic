@@ -5,7 +5,7 @@ import { api } from "./api-client.js";
 
 function courseCard(enrollment) {
   const c = enrollment.course || {};
-  const pct = Math.max(0, Math.min(100, Number(enrollment.progress_pct) || 0));
+  const pct = Number(enrollment.progress_pct) || 0;
   const total = c.total_modules || "—";
   const current = enrollment.current_module || 0;
   return `

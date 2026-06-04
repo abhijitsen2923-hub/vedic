@@ -65,15 +65,59 @@ function courseMap(courses) {
   return new Map(courses.map((c) => [c.course_id, c]));
 }
 
-function enrolledCourseIds(enrollments, studentId) {
-  return new Set(
+// current_module clamped against the course's total_modules (a typo in the
+// sheet that sets current_module=99 on a 10-module course caps at 10, not
+// blows up the progress %). Returns the integer count of completed modules.
+function clampedCurrentModule(enrollment, course) {
+  const total = Number(course?.total_modules) || 0;
+  const raw = Number(enrollment.current_module) || 0;
+  return total > 0 ? Math.min(raw, total) : raw;
+}
+
+// Enrich an enrollment with the joined course + computed progress %. The raw
+// `progress_pct` cell from the sheet is ignored — always recomputed here as
+// floor(current_module / total_modules * 100) so the number can't drift.
+function withComputedProgress(enrollment, course) {
+  const current = clampedCurrentModule(enrollment, course);
+  const total = Number(course?.total_modules) || 0;
+  const progress_pct = total > 0 ? Math.floor((current / total) * 100) : 0;
+  return { ...enrollment, current_module: current, progress_pct, course: course || null };
+}
+
+// Per-course "modules completed by this student" map. Classes / Resources for
+// module_number ≤ that value are filtered out (the student already passed
+// that module). module_number=0 or blank → always visible (general sessions).
+function studentProgressByCourse(enrollments, courses, studentId) {
+  const byCourse = courseMap(courses);
+  return new Map(
     enrollments
       .filter((e) => e.student_id === studentId)
-      .map((e) => e.course_id),
+      .map((e) => [e.course_id, clampedCurrentModule(e, byCourse.get(e.course_id))]),
   );
 }
 
-// Enrollments for the student, each joined with its course record.
+// True when `module_number` indicates the row should be visible given the
+// student's current progress on that course. Rows without a module_number
+// (null / 0 / blank) are treated as "applies to everyone".
+function passesModuleGate(moduleNumber, currentModule) {
+  const m = Number(moduleNumber) || 0;
+  if (m === 0) return true;
+  return m > currentModule;
+}
+
+// Honor the Classes.status column as an override on top of the timestamp split.
+// "ended" → force into past (cancellation / manual close).
+// "upcoming" → force into upcoming (overrides a stale timestamp).
+// blank / anything else → fall back to scheduled_at vs now.
+export function isClassUpcoming(c, nowMs) {
+  const status = String(c.status || "").trim().toLowerCase();
+  if (status === "ended") return false;
+  if (status === "upcoming") return true;
+  const ts = Date.parse(c.scheduled_at);
+  return !Number.isNaN(ts) && ts >= nowMs;
+}
+
+// Enrollments for the student, each joined with its course record + computed progress.
 export async function listEnrolledCourses(env, studentId) {
   const [enrollments, courses] = await Promise.all([
     readTab(env, ENROLLMENTS_TAB),
@@ -82,20 +126,22 @@ export async function listEnrolledCourses(env, studentId) {
   const byId = courseMap(courses);
   return enrollments
     .filter((e) => e.student_id === studentId)
-    .map((e) => ({ ...e, course: byId.get(e.course_id) || null }));
+    .map((e) => withComputedProgress(e, byId.get(e.course_id)));
 }
 
-// Classes belonging to the student's enrolled courses, with the course title attached.
+// Classes belonging to the student's enrolled courses, filtered to modules the
+// student hasn't completed yet. Course title attached for the UI.
 export async function listStudentClasses(env, studentId) {
   const [enrollments, classes, courses] = await Promise.all([
     readTab(env, ENROLLMENTS_TAB),
     readTab(env, CLASSES_TAB),
     readTab(env, COURSES_TAB),
   ]);
-  const mine = enrolledCourseIds(enrollments, studentId);
   const byId = courseMap(courses);
+  const progress = studentProgressByCourse(enrollments, courses, studentId);
   return classes
-    .filter((c) => mine.has(c.course_id))
+    .filter((c) => progress.has(c.course_id))
+    .filter((c) => passesModuleGate(c.module_number, progress.get(c.course_id)))
     .map((c) => ({ ...c, course_title: byId.get(c.course_id)?.title || "" }));
 }
 
@@ -118,17 +164,24 @@ export async function listStudentAttendance(env, studentId) {
     });
 }
 
-// Resources for the student's enrolled courses, with the course title attached.
+// Resources for the student's enrolled courses, filtered the same way as
+// classes: a resource tagged module_number=M is hidden until the student has
+// completed M modules. Rows without a module_number stay visible to all
+// enrolled students (general references, assignments, etc.).
+// NOTE: the Resources tab needs a `module_number` column for the gate to do
+// anything; until the column is added, all rows pass through unfiltered (the
+// "module_number=0/blank → always visible" rule covers the missing-column case).
 export async function listStudentResources(env, studentId) {
   const [enrollments, resources, courses] = await Promise.all([
     readTab(env, ENROLLMENTS_TAB),
     readTab(env, RESOURCES_TAB),
     readTab(env, COURSES_TAB),
   ]);
-  const mine = enrolledCourseIds(enrollments, studentId);
   const byId = courseMap(courses);
+  const progress = studentProgressByCourse(enrollments, courses, studentId);
   return resources
-    .filter((r) => mine.has(r.course_id))
+    .filter((r) => progress.has(r.course_id))
+    .filter((r) => passesModuleGate(r.module_number, progress.get(r.course_id)))
     .map((r) => ({ ...r, course_title: byId.get(r.course_id)?.title || "" }));
 }
 
@@ -147,24 +200,35 @@ export async function getDashboard(env, studentId) {
   ]);
   const byId = courseMap(courses);
   const myEnrollments = enrollments.filter((e) => e.student_id === studentId);
-  const mine = new Set(myEnrollments.map((e) => e.course_id));
 
-  const enrolledCourses = myEnrollments.map((e) => ({
-    ...e,
-    course: byId.get(e.course_id) || null,
-  }));
+  const enrolledCourses = myEnrollments.map((e) =>
+    withComputedProgress(e, byId.get(e.course_id)),
+  );
 
-  // Next upcoming class across enrolled courses (earliest scheduled_at >= now).
+  // Next upcoming class across enrolled courses — must clear the module gate
+  // for the student's current progress on that course, AND be upcoming per
+  // either status="upcoming" or scheduled_at >= now.
+  const progress = studentProgressByCourse(enrollments, courses, studentId);
   const now = Date.now();
   const upcoming = classes
-    .filter((c) => mine.has(c.course_id))
+    .filter((c) => progress.has(c.course_id))
+    .filter((c) => passesModuleGate(c.module_number, progress.get(c.course_id)))
+    .filter((c) => isClassUpcoming(c, now))
     .map((c) => ({
       ...c,
       course_title: byId.get(c.course_id)?.title || "",
       _ts: Date.parse(c.scheduled_at),
     }))
-    .filter((c) => !Number.isNaN(c._ts) && c._ts >= now)
-    .sort((a, b) => a._ts - b._ts);
+    .sort((a, b) => {
+      // Valid timestamps first (earliest at front); NaN timestamps sink to the
+      // bottom so status="upcoming" rows without a date don't outrank real ones.
+      const aBad = Number.isNaN(a._ts);
+      const bBad = Number.isNaN(b._ts);
+      if (aBad && bBad) return 0;
+      if (aBad) return 1;
+      if (bBad) return -1;
+      return a._ts - b._ts;
+    });
   const nextClass = upcoming.length ? upcoming[0] : null;
   if (nextClass) delete nextClass._ts;
 
