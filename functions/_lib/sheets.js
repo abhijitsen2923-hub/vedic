@@ -105,6 +105,48 @@ const NUMERIC_COLUMNS = {
   Resources: ["module_number"],
 };
 
+// Required header columns per tab. readTab throws if any are missing — the
+// thrown error string lands in the structured error log so owner can see
+// exactly which sheet header needs fixing.
+//
+// Extra columns are NOT an error: the sheet may evolve faster than the code
+// expects (e.g. owner adds a "notes" scratch column). Extras emit a one-line
+// warning per request so they don't go entirely unnoticed.
+//
+// module_number on Resources is intentionally absent — it's an optional gate,
+// and code falls through to "always visible" when the column is missing.
+const EXPECTED_HEADERS = {
+  Students: ["student_id", "name", "email", "phone", "password", "tier", "avatar_initials", "joined_date"],
+  Courses: ["course_id", "title", "instructor_name", "total_modules", "category", "icon_type"],
+  Enrollments: ["enrollment_id", "student_id", "course_id", "current_module", "progress_pct", "enrolled_on"],
+  Classes: ["class_id", "course_id", "title", "module_number", "scheduled_at", "duration_min", "meet_link", "status"],
+  Attendance: ["attendance_id", "student_id", "class_id", "joined_at", "left_at", "counted"],
+  Resources: ["resource_id", "course_id", "title", "type", "format", "url_or_location", "uploaded_by", "upload_date"],
+  Content: ["key", "value"],
+  IconTypes: ["icon_type", "svg_or_emoji"],
+};
+
+function validateHeaders(tab, headers) {
+  const expected = EXPECTED_HEADERS[tab];
+  if (!expected) return; // unknown tab → skip validation, let it through
+
+  const present = new Set(headers);
+  const missing = expected.filter((h) => !present.has(h));
+  if (missing.length) {
+    throw new Error(
+      `Sheet tab "${tab}" is missing required column(s): ${missing.join(", ")}. ` +
+        `Header row has: ${headers.join(", ") || "(empty)"}`,
+    );
+  }
+
+  const extra = headers.filter((h) => h && !expected.includes(h));
+  if (extra.length) {
+    console.log(
+      JSON.stringify({ level: "warn", msg: "sheet_extra_columns", tab, extra }),
+    );
+  }
+}
+
 function coerceRow(tab, headers, row) {
   const numeric = NUMERIC_COLUMNS[tab];
   const obj = {};
@@ -128,11 +170,14 @@ function coerceRow(tab, headers, row) {
 
 // Returns rows as objects keyed by the header row.
 // `tab` is the tab name; we fetch the entire tab range.
+// Throws if any required header is missing (see EXPECTED_HEADERS) — callers
+// catch this in their try/catch and return 503 with the error message logged.
 export async function readTab(env, tab) {
   const data = await googleFetch(env, sheetsUrl(env.IVA_SHEET_ID, tab));
   const values = data.values || [];
   if (values.length < 1) return [];
   const headers = values[0];
+  validateHeaders(tab, headers);
   return values.slice(1).map((row) => coerceRow(tab, headers, row));
 }
 

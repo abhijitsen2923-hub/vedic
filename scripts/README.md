@@ -49,3 +49,51 @@ Safe to re-run. The script clears each tab before writing, so re-running produce
 ### After the first run
 
 You can delete the legacy `astro/astro` Flask app — the Sheet becomes the single source of truth. The script's only purpose is the one-time seed.
+
+## `import-meet-attendance.mjs`
+
+Bulk-imports a Google Meet attendance CSV into the `Attendance` tab. Run it after each class instead of typing rows by hand.
+
+### Prerequisites
+
+Same as `migrate-excel-to-sheet.mjs` — Node 18+, `npm install`, `./service-account.json`, `IVA_SHEET_ID` env.
+
+### Run
+
+```powershell
+$env:IVA_SHEET_ID = "…"
+node scripts/import-meet-attendance.mjs `
+  --class-id CLASS-005 `
+  --csv .\meet-export.csv
+# optional: --counted false  (defaults to true)
+```
+
+### Expected CSV columns
+
+Standard Google Meet attendance export. The script auto-detects these columns case-insensitively:
+
+- `Email` (or `Email Address`) — **required**; used to look up the student
+- `First Join` (or `Join Time`) — parsed into `joined_at`; left blank if missing/unparseable
+- `Last Leave` (or `Leave Time`) — parsed into `left_at`; left blank if missing/unparseable
+
+Everything else in the CSV is ignored.
+
+### What it does
+
+1. Auths as the service account; pulls `Students`, `Classes`, `Attendance`.
+2. Verifies `--class-id` exists in the `Classes` tab; aborts if not.
+3. Builds an `email → student_id` map (case-insensitive, trimmed).
+4. For each Meet row:
+   - Unknown email → logged to stderr, counted as "unknown", skipped.
+   - Student already recorded for this class → counted as "skipped" (idempotency).
+   - Otherwise → builds a row with a deterministic `attendance_id` (stable hash of class_id + student_id, so the same student in the same class always gets the same id).
+5. Appends new rows to the `Attendance` tab. Prints `Imported N, skipped M, U unknown`.
+
+### Idempotency
+
+Safe to re-run. The deterministic `attendance_id` plus the already-recorded check mean a second run does nothing. Useful if the first run failed partway, or if the Meet CSV was updated.
+
+### Limits
+
+- `--counted` flag applies to every imported row (no per-student opt-out). For per-student fine-tuning, edit the sheet after importing.
+- Meet timestamps are parsed best-effort via `Date.parse`. Some exports use locale-specific formats — if `joined_at` / `left_at` come out blank, the timestamp format wasn't recognised; you can fill them in manually on the sheet.

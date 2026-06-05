@@ -27,22 +27,44 @@ export function escapeHtml(s) {
     .replace(/'/g, "&#39;");
 }
 
-// "2026-05-29T18:00:00" -> "29 May 2026, 6:00 PM" (falls back to the raw string).
+// Owner's working timezone — naked datetime strings ("2026-05-29T18:00:00")
+// from the sheet are anchored here so the viewer's browser can convert.
+const SHEET_TZ_OFFSET = "+05:30";
+const DATE_ONLY_RE = /^\d{4}-\d{2}-\d{2}$/;
+const NAKED_DATETIME_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?$/;
+
+// Mirror of functions/_lib/dates.js for the browser. Kept inline (not imported
+// from the backend module) so the static portal can stay framework-free.
+function parseSheetDate(s) {
+  if (typeof s !== "string" || !s) return NaN;
+  if (DATE_ONLY_RE.test(s)) {
+    const [y, m, d] = s.split("-").map(Number);
+    return new Date(y, m - 1, d).getTime();
+  }
+  if (NAKED_DATETIME_RE.test(s)) {
+    return Date.parse(s + SHEET_TZ_OFFSET);
+  }
+  return Date.parse(s);
+}
+
+// "2026-05-29T18:00:00" → "29 May 2026, 6:00 pm IST" (viewer in IST) or
+// "29 May 2026, 8:30 am EDT" (viewer in EDT). Timezone label is the viewer's,
+// since that's the clock they actually read times against.
 export function formatDateTime(s) {
-  const ts = Date.parse(s);
+  const ts = parseSheetDate(s);
   if (Number.isNaN(ts)) return escapeHtml(s || "—");
-  const d = new Date(ts);
-  return d.toLocaleString("en-IN", {
+  return new Date(ts).toLocaleString("en-IN", {
     day: "2-digit",
     month: "short",
     year: "numeric",
     hour: "numeric",
     minute: "2-digit",
+    timeZoneName: "short",
   });
 }
 
 export function formatDate(s) {
-  const ts = Date.parse(s);
+  const ts = parseSheetDate(s);
   if (Number.isNaN(ts)) return escapeHtml(s || "—");
   return new Date(ts).toLocaleDateString("en-IN", {
     day: "2-digit",

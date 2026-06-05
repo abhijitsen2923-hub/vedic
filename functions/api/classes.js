@@ -5,6 +5,7 @@
 
 import { json, error, studentIdFromRequest } from "../_lib/auth.js";
 import { listStudentClasses, isClassUpcoming } from "../_lib/repos.js";
+import { parseSheetDate } from "../_lib/dates.js";
 
 export const onRequestGet = async ({ request, env }) => {
   const studentId = await studentIdFromRequest(env, request);
@@ -18,8 +19,12 @@ export const onRequestGet = async ({ request, env }) => {
     for (const c of all) {
       (isClassUpcoming(c, now) ? upcoming : past).push(c);
     }
-    upcoming.sort((a, b) => Date.parse(a.scheduled_at) - Date.parse(b.scheduled_at));
-    past.sort((a, b) => Date.parse(b.scheduled_at) - Date.parse(a.scheduled_at));
+    upcoming.sort(
+      (a, b) => parseSheetDate(a.scheduled_at) - parseSheetDate(b.scheduled_at),
+    );
+    past.sort(
+      (a, b) => parseSheetDate(b.scheduled_at) - parseSheetDate(a.scheduled_at),
+    );
     return json({ upcoming, past });
   } catch (err) {
     console.log(JSON.stringify({ level: "error", msg: "classes_failed", err: String(err) }));

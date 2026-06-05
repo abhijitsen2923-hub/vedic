@@ -4,21 +4,33 @@
 
 import { readTab, appendRow, updateRowWhere } from "./sheets.js";
 import { normalizeEmail } from "./validate.js";
+import { parseSheetDate } from "./dates.js";
 
 // --- Students ---
 
 export const STUDENTS_TAB = "Students";
 
+// Sheet columns that hold credentials and must never reach the client. Any
+// student-row field whose name (case-insensitive) is in this set is stripped
+// by publicProfile. Adding a new credential-shaped column to the sheet later
+// only requires extending this set.
+const CREDENTIAL_KEYS = new Set([
+  "password",
+  "password_hash",
+  "pw",
+  "pwd",
+  "hash",
+  "salt",
+  "password_reset_token",
+]);
+
 export function publicProfile(student) {
-  // Strip the password (and any legacy `password_hash` cell still around) before
-  // returning to the client. Frontend never sees the credential.
   if (!student) return null;
-  const {
-    password, // eslint-disable-line no-unused-vars
-    password_hash, // eslint-disable-line no-unused-vars  (legacy column name, dropped silently if present)
-    ...rest
-  } = student;
-  return rest;
+  const out = {};
+  for (const [k, v] of Object.entries(student)) {
+    if (!CREDENTIAL_KEYS.has(String(k).toLowerCase())) out[k] = v;
+  }
+  return out;
 }
 
 export async function getStudentByEmail(env, email) {
@@ -77,11 +89,20 @@ function clampedCurrentModule(enrollment, course) {
 // Enrich an enrollment with the joined course + computed progress %. The raw
 // `progress_pct` cell from the sheet is ignored — always recomputed here as
 // floor(current_module / total_modules * 100) so the number can't drift.
+// course_missing=true signals to the frontend that the Enrollments.course_id
+// points at a deleted/non-existent Course row (so it can render a "Course
+// removed" state instead of a blank card).
 function withComputedProgress(enrollment, course) {
   const current = clampedCurrentModule(enrollment, course);
   const total = Number(course?.total_modules) || 0;
   const progress_pct = total > 0 ? Math.floor((current / total) * 100) : 0;
-  return { ...enrollment, current_module: current, progress_pct, course: course || null };
+  return {
+    ...enrollment,
+    current_module: current,
+    progress_pct,
+    course: course || null,
+    course_missing: !course,
+  };
 }
 
 // Per-course "modules completed by this student" map. Classes / Resources for
@@ -113,11 +134,34 @@ export function isClassUpcoming(c, nowMs) {
   const status = String(c.status || "").trim().toLowerCase();
   if (status === "ended") return false;
   if (status === "upcoming") return true;
-  const ts = Date.parse(c.scheduled_at);
+  const ts = parseSheetDate(c.scheduled_at);
   return !Number.isNaN(ts) && ts >= nowMs;
 }
 
+// Three-state attendance: "present" (counted=TRUE), "absent" (FALSE), "pending"
+// (blank or anything else). The owner uses blank to mean "I haven't graded
+// this class yet" — distinguishing that from explicit FALSE makes the rate
+// meaningful (pending excluded from the denominator).
+export function attendanceState(record) {
+  const v = String(record?.counted ?? "").trim().toUpperCase();
+  if (v === "TRUE") return "present";
+  if (v === "FALSE") return "absent";
+  return "pending";
+}
+
+// Real participation minutes if both join + leave timestamps are filled.
+// Returns null otherwise — the UI renders "—" so missing data is visible.
+function computeParticipationMin(record) {
+  const j = parseSheetDate(record?.joined_at);
+  const l = parseSheetDate(record?.left_at);
+  if (Number.isNaN(j) || Number.isNaN(l) || l <= j) return null;
+  return Math.max(0, Math.floor((l - j) / 60000));
+}
+
 // Enrollments for the student, each joined with its course record + computed progress.
+// Logs a warning per broken FK (Enrollment points at a Course that no longer
+// exists); withComputedProgress flags it so the UI can render a "Course
+// removed" muted card.
 export async function listEnrolledCourses(env, studentId) {
   const [enrollments, courses] = await Promise.all([
     readTab(env, ENROLLMENTS_TAB),
@@ -126,11 +170,26 @@ export async function listEnrolledCourses(env, studentId) {
   const byId = courseMap(courses);
   return enrollments
     .filter((e) => e.student_id === studentId)
-    .map((e) => withComputedProgress(e, byId.get(e.course_id)));
+    .map((e) => {
+      const course = byId.get(e.course_id);
+      if (!course) {
+        console.log(
+          JSON.stringify({
+            level: "warn",
+            msg: "enrollment_fk_missing",
+            enrollment_id: e.enrollment_id,
+            course_id: e.course_id,
+            student_id: e.student_id,
+          }),
+        );
+      }
+      return withComputedProgress(e, course);
+    });
 }
 
 // Classes belonging to the student's enrolled courses, filtered to modules the
-// student hasn't completed yet. Course title attached for the UI.
+// student hasn't completed yet. Course title attached for the UI; course_missing
+// flag signals to the frontend that a parent Course row was deleted.
 export async function listStudentClasses(env, studentId) {
   const [enrollments, classes, courses] = await Promise.all([
     readTab(env, ENROLLMENTS_TAB),
@@ -142,10 +201,21 @@ export async function listStudentClasses(env, studentId) {
   return classes
     .filter((c) => progress.has(c.course_id))
     .filter((c) => passesModuleGate(c.module_number, progress.get(c.course_id)))
-    .map((c) => ({ ...c, course_title: byId.get(c.course_id)?.title || "" }));
+    .map((c) => {
+      const course = byId.get(c.course_id);
+      return {
+        ...c,
+        course_title: course?.title || "",
+        course_missing: !course,
+      };
+    });
 }
 
-// The student's attendance rows, joined to the class title + scheduled_at.
+// The student's attendance rows, joined to the class title + scheduled_at,
+// enriched with the tri-state (present/absent/pending) and the real
+// participation duration in minutes (computed from joined_at + left_at).
+// class_missing=true flags rows whose class_id no longer resolves to a Class
+// row (deleted from the sheet); the frontend renders these as "Class removed".
 export async function listStudentAttendance(env, studentId) {
   const [attendance, classes] = await Promise.all([
     readTab(env, ATTENDANCE_TAB),
@@ -155,11 +225,26 @@ export async function listStudentAttendance(env, studentId) {
   return attendance
     .filter((a) => a.student_id === studentId)
     .map((a) => {
-      const cls = classById.get(a.class_id) || null;
+      const cls = classById.get(a.class_id);
+      if (!cls) {
+        console.log(
+          JSON.stringify({
+            level: "warn",
+            msg: "attendance_fk_missing",
+            attendance_id: a.attendance_id,
+            class_id: a.class_id,
+            student_id: a.student_id,
+          }),
+        );
+      }
       return {
         ...a,
         class_title: cls?.title || "",
         scheduled_at: cls?.scheduled_at || "",
+        class_duration_min: cls?.duration_min ?? null,
+        class_missing: !cls,
+        state: attendanceState(a),
+        participation_min: computeParticipationMin(a),
       };
     });
 }
@@ -185,12 +270,8 @@ export async function listStudentResources(env, studentId) {
     .map((r) => ({ ...r, course_title: byId.get(r.course_id)?.title || "" }));
 }
 
-function isCounted(v) {
-  return String(v).trim().toUpperCase() === "TRUE";
-}
-
 // Dashboard summary — reads the needed tabs once and assembles:
-//  { courses, nextClass, attendance: { attended, total } }
+//  { courses, nextClass, attendance: { attended, absent, pending, total, rate } }
 export async function getDashboard(env, studentId) {
   const [enrollments, courses, classes, attendance] = await Promise.all([
     readTab(env, ENROLLMENTS_TAB),
@@ -201,9 +282,21 @@ export async function getDashboard(env, studentId) {
   const byId = courseMap(courses);
   const myEnrollments = enrollments.filter((e) => e.student_id === studentId);
 
-  const enrolledCourses = myEnrollments.map((e) =>
-    withComputedProgress(e, byId.get(e.course_id)),
-  );
+  const enrolledCourses = myEnrollments.map((e) => {
+    const course = byId.get(e.course_id);
+    if (!course) {
+      console.log(
+        JSON.stringify({
+          level: "warn",
+          msg: "enrollment_fk_missing",
+          enrollment_id: e.enrollment_id,
+          course_id: e.course_id,
+          student_id: e.student_id,
+        }),
+      );
+    }
+    return withComputedProgress(e, course);
+  });
 
   // Next upcoming class across enrolled courses — must clear the module gate
   // for the student's current progress on that course, AND be upcoming per
@@ -214,11 +307,15 @@ export async function getDashboard(env, studentId) {
     .filter((c) => progress.has(c.course_id))
     .filter((c) => passesModuleGate(c.module_number, progress.get(c.course_id)))
     .filter((c) => isClassUpcoming(c, now))
-    .map((c) => ({
-      ...c,
-      course_title: byId.get(c.course_id)?.title || "",
-      _ts: Date.parse(c.scheduled_at),
-    }))
+    .map((c) => {
+      const course = byId.get(c.course_id);
+      return {
+        ...c,
+        course_title: course?.title || "",
+        course_missing: !course,
+        _ts: parseSheetDate(c.scheduled_at),
+      };
+    })
     .sort((a, b) => {
       // Valid timestamps first (earliest at front); NaN timestamps sink to the
       // bottom so status="upcoming" rows without a date don't outrank real ones.
@@ -233,12 +330,20 @@ export async function getDashboard(env, studentId) {
   if (nextClass) delete nextClass._ts;
 
   const myAttendance = attendance.filter((a) => a.student_id === studentId);
-  const attended = myAttendance.filter((a) => isCounted(a.counted)).length;
+  const counts = { present: 0, absent: 0, pending: 0 };
+  for (const a of myAttendance) counts[attendanceState(a)]++;
+  const graded = counts.present + counts.absent;
 
   return {
     courses: enrolledCourses,
     nextClass,
-    attendance: { attended, total: myAttendance.length },
+    attendance: {
+      attended: counts.present,
+      absent: counts.absent,
+      pending: counts.pending,
+      total: myAttendance.length,
+      rate: graded ? Math.round((counts.present / graded) * 100) : null,
+    },
   };
 }
 

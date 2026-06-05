@@ -1,9 +1,10 @@
-// GET /api/attendance — the student's attendance records + a tally.
+// GET /api/attendance — the student's attendance records + a tri-state tally.
+// `summary.rate` excludes pending rows from the denominator so it stays
+// meaningful while the owner is still filling in the `counted` column.
 
 import { json, error, studentIdFromRequest } from "../_lib/auth.js";
 import { listStudentAttendance } from "../_lib/repos.js";
-
-const isCounted = (v) => String(v).trim().toUpperCase() === "TRUE";
+import { parseSheetDate } from "../_lib/dates.js";
 
 export const onRequestGet = async ({ request, env }) => {
   const studentId = await studentIdFromRequest(env, request);
@@ -11,11 +12,32 @@ export const onRequestGet = async ({ request, env }) => {
 
   try {
     const records = await listStudentAttendance(env, studentId);
-    records.sort((a, b) => Date.parse(b.scheduled_at) - Date.parse(a.scheduled_at));
-    const attended = records.filter((r) => isCounted(r.counted)).length;
-    return json({ records, summary: { attended, total: records.length } });
+    records.sort(
+      (a, b) => parseSheetDate(b.scheduled_at) - parseSheetDate(a.scheduled_at),
+    );
+
+    const counts = { present: 0, absent: 0, pending: 0 };
+    for (const r of records) counts[r.state]++;
+    const graded = counts.present + counts.absent;
+
+    return json({
+      records,
+      summary: {
+        attended: counts.present,
+        absent: counts.absent,
+        pending: counts.pending,
+        total: records.length,
+        rate: graded ? Math.round((counts.present / graded) * 100) : null,
+      },
+    });
   } catch (err) {
-    console.log(JSON.stringify({ level: "error", msg: "attendance_failed", err: String(err) }));
+    console.log(
+      JSON.stringify({
+        level: "error",
+        msg: "attendance_failed",
+        err: String(err),
+      }),
+    );
     return error("Service temporarily unavailable", 503);
   }
 };
