@@ -52,10 +52,6 @@
   /* Core Global Settings */
   body {
     font-family: var(--sans);
-    background-image: url('./assets/img/background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     color: var(--ink);
     overflow-x: hidden;
     line-height: 1.6;
@@ -70,72 +66,8 @@
   }
 
   /* Cosmic dark background sections */
-  .bg-cosmic {
-    background: linear-gradient(180deg, var(--cosmic-deep) 0%, var(--cosmic-mid) 100%);
-    color: #faf5ea;
-    position: relative;
-    /* overflow: hidden; */
-  }
-
-  .bg-cosmic::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(1px 1px at 15% 15%, rgba(255,255,255,0.7), transparent),
-      radial-gradient(1px 1px at 45% 35%, rgba(255,245,210,0.6), transparent),
-      radial-gradient(1.5px 1.5px at 75% 20%, rgba(255,255,255,0.9), transparent),
-      radial-gradient(1px 1px at 85% 65%, rgba(255,245,210,0.5), transparent),
-      radial-gradient(1.5px 1.5px at 25% 75%, rgba(255,255,255,0.8), transparent),
-      radial-gradient(1px 1px at 60% 80%, rgba(255,245,210,0.6), transparent);
-    background-size: 100% 100%;
-    opacity: 0.8;
-  }
-
-  /* Header Logo & Navigation */
-  .navbar-brand .logo-mark {
-    width: 44px;
-    height: 44px;
-    border: 1.5px solid var(--gold);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(circle, rgba(212,162,76,0.2), transparent);
-  }
-  .navbar-brand .logo-mark svg {
-    width: 24px;
-    height: 24px;
-    color: var(--gold-bright);
-  }
-  .navbar-brand .logo-text {
-    font-family: var(--serif-display);
-    font-size: 16px;
-    letter-spacing: 2px;
-    font-weight: 500;
-    text-transform: uppercase;
-    line-height: 1.1;
-    color: #faf5ea;
-  }
-  .navbar-brand .logo-text span {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    margin-top: 2px;
-  }
-
-  .nav-link {
-    color: #e8e0d0 !important;
-    font-size: 14.5px;
-    margin-right: 1.5rem;
-    transition: color 0.3s;
-  }
-  .nav-link:hover, .nav-link.active {
-    color: var(--gold-bright) !important;
-  }
-
-  /* Custom Buttons */
+/* Header Logo & Navigation */
+/* Custom Buttons */
   .btn-gold {
     background: linear-gradient(135deg, var(--gold-bright), var(--gold));
     color: #1a0f00 !important;
@@ -532,6 +464,7 @@
   ]
 }
 </script>
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
@@ -539,7 +472,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-3" href="#">
-      <img src="assets/img/logo.png" class="img-fluid" style="width: 180px; height: 60px;"/>
+      <img src="assets/img/logo.png" class="img-fluid"/>
       
      
 

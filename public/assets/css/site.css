@@ -1,0 +1,164 @@
+/* site.css — shared cross-cutting responsive rules + CSS-only body background.
+   Loaded by every marketing page (public/*.html) and every portal page
+   (public/portal/*.html). Page-local fixes still live next to the markup
+   they apply to; this file only carries rules that should be identical
+   sitewide.
+
+   Sections:
+     1. Body background (replaces the deprecated background.png)
+     2. Logo sizing
+     3. Cross-cutting responsive utilities (tables, hero cards, forms, images)
+*/
+
+/* ---- 1. Body background ------------------------------------------------- */
+
+:root {
+  --bg-cream: #fff7e6;
+  --bg-cream-deep: #fbf2dd;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at top left,     rgba(212, 162, 76, 0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(26,  14, 46, 0.05), transparent 60%),
+    linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* ---- 2. Logo sizing ----------------------------------------------------- */
+
+.navbar-brand img,
+.brand-row .brand-logo {
+  width: auto;
+  max-width: 180px;
+  height: auto;
+}
+@media (max-width: 480px) {
+  .navbar-brand img,
+  .brand-row .brand-logo {
+    max-width: 130px;
+  }
+}
+
+/* ---- 3. Cross-cutting responsive utilities ----------------------------- */
+
+/* Tables: scroll horizontally inside their wrapper instead of bursting the
+   page's max width. Portal JS that builds .data-table should wrap it in
+   <div class="data-table-wrap">. */
+.data-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 640px) {
+  .data-table { font-size: 13px; }
+}
+
+/* Hide the decorative floating tarot/zodiac cards on the homepage hero
+   below 640px — they overlap the content on narrow viewports. */
+@media (max-width: 640px) {
+  .hv-card { display: none; }
+}
+
+/* Body text scales gently at the small end. Capped so desktop stays
+   at the existing ~17px reading size. */
+body {
+  font-size: clamp(15px, 0.95vw + 13px, 17px);
+}
+
+/* Form inputs at >=16px on mobile so iOS Safari doesn't auto-zoom on focus
+   (the actual symptom users report as "the form is broken on my phone"). */
+@media (max-width: 480px) {
+  input.form-control,
+  select.form-select,
+  textarea.form-control {
+    font-size: 16px;
+  }
+}
+
+/* Defensive: any stray <img> stays within its container. */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- 4. Marketing navbar — shared cosmic styling ----------------------- */
+/* These rules used to live duplicated in each marketing page's inline
+   <style>. Centralised so a single edit reflows every page. blog.html
+   intentionally opts out (uses a light editorial navbar). */
+
+.bg-cosmic {
+  background: linear-gradient(180deg, var(--cosmic-deep, #0a0618) 0%, var(--cosmic-mid, #1a1535) 100%);
+  color: #faf5ea;
+  position: relative;
+}
+
+.bg-cosmic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 15% 15%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 45% 35%, rgba(255,245,210,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 75% 20%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 85% 65%, rgba(255,245,210,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 25% 75%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 60% 80%, rgba(255,245,210,0.6), transparent);
+  background-size: 100% 100%;
+  opacity: 0.8;
+}
+
+.navbar-brand .logo-mark {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--gold, #d4a24c);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle, rgba(212, 162, 76, 0.2), transparent);
+}
+.navbar-brand .logo-mark svg {
+  width: 24px;
+  height: 24px;
+  color: var(--gold-bright, #f0c878);
+}
+.navbar-brand .logo-text {
+  font-family: var(--serif-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #faf5ea;
+}
+.navbar-brand .logo-text span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold, #d4a24c);
+  margin-top: 2px;
+}
+
+.bg-cosmic .nav-link {
+  color: #e8e0d0 !important;
+  font-size: 14.5px;
+  margin-right: 1.5rem;
+  transition: color 0.3s;
+}
+.bg-cosmic .nav-link:hover,
+.bg-cosmic .nav-link.active,
+.bg-cosmic .nav-link.show {
+  color: var(--gold-bright, #f0c878) !important;
+}
+
+/* Defensive: keep .dropdown-menu-dark on-brand under .bg-cosmic */
+.dropdown-menu-dark {
+  --bs-dropdown-bg: #1a1535;
+  --bs-dropdown-link-color: #e8e0d0;
+  --bs-dropdown-link-hover-color: var(--gold-bright, #f0c878);
+  --bs-dropdown-link-hover-bg: rgba(212, 162, 76, 0.1);
+  --bs-dropdown-link-active-color: var(--gold-bright, #f0c878);
+  --bs-dropdown-link-active-bg: rgba(212, 162, 76, 0.15);
+}

@@ -58,10 +58,12 @@ function summaryLine(s) {
       .join("");
 
     recordsEl.innerHTML = `
-      <table class="data-table">
-        <thead><tr><th>Class</th><th>When</th><th>Duration</th><th>Status</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>`;
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Class</th><th>When</th><th>Duration</th><th>Status</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
   } catch {
     summaryEl.textContent = "";
     recordsEl.innerHTML = "";
