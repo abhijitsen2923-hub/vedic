@@ -543,11 +543,16 @@
 
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav" aria-label="Open menu">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="mainNav">
+    <div class="offcanvas offcanvas-end" id="mainNav" tabindex="-1" aria-labelledby="mainNavLabel">
+      <div class="offcanvas-header">
+        <span class="offcanvas-title visually-hidden" id="mainNavLabel">Menu</span>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
@@ -572,6 +577,7 @@
         <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
         <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold" data-enroll-modal>Enroll Now</a></li>
       </ul>
+      </div>
     </div>
   </div>
 </nav>

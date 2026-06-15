@@ -211,3 +211,64 @@ img {
   .faq-section .accordion-button { padding: 14px 18px; font-size: 15px; }
   .faq-section .accordion-body { padding: 14px 18px 18px; font-size: 14px; }
 }
+
+/* ---- 6. Hero small-viewport polish (homepage) -------------------------- */
+/* The hero h1 used `clamp(28px, 8vw, 44px)` + `letter-spacing: -1.5px` at
+   ≤768px, which spilled past the right edge at <420px. Step the floor down
+   and let long words break instead of overflowing. */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: clamp(26px, 7.5vw, 36px);
+    letter-spacing: -0.5px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  .hero p.lead {
+    font-size: 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  .hero-content { padding-inline: 4px; }
+}
+
+/* ---- 7. Mobile offcanvas drawer (hamburger menu) ----------------------- */
+/* Activates below .lg (≤991.98px). On wider screens the navbar stays inline
+   exactly as before — Bootstrap's responsive offcanvas drops the chrome and
+   restores the inline layout automatically. */
+@media (max-width: 991.98px) {
+  #mainNav.offcanvas {
+    background: var(--cosmic-deep, #0a0618);
+    color: #faf5ea;
+    width: min(82vw, 320px);
+  }
+  #mainNav .offcanvas-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid rgba(212, 162, 76, 0.18);
+  }
+  #mainNav .offcanvas-header .btn-close {
+    filter: invert(1) sepia(0.4) saturate(2) hue-rotate(10deg);
+    opacity: 0.85;
+  }
+  #mainNav .offcanvas-body {
+    padding: 18px 20px 28px;
+  }
+  #mainNav .navbar-nav {
+    align-items: flex-end;
+    gap: 6px;
+  }
+  #mainNav .nav-link {
+    font-size: 17px;
+    padding: 10px 4px;
+  }
+  #mainNav .dropdown-menu {
+    text-align: right;
+    background: rgba(212, 162, 76, 0.05);
+    border: 0;
+    box-shadow: none;
+    padding: 4px 0;
+  }
+  #mainNav .btn-gold {
+    margin-top: 12px;
+    align-self: flex-end;
+  }
+}
