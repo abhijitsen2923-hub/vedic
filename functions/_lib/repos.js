@@ -347,6 +347,49 @@ export async function getDashboard(env, studentId) {
   };
 }
 
+// --- Course FAQs (sheet-driven, trilingual) ---
+
+export const FAQS_TAB = "FAQs";
+
+// Reads the FAQs tab and groups rows by course_id then by lang. Each language
+// list is sorted by `order`. Empty cells (missing question or answer) are
+// skipped — a row needs both to count as a usable FAQ.
+//
+// Shape:
+//   {
+//     [course_id]: {
+//       en: [{ order, question, answer }, ...],
+//       hi: [...],
+//       bn: [...]
+//     },
+//     ...
+//   }
+export async function getCourseFaqs(env) {
+  const rows = await readTab(env, FAQS_TAB);
+  const map = {};
+  for (const r of rows) {
+    const courseId = String(r.course_id || "").trim();
+    const lang = String(r.lang || "").trim().toLowerCase();
+    if (!courseId || !lang) continue;
+    const question = String(r.question || "").trim();
+    const answer = String(r.answer || "").trim();
+    if (!question || !answer) continue;
+    if (!map[courseId]) map[courseId] = {};
+    if (!map[courseId][lang]) map[courseId][lang] = [];
+    map[courseId][lang].push({
+      order: Number(r.order) || 0,
+      question,
+      answer,
+    });
+  }
+  for (const cid of Object.keys(map)) {
+    for (const lang of Object.keys(map[cid])) {
+      map[cid][lang].sort((a, b) => a.order - b.order);
+    }
+  }
+  return map;
+}
+
 // --- Marketing site content ---
 
 export const CONTENT_TAB = "Content";

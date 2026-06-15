@@ -179,3 +179,35 @@ img {
   --bs-dropdown-link-active-color: var(--gold-bright, #f0c878);
   --bs-dropdown-link-active-bg: rgba(212, 162, 76, 0.15);
 }
+
+/* ---- 5. FAQ accordion (sheet-driven; see public/assets/js/faqs.js) ------ */
+.faq-section .accordion-item {
+  border: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 12px rgba(26, 21, 53, 0.06);
+}
+.faq-section .accordion-button {
+  font-family: var(--serif, 'Fraunces', Georgia, serif);
+  font-weight: 600;
+  color: var(--ink, #1a1535);
+  background: #fff;
+  padding: 18px 24px;
+}
+.faq-section .accordion-button:not(.collapsed) {
+  color: var(--gold-deep, #a8791f);
+  background: var(--bg-cream-deep, #f0e8d3);
+  box-shadow: none;
+}
+.faq-section .accordion-button:focus { box-shadow: 0 0 0 0.2rem rgba(212, 162, 76, 0.2); }
+.faq-section .accordion-body { color: #4a4365; padding: 16px 24px 22px; line-height: 1.7; }
+.faq-lang-toggle .btn { margin: 0 4px; min-width: 92px; padding: 6px 16px; font-size: 14px; }
+.faq-lang-toggle .btn-outline-gold { color: var(--gold-deep, #a8791f) !important; border-color: var(--gold, #d4a24c); }
+.faq-lang-toggle .btn-outline-gold:hover { background: rgba(212, 162, 76, 0.08); color: var(--gold-deep, #a8791f) !important; }
+.faq-lang-pane[hidden] { display: none !important; }
+[lang="hi"], [lang="bn"] { font-family: 'Noto Sans', 'Inter', sans-serif; }
+@media (max-width: 480px) {
+  .faq-section .accordion-button { padding: 14px 18px; font-size: 15px; }
+  .faq-section .accordion-body { padding: 14px 18px 18px; font-size: 14px; }
+}

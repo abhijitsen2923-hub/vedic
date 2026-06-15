@@ -13,6 +13,7 @@
 
 import { onRequestGet as healthGet } from "../functions/api/health.js";
 import { onRequestGet as contentGet } from "../functions/api/content.js";
+import { onRequestGet as faqsGet } from "../functions/api/faqs.js";
 import { onRequestPost as loginPost } from "../functions/api/auth/login.js";
 import { onRequestPost as registerPost } from "../functions/api/auth/register.js";
 import { onRequestGet as meGet } from "../functions/api/auth/me.js";
@@ -29,6 +30,7 @@ import {
 const routes = {
   "GET /api/health":         healthGet,
   "GET /api/content":        contentGet,
+  "GET /api/faqs":           faqsGet,
   "POST /api/auth/login":    loginPost,
   "POST /api/auth/register": registerPost,
   "GET /api/auth/me":        meGet,
