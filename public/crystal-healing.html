@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<title>Learn Crystal Healing Online — International Vedic Academy</title>
+<meta name="description" content="Master crystal energy, chakra-based crystal selection, cleansing, charging, crystal grids, and manifestation through our online Crystal Healing course." />
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-cream: #f7f1e3;
+    --bg-cream-deep: #f0e8d3;
+    --bg-white: #ffffff;
+    --ink: #1a1535;
+    --ink-soft: #4a4365;
+    --ink-muted: #7a7290;
+    --cosmic-deep: #0a0618;
+    --cosmic-mid: #1a1535;
+    --cosmic-purple: #2a1f5e;
+    --cosmic-violet: #4a2f8e;
+    --gold: #d4a24c;
+    --gold-bright: #f0c878;
+    --gold-deep: #a8791f;
+    --border-light: rgba(26, 21, 53, 0.08);
+    --border-gold: rgba(212, 162, 76, 0.3);
+    --shadow-sm: 0 4px 12px rgba(26, 21, 53, 0.06);
+    --shadow-md: 0 8px 24px rgba(26, 21, 53, 0.08);
+    --shadow-lg: 0 20px 50px rgba(26, 21, 53, 0.12);
+    --shadow-cosmic: 0 30px 80px rgba(10, 6, 24, 0.4);
+    --serif: 'Fraunces', Georgia, serif;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  body { font-family: var(--sans); color: var(--ink); overflow-x: hidden; line-height: 1.6; }
+  h1, h2, h3, h4, .font-serif { font-family: var(--serif); }
+  .font-serif-display { font-family: var(--serif-display); }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0f00 !important; font-weight: 600; border: none; border-radius: 50px;
+    padding: 12px 28px; transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 162, 76, 0.35);
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 162, 76, 0.5); }
+
+  .btn-outline-gold {
+    background: transparent; color: var(--gold-bright) !important;
+    border: 1px solid var(--gold); border-radius: 50px;
+    padding: 12px 28px; font-weight: 500; transition: all 0.3s;
+  }
+  .btn-outline-gold:hover { background: rgba(212, 162, 76, 0.1); border-color: var(--gold-bright); color: #fff !important; }
+
+  .course-hero { position: relative; padding: 100px 0 120px; }
+  .course-hero h1 { font-size: clamp(36px, 4.5vw, 54px); font-weight: 500; letter-spacing: -1px; line-height: 1.1; }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #f0c878, #d4a24c);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .course-hero .lead { color: #d8cfbd; font-size: 17px; line-height: 1.7; }
+
+  .celestial-graphic { position: relative; max-width: 440px; margin: 0 auto; filter: drop-shadow(0 15px 35px rgba(10, 6, 24, 0.5)); }
+  .celestial-graphic svg { overflow: visible; }
+
+  /* Crystal-specific gentle pulse on the central gemstone */
+  @keyframes crystalPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 0.95; transform: scale(1.04); }
+  }
+  @keyframes chakraRotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .crystal-pulse { animation: crystalPulse 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .chakra-ring   { animation: chakraRotate 45s linear infinite; transform-box: fill-box; transform-origin: center; }
+
+  .section-padding { padding: 100px 0; }
+  .section-title { font-size: clamp(28px, 3.5vw, 38px); font-weight: 500; color: var(--ink); margin-bottom: 20px; }
+  .title-gold-line-center::after {
+    content: ''; display: block; width: 80px; height: 2px;
+    background: var(--gold); margin: 15px auto 0;
+  }
+
+  .custom-card {
+    background-color: var(--bg-white); border: 1px solid var(--border-light);
+    border-radius: 16px; padding: 40px 32px; box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .custom-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border-gold); }
+
+  .ornate-dark-card {
+    background: linear-gradient(160deg, #1a1535 0%, #0a0618 100%);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 16px; padding: 45px 35px; color: #faf5ea;
+    position: relative; overflow: hidden; height: 100%; box-shadow: var(--shadow-md);
+  }
+  .ornate-dark-card::before {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.25); border-radius: 12px; pointer-events: none;
+  }
+  .ornate-dark-card h3 { color: var(--gold-bright); font-family: var(--serif); }
+
+  .icon-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(212, 162, 76, 0.12);
+    border: 1.5px solid rgba(212, 162, 76, 0.35);
+    display: grid; place-items: center; color: var(--gold-bright); margin-bottom: 24px;
+  }
+  .icon-circle svg { width: 26px; height: 26px; }
+
+  /* FAQ accordion */
+  .faq-section .accordion-item {
+    border: 0 !important; border-radius: 12px !important;
+    overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-sm);
+  }
+  .faq-section .accordion-button {
+    font-family: var(--serif); font-weight: 600;
+    color: var(--ink); background: #fff; padding: 18px 24px;
+  }
+  .faq-section .accordion-button:not(.collapsed) {
+    color: var(--gold-deep); background: var(--bg-cream-deep);
+    box-shadow: none;
+  }
+  .faq-section .accordion-button:focus { box-shadow: 0 0 0 0.2rem rgba(212, 162, 76, 0.2); }
+  .faq-section .accordion-body { color: var(--ink-soft); padding: 16px 24px 22px; line-height: 1.7; }
+  .faq-lang-toggle .btn { margin: 0 4px; min-width: 92px; padding: 6px 16px; font-size: 14px; }
+  .faq-lang-toggle .btn-outline-gold { color: var(--gold-deep) !important; border-color: var(--gold); }
+  .faq-lang-toggle .btn-outline-gold:hover { background: rgba(212, 162, 76, 0.08); color: var(--gold-deep) !important; }
+  .faq-lang-pane[hidden] { display: none !important; }
+  [lang="hi"], [lang="bn"] { font-family: 'Noto Sans', 'Inter', sans-serif; }
+
+  footer { background: var(--cosmic-deep); color: #c4bba8; padding: 50px 0 28px; }
+  footer a { color: #c4bba8; text-decoration: none; transition: color 0.3s; }
+  footer a:hover { color: var(--gold-bright); }
+  .foot-grid {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 32px; padding-bottom: 28px;
+    border-bottom: 1px solid rgba(212, 162, 76, 0.15);
+  }
+  .foot-links { display: flex; gap: 32px; flex-wrap: wrap; }
+  .foot-links a { color: #c4bba8; font-size: 14px; }
+  .foot-socials { display: flex; gap: 10px; }
+  .foot-socials a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    display: grid; place-items: center; color: var(--gold); transition: all 0.3s;
+  }
+  .foot-socials a:hover { background: var(--gold); color: var(--cosmic-deep); }
+  .foot-socials svg { width: 16px; height: 16px; }
+
+  @media (max-width: 1024px) {
+    .course-hero { padding: 80px 0 80px; }
+  }
+  @media (max-width: 768px) {
+    .course-hero { padding: 60px 0 50px; }
+    .course-hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .section-padding { padding: 50px 0; }
+    .section-title { font-size: clamp(22px, 5vw, 30px); }
+    .custom-card, .ornate-dark-card { padding: 28px 22px; }
+    .foot-grid { gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    .course-hero { padding: 40px 0 32px; }
+    .section-padding { padding: 32px 0; }
+    .custom-card, .ornate-dark-card { padding: 22px 18px; }
+    .btn-gold { padding: 12px 24px !important; font-size: 14px; }
+    .faq-section .accordion-button { padding: 14px 18px; font-size: 15px; }
+    .faq-section .accordion-body { padding: 14px 18px 18px; font-size: 14px; }
+    .foot-grid { flex-direction: column; text-align: center; gap: 24px; }
+    .foot-links { justify-content: center; gap: 18px 24px; }
+  }
+
+  /* Features stripe — copied verbatim from existing course pages */
+  .features-stripe {
+    background: linear-gradient(135deg, var(--cosmic-mid) 0%, var(--cosmic-purple) 50%, var(--cosmic-deep) 100%);
+    padding: 56px 0; color: #faf5ea; position: relative;
+  }
+  .features-stripe::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(1px 1px at 18% 30%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 60%, rgba(240,200,120,0.45), transparent),
+      radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.3), transparent);
+    background-size: 360px 360px; pointer-events: none; opacity: 0.7;
+  }
+  .features-stripe .container { position: relative; z-index: 1; }
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+  .feature-cell { padding: 8px 4px; }
+  .feature-icon { width: 64px; height: 64px; margin: 0 auto 14px; color: #ffffff; }
+  .feature-icon svg { width: 100%; height: 100%; }
+  .feature-headline { font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--gold-bright); margin-bottom: 4px; }
+  .feature-sub { font-size: 14px; color: #e8e0d0; letter-spacing: 0.4px; }
+  @media (max-width: 992px) { .features-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; } }
+  @media (max-width: 480px) {
+    .features-stripe { padding: 40px 0; }
+    .features-grid { grid-template-columns: 1fr; gap: 28px; }
+    .feature-icon { width: 56px; height: 56px; margin-bottom: 10px; }
+    .feature-headline { font-size: 20px; }
+  }
+</style>
+
+<!-- SEO + social previews -->
+<link rel="canonical" href="https://internationalvedicacademy.com/crystal-healing.html" />
+<meta name="theme-color" content="#1a1535" />
+<meta name="author" content="International Vedic Academy" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="International Vedic Academy" />
+<meta property="og:title" content="Learn Crystal Healing Online — International Vedic Academy" />
+<meta property="og:description" content="Master crystal energy, chakra-based crystal selection, cleansing, charging, crystal grids and manifestation in our practical online Crystal Healing course." />
+<meta property="og:url" content="https://internationalvedicacademy.com/crystal-healing.html" />
+<meta property="og:image" content="https://internationalvedicacademy.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_IN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Learn Crystal Healing Online — International Vedic Academy" />
+<meta name="twitter:description" content="Master crystal energy, chakra-based crystal selection, cleansing, charging, crystal grids and manifestation in our practical online Crystal Healing course." />
+<meta name="twitter:image" content="https://internationalvedicacademy.com/og-image.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "International Vedic Academy",
+  "url": "https://internationalvedicacademy.com",
+  "logo": "https://internationalvedicacademy.com/favicon.png",
+  "description": "Online Vedic academy teaching Vedic Astrology, Numerology, Tarot, Palmistry, Vastu Shastra, Crystal Healing and Reiki Healing.",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Crystal Healing",
+  "description": "Online Crystal Healing course covering crystal types, properties, chakra-based selection, cleansing and charging, crystal grids, manifestation techniques and energy balancing.",
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "International Vedic Academy",
+    "url": "https://internationalvedicacademy.com"
+  },
+  "courseMode": "online",
+  "educationalLevel": "All Levels",
+  "numberOfCredits": 8,
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://internationalvedicacademy.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Crystal Healing", "item": "https://internationalvedicacademy.com/crystal-healing.html" }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+      <img src="assets/img/logo.png" class="img-fluid" alt="International Vedic Academy"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark border-0 shadow-lg">
+            <li><a class="dropdown-item" href="vedic-astrology.html">Vedic Astrology</a></li>
+            <li><a class="dropdown-item" href="tarot-card.html">Tarot Card Reading</a></li>
+            <li><a class="dropdown-item" href="numerology.html">Numerology</a></li>
+            <li><a class="dropdown-item" href="palmistry.html">Palmistry</a></li>
+            <li><a class="dropdown-item" href="vastu-shastra.html">Vastu Shastra</a></li>
+            <li><a class="dropdown-item" href="crystal-healing.html">Crystal Healing</a></li>
+            <li><a class="dropdown-item" href="reiki-healing.html">Reiki Healing</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
+        <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold" data-enroll-modal>Enroll Now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="course-hero bg-cosmic">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="text-uppercase small fw-bold d-block mb-3" style="letter-spacing: 3px; color: var(--gold-bright);">Energy &amp; Wellness Practice</span>
+        <h1>Learn <span class="gold-gradient-text">Crystal Healing</span> Online</h1>
+        <p class="lead mt-4">The Crystal Healing Course at International Vedic Academy is designed to help students understand the energy, properties, and practical uses of healing crystals for emotional balance, spiritual growth, and personal well-being. It is ideal for beginners as well as learners who want to turn crystal healing into a professional wellness practice.</p>
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
+          <a href="#enroll" class="btn btn-gold">Enroll Now</a>
+          <a href="#syllabus" class="btn btn-outline-gold">View Course details</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="celestial-graphic">
+          <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
+            <!-- Outer rotating chakra ring -->
+            <g class="chakra-ring" stroke="#d4a24c" stroke-width="0.8">
+              <circle cx="200" cy="200" r="180" stroke-dasharray="3 6" opacity="0.45"/>
+              <circle cx="200" cy="200" r="160" stroke-dasharray="1 5" opacity="0.55"/>
+              <!-- 7 chakra dots around the ring -->
+              <circle cx="200" cy="40"  r="6" fill="#f0c878" stroke="none"/>
+              <circle cx="320" cy="100" r="6" fill="#d4a24c" stroke="none"/>
+              <circle cx="360" cy="220" r="6" fill="#a8791f" stroke="none"/>
+              <circle cx="290" cy="340" r="6" fill="#f0c878" stroke="none"/>
+              <circle cx="120" cy="340" r="6" fill="#d4a24c" stroke="none"/>
+              <circle cx="40"  cy="220" r="6" fill="#a8791f" stroke="none"/>
+              <circle cx="80"  cy="100" r="6" fill="#f0c878" stroke="none"/>
+            </g>
+
+            <!-- Central gemstone cluster -->
+            <g stroke="#f0c878" stroke-width="1.6" fill="none">
+              <!-- Large central diamond -->
+              <path d="M200 90 L150 180 L200 320 L250 180 Z" fill="#1a1535" fill-opacity="0.8"/>
+              <path d="M150 180 L250 180" stroke="#d4a24c" stroke-width="1.2"/>
+              <path d="M200 90 L200 180" stroke="#d4a24c" stroke-width="1"/>
+              <path d="M200 180 L175 220 M200 180 L225 220" stroke="#d4a24c" stroke-width="0.9" opacity="0.7"/>
+              <!-- Inner glow gemstone -->
+              <path class="crystal-pulse" d="M200 130 L175 180 L200 260 L225 180 Z" fill="#f0c878" fill-opacity="0.18" stroke="#f0c878" stroke-width="1"/>
+              <!-- Small side gems -->
+              <path d="M105 230 L88 260 L105 305 L122 260 Z" fill="#1a1535" fill-opacity="0.8" stroke="#d4a24c" stroke-width="1.1"/>
+              <path d="M295 230 L278 260 L295 305 L312 260 Z" fill="#1a1535" fill-opacity="0.8" stroke="#d4a24c" stroke-width="1.1"/>
+              <!-- Ground line under the cluster -->
+              <line x1="70" y1="335" x2="330" y2="335" stroke="#d4a24c" stroke-width="0.7" opacity="0.4"/>
+            </g>
+
+            <!-- Outer sparkles -->
+            <g fill="#f0c878">
+              <circle cx="58"  cy="80"  r="2"/>
+              <circle cx="350" cy="60"  r="1.5"/>
+              <circle cx="370" cy="350" r="2"/>
+              <circle cx="40"  cy="360" r="1.5"/>
+              <circle cx="200" cy="20"  r="2"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROP STRIPE -->
+<section class="features-stripe">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22 L32 12 L58 22 L32 32 Z"/>
+            <path d="M16 26 V40 C16 44 24 48 32 48 C40 48 48 44 48 40 V26"/>
+            <path d="M58 22 V36"/>
+            <circle cx="58" cy="38" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="feature-headline">Professional</div>
+        <div class="feature-sub">Certification</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="14" width="44" height="28" rx="2"/>
+            <path d="M6 46 H58 L60 50 H4 Z" fill="currentColor" stroke="none"/>
+            <circle cx="32" cy="28" r="6"/>
+            <path d="M30 24 L36 28 L30 32 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="feature-headline">100% Live</div>
+        <div class="feature-sub">Online Classes</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="22" r="6"/>
+            <path d="M10 42 C10 36 16 32 22 32 C28 32 34 36 34 42"/>
+            <circle cx="42" cy="22" r="5"/>
+            <path d="M36 42 C36 36 42 32 48 32"/>
+            <circle cx="46" cy="46" r="6"/>
+            <path d="M50 50 L56 56"/>
+          </svg>
+        </div>
+        <div class="feature-headline">100% Placement</div>
+        <div class="feature-sub">Support</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="20" r="6"/>
+            <path d="M22 28 V44 M14 50 L22 44 L30 50 M22 36 L28 32"/>
+            <path d="M48 14 L51 22 L59 23 L53 28 L55 36 L48 32 L41 36 L43 28 L37 23 L45 22 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="feature-headline">1 On 1</div>
+        <div class="feature-sub">Mentorship</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM: What We Teach / How We Teach -->
+<section id="syllabus" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title title-gold-line-center">Our Curriculum</h2>
+        <p class="text-secondary">A practical, structured approach taking you from foundational crystal knowledge to confident professional practice.</p>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-6">
+        <div class="custom-card h-100">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="mb-3">What We Teach</h3>
+          <p class="text-secondary mb-0">Students learn about crystal types, crystal properties, chakra-based crystal selection, cleansing and charging methods, crystal grids, manifestation techniques, energy balancing, and practical healing applications. The course provides both theoretical understanding and hands-on usage of crystals.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="custom-card h-100">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="mb-3">How We Teach</h3>
+          <p class="text-secondary mb-0">Our teaching method combines crystal knowledge, guided demonstrations, practical exercises, and real-life healing scenarios. Students learn how to identify, activate, program, and use crystals effectively for personal and client-focused healing sessions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES: Why Learn / Career -->
+<section class="section-padding bg-cosmic text-white">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title text-white title-gold-line-center">Values &amp; Opportunities</h2>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-6">
+        <div class="ornate-dark-card">
+          <h3 class="mb-3">Why Learn Crystal Healing</h3>
+          <p class="text-light opacity-75 mb-0">Crystal healing is valuable because it combines ancient energy practices with modern wellness approaches. It helps individuals improve emotional clarity, relaxation, focus, and spiritual awareness while providing a practical skill that can be integrated into holistic healing and wellness services.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ornate-dark-card">
+          <h3 class="mb-3">Career Opportunities</h3>
+          <p class="text-light opacity-75 mb-0">After completing the course, students can work as a crystal healing practitioner, holistic wellness consultant, energy healer, spiritual coach, workshop facilitator, or content creator. With the growing demand for alternative wellness services, crystal healing has become a promising skill for both personal practice and professional consultation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section-padding faq-section" style="background: var(--bg-cream-deep);">
+  <div class="container" style="max-width: 880px;">
+    <div class="text-center mb-4">
+      <h2 class="section-title title-gold-line-center">Crystal Healing — <em>FAQs</em></h2>
+      <p class="text-secondary">Common questions about the course, certification, and what to expect.</p>
+    </div>
+
+    <div class="faq-lang-toggle text-center mb-4" role="group" aria-label="FAQ language">
+      <button type="button" class="btn btn-sm btn-gold active" data-faq-lang="en">English</button>
+      <button type="button" class="btn btn-sm btn-outline-gold" data-faq-lang="hi">हिन्दी</button>
+      <button type="button" class="btn btn-sm btn-outline-gold" data-faq-lang="bn">বাংলা</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="faq-lang-pane" data-faq-pane="en">
+      <div class="accordion" id="faqAccordion-en">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-1">Do I need any prior knowledge to learn Crystal Healing?</button></h2>
+          <div id="faq-en-1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion-en"><div class="accordion-body">No. This course is designed for complete beginners as well as individuals who wish to deepen their knowledge of crystal energy and healing practices.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-2">Will I learn how to choose the right crystal?</button></h2>
+          <div id="faq-en-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. You will learn how to identify different crystals, understand their properties, and select appropriate crystals for specific intentions, chakras, and healing goals.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-3">Are crystals scientifically proven to heal?</button></h2>
+          <div id="faq-en-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Crystal healing is considered a complementary and spiritual wellness practice. The course focuses on traditional and energy-based applications rather than medical treatment.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-4">Will I learn how to cleanse and charge crystals?</button></h2>
+          <div id="faq-en-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. The course covers various methods of cleansing, charging, activating, and maintaining crystals to ensure effective use.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-5">Can I use crystal healing for myself and my family?</button></h2>
+          <div id="faq-en-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Absolutely. Students learn self-healing techniques as well as methods that can be applied responsibly for friends, family members, and clients.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-6">Will the course teach crystal grids and manifestation techniques?</button></h2>
+          <div id="faq-en-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. You will learn how to create crystal grids, set intentions, and use crystals for manifestation, meditation, and energy balancing.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-7">Can I build a professional career after completing the course?</button></h2>
+          <div id="faq-en-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. Many students use crystal healing skills to offer wellness consultations, holistic healing sessions, workshops, and online coaching services.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-8">Is certification provided after course completion?</button></h2>
+          <div id="faq-en-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. Students who successfully complete the course requirements will receive a course completion certificate.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-9">How are the classes conducted?</button></h2>
+          <div id="faq-en-9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Classes are conducted online through structured lessons, demonstrations, practical exercises, and guided learning sessions.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HINDI -->
+    <div class="faq-lang-pane" data-faq-pane="hi" hidden lang="hi">
+      <div class="accordion" id="faqAccordion-hi">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-1">क्या क्रिस्टल हीलिंग सीखने के लिए मुझे किसी पूर्व ज्ञान की आवश्यकता है?</button></h2>
+          <div id="faq-hi-1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">नहीं। यह कोर्स पूर्ण शुरुआती लोगों के लिए डिज़ाइन किया गया है, साथ ही उन व्यक्तियों के लिए भी जो क्रिस्टल ऊर्जा और उपचार प्रथाओं के अपने ज्ञान को गहरा करना चाहते हैं।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-2">क्या मैं सीखूंगा कि सही क्रिस्टल कैसे चुनें?</button></h2>
+          <div id="faq-hi-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। आप विभिन्न क्रिस्टलों की पहचान करना, उनके गुणों को समझना, और विशिष्ट इरादों, चक्रों, और उपचार लक्ष्यों के लिए उपयुक्त क्रिस्टल चुनना सीखेंगे।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-3">क्या क्रिस्टल वैज्ञानिक रूप से उपचार के लिए सिद्ध हैं?</button></h2>
+          <div id="faq-hi-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">क्रिस्टल हीलिंग को एक पूरक और आध्यात्मिक स्वास्थ्य अभ्यास माना जाता है। यह कोर्स चिकित्सा उपचार के बजाय पारंपरिक और ऊर्जा-आधारित अनुप्रयोगों पर केंद्रित है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-4">क्या मैं सीखूंगा कि क्रिस्टल को कैसे शुद्ध और चार्ज किया जाए?</button></h2>
+          <div id="faq-hi-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। कोर्स प्रभावी उपयोग सुनिश्चित करने के लिए क्रिस्टल को शुद्ध करने, चार्ज करने, सक्रिय करने, और बनाए रखने के विभिन्न तरीकों को कवर करता है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-5">क्या मैं अपने और अपने परिवार के लिए क्रिस्टल हीलिंग का उपयोग कर सकता हूं?</button></h2>
+          <div id="faq-hi-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">बिल्कुल। छात्र स्वयं-उपचार तकनीकें सीखते हैं, साथ ही ऐसे तरीके जो दोस्तों, परिवार के सदस्यों, और ग्राहकों के लिए जिम्मेदारी से लागू किए जा सकते हैं।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-6">क्या यह कोर्स क्रिस्टल ग्रिड और मेनिफेस्टेशन तकनीक सिखाएगा?</button></h2>
+          <div id="faq-hi-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। आप क्रिस्टल ग्रिड बनाना, इरादे निर्धारित करना, और मेनिफेस्टेशन, ध्यान, और ऊर्जा संतुलन के लिए क्रिस्टल का उपयोग करना सीखेंगे।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-7">क्या मैं कोर्स पूरा करने के बाद एक पेशेवर करियर बना सकता हूं?</button></h2>
+          <div id="faq-hi-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। कई छात्र वेलनेस परामर्श, समग्र उपचार सत्र, कार्यशालाएं, और ऑनलाइन कोचिंग सेवाएं प्रदान करने के लिए क्रिस्टल हीलिंग कौशल का उपयोग करते हैं।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-8">क्या कोर्स पूरा होने के बाद प्रमाणपत्र दिया जाता है?</button></h2>
+          <div id="faq-hi-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। जो छात्र सफलतापूर्वक कोर्स की आवश्यकताओं को पूरा करते हैं, उन्हें कोर्स पूरा करने का प्रमाणपत्र मिलेगा।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-9">कक्षाएं कैसे संचालित की जाती हैं?</button></h2>
+          <div id="faq-hi-9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">कक्षाएं संरचित पाठों, प्रदर्शनों, व्यावहारिक अभ्यासों, और निर्देशित सीखने के सत्रों के माध्यम से ऑनलाइन संचालित की जाती हैं।</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENGALI -->
+    <div class="faq-lang-pane" data-faq-pane="bn" hidden lang="bn">
+      <div class="accordion" id="faqAccordion-bn">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-1">ক্রিস্টাল হিলিং শিখতে কি আমার কোনো পূর্ব জ্ঞানের প্রয়োজন আছে?</button></h2>
+          <div id="faq-bn-1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">না। এই কোর্সটি সম্পূর্ণ নতুনদের পাশাপাশি যারা ক্রিস্টাল শক্তি ও নিরাময় অনুশীলন সম্পর্কে আরও জানতে চান তাদের জন্য ডিজাইন করা হয়েছে।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-2">আমি কি সঠিক ক্রিস্টাল কীভাবে নির্বাচন করতে হয় তা শিখব?</button></h2>
+          <div id="faq-bn-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। আপনি বিভিন্ন ক্রিস্টাল চিনতে, তাদের বৈশিষ্ট্য বুঝতে, এবং নির্দিষ্ট উদ্দেশ্য, চক্র ও নিরাময় লক্ষ্যের জন্য উপযুক্ত ক্রিস্টাল নির্বাচন করতে শিখবেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-3">ক্রিস্টাল কি বৈজ্ঞানিকভাবে নিরাময়ের জন্য প্রমাণিত?</button></h2>
+          <div id="faq-bn-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">ক্রিস্টাল হিলিংকে একটি পরিপূরক ও আধ্যাত্মিক স্বাস্থ্য অনুশীলন হিসেবে বিবেচনা করা হয়। কোর্সটি চিকিৎসার পরিবর্তে ঐতিহ্যবাহী ও শক্তি-ভিত্তিক প্রয়োগের উপর কেন্দ্রীভূত।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-4">ক্রিস্টাল কীভাবে পরিষ্কার ও চার্জ করতে হয় তা কি আমি শিখব?</button></h2>
+          <div id="faq-bn-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। কার্যকর ব্যবহার নিশ্চিত করতে কোর্সে ক্রিস্টাল পরিষ্কার, চার্জ, সক্রিয়করণ ও রক্ষণাবেক্ষণের বিভিন্ন পদ্ধতি অন্তর্ভুক্ত রয়েছে।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-5">আমি কি নিজের ও পরিবারের জন্য ক্রিস্টাল হিলিং ব্যবহার করতে পারব?</button></h2>
+          <div id="faq-bn-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">অবশ্যই। শিক্ষার্থীরা আত্ম-নিরাময়ের কৌশলগুলি শেখেন, পাশাপাশি বন্ধু, পরিবারের সদস্য ও ক্লায়েন্টদের জন্য দায়িত্বশীলভাবে প্রয়োগ করা যেতে পারে এমন পদ্ধতিগুলিও শেখেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-6">এই কোর্সে কি ক্রিস্টাল গ্রিড ও ম্যানিফেস্টেশন কৌশল শেখানো হবে?</button></h2>
+          <div id="faq-bn-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। আপনি ক্রিস্টাল গ্রিড তৈরি করতে, উদ্দেশ্য নির্ধারণ করতে, এবং ম্যানিফেস্টেশন, ধ্যান ও শক্তি ভারসাম্যের জন্য ক্রিস্টাল ব্যবহার করতে শিখবেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-7">কোর্স সম্পূর্ণ করার পরে কি আমি একটি পেশাদার ক্যারিয়ার গড়তে পারব?</button></h2>
+          <div id="faq-bn-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। অনেক শিক্ষার্থী ওয়েলনেস কনসাল্টেশন, সামগ্রিক নিরাময় সেশন, কর্মশালা ও অনলাইন কোচিং পরিষেবা প্রদানে ক্রিস্টাল হিলিং দক্ষতা ব্যবহার করেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-8">কোর্স সম্পন্ন হওয়ার পরে কি সার্টিফিকেট দেওয়া হয়?</button></h2>
+          <div id="faq-bn-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। যে শিক্ষার্থীরা কোর্সের প্রয়োজনীয়তা সফলভাবে পূরণ করেন তারা একটি কোর্স সম্পূর্ণতা সার্টিফিকেট পাবেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-9">ক্লাসগুলি কীভাবে পরিচালিত হয়?</button></h2>
+          <div id="faq-bn-9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">ক্লাসগুলি অনলাইনে কাঠামোগত পাঠ, প্রদর্শন, ব্যবহারিক অনুশীলন ও পরিচালিত শিক্ষাদানের মাধ্যমে পরিচালিত হয়।</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLLMENT -->
+<section id="enroll" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="custom-card border-gold p-5">
+          <div class="text-center mb-4">
+            <h2 class="font-serif mb-2 text-dark">Enroll in Crystal Healing</h2>
+            <p class="text-secondary small">Begin your structured pathway into crystal energy practice and professional wellness consultation.</p>
+          </div>
+          <form id="enroll-form" class="row g-3" action="https://formspree.io/f/mqeozdpo" method="POST" novalidate>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="New enrollment - Crystal Healing">
+            <input type="hidden" name="course" value="Crystal Healing">
+            <div class="col-md-6">
+              <label class="form-label text-dark small fw-bold">Full Name</label>
+              <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-dark small fw-bold">Phone Number</label>
+              <input type="tel" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-dark small fw-bold">Email Address</label>
+              <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="_replyto" placeholder="Enter your email address" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-dark small fw-bold">Prior Crystal-Healing Experience (Optional)</label>
+              <select name="experience" class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
+                <option value="none">Beginner (No prior experience)</option>
+                <option value="intermediate">Intermediate (Some crystal exposure)</option>
+                <option value="advanced">Advanced (Aspiring professional)</option>
+              </select>
+            </div>
+            <div class="col-12 text-center mt-4">
+              <button type="submit" class="btn btn-gold px-5 py-3">Submit Inquiry</button>
+              <p class="form-status mt-3" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <a href="index.html" class="logo" aria-label="Home">
+        <img src="assets/img/logo.png" class="img-fluid" alt="International Vedic Academy" />
+      </a>
+      <div class="foot-links">
+        <a href="about-us.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="foot-socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r="0.6" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M6.5 5.5l4 2.5-4 2.5z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 8h2.2l.4-2.4H9.5v-1c0-.6.3-1 1-1H12V1h-2.2c-1.7 0-2.6 1-2.6 2.6v2H5.5V8h1.7v6h2.3V8z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1a7 7 0 00-6 10.6L1 15l3.4-1A7 7 0 108 1z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="assets/js/content.js"></script>
+<script defer src="assets/js/enroll-modal.js"></script>
+
+<!-- Inline enroll-form validation + submit (mirrors the other course pages) -->
+<script>
+  (function () {
+    const f = document.getElementById('enroll-form'); if (!f) return;
+    let s = f.querySelector('.form-status'); if (!s) { s = document.createElement('p'); s.className = 'form-status mt-3'; f.appendChild(s); }
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const bad = Array.from(f.querySelectorAll('[required]')).filter(el => {
+        const v = (el.value || '').trim();
+        if (!v) return true;
+        if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return true;
+        if (el.type === 'tel' && v.replace(/\D/g, '').length < 7) return true;
+        return false;
+      });
+      if (bad.length) { s.textContent = 'Please fill all required fields correctly.'; s.style.color = '#8b1a1a'; try { bad[0].focus(); } catch (_) {} return; }
+      s.textContent = 'Sending...'; s.style.color = '';
+      try {
+        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } });
+        if (r.ok) { s.textContent = 'Thanks - we will contact you shortly.'; s.style.color = '#2d5016'; f.reset(); }
+        else { const d = await r.json().catch(() => ({})); s.textContent = (d.errors ? d.errors.map(x => x.message).join(', ') : 'Something went wrong.'); s.style.color = '#8b1a1a'; }
+      } catch { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
+    });
+  })();
+</script>
+
+<!-- FAQ language toggle -->
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.faq-lang-toggle [data-faq-lang]');
+    var panes = document.querySelectorAll('[data-faq-pane]');
+    if (!buttons.length) return;
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lang = btn.getAttribute('data-faq-lang');
+        buttons.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('active', on);
+          b.classList.toggle('btn-gold', on);
+          b.classList.toggle('btn-outline-gold', !on);
+        });
+        panes.forEach(function (p) {
+          p.hidden = p.getAttribute('data-faq-pane') !== lang;
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

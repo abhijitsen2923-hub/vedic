@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<title>Learn Reiki Healing Online — International Vedic Academy</title>
+<meta name="description" content="Learn the traditional Japanese energy healing system. Reiki principles, hand positions, chakra balancing, self-healing, distant healing, and client protocols." />
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-cream: #f7f1e3;
+    --bg-cream-deep: #f0e8d3;
+    --bg-white: #ffffff;
+    --ink: #1a1535;
+    --ink-soft: #4a4365;
+    --ink-muted: #7a7290;
+    --cosmic-deep: #0a0618;
+    --cosmic-mid: #1a1535;
+    --cosmic-purple: #2a1f5e;
+    --cosmic-violet: #4a2f8e;
+    --gold: #d4a24c;
+    --gold-bright: #f0c878;
+    --gold-deep: #a8791f;
+    --border-light: rgba(26, 21, 53, 0.08);
+    --border-gold: rgba(212, 162, 76, 0.3);
+    --shadow-sm: 0 4px 12px rgba(26, 21, 53, 0.06);
+    --shadow-md: 0 8px 24px rgba(26, 21, 53, 0.08);
+    --shadow-lg: 0 20px 50px rgba(26, 21, 53, 0.12);
+    --shadow-cosmic: 0 30px 80px rgba(10, 6, 24, 0.4);
+    --serif: 'Fraunces', Georgia, serif;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  body { font-family: var(--sans); color: var(--ink); overflow-x: hidden; line-height: 1.6; }
+  h1, h2, h3, h4, .font-serif { font-family: var(--serif); }
+  .font-serif-display { font-family: var(--serif-display); }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0f00 !important; font-weight: 600; border: none; border-radius: 50px;
+    padding: 12px 28px; transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 162, 76, 0.35);
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 162, 76, 0.5); }
+
+  .btn-outline-gold {
+    background: transparent; color: var(--gold-bright) !important;
+    border: 1px solid var(--gold); border-radius: 50px;
+    padding: 12px 28px; font-weight: 500; transition: all 0.3s;
+  }
+  .btn-outline-gold:hover { background: rgba(212, 162, 76, 0.1); border-color: var(--gold-bright); color: #fff !important; }
+
+  .course-hero { position: relative; padding: 100px 0 120px; }
+  .course-hero h1 { font-size: clamp(36px, 4.5vw, 54px); font-weight: 500; letter-spacing: -1px; line-height: 1.1; }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #f0c878, #d4a24c);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .course-hero .lead { color: #d8cfbd; font-size: 17px; line-height: 1.7; }
+
+  .celestial-graphic { position: relative; max-width: 440px; margin: 0 auto; filter: drop-shadow(0 15px 35px rgba(10, 6, 24, 0.5)); }
+  .celestial-graphic svg { overflow: visible; }
+
+  /* Reiki-specific halo + pulsing aura */
+  @keyframes haloRotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  @keyframes auraPulse { 0%, 100% { opacity: 0.35; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.06); } }
+  .halo-ring { animation: haloRotate 60s linear infinite; transform-box: fill-box; transform-origin: center; }
+  .aura-pulse { animation: auraPulse 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+  .section-padding { padding: 100px 0; }
+  .section-title { font-size: clamp(28px, 3.5vw, 38px); font-weight: 500; color: var(--ink); margin-bottom: 20px; }
+  .title-gold-line-center::after {
+    content: ''; display: block; width: 80px; height: 2px;
+    background: var(--gold); margin: 15px auto 0;
+  }
+
+  .custom-card {
+    background-color: var(--bg-white); border: 1px solid var(--border-light);
+    border-radius: 16px; padding: 40px 32px; box-shadow: var(--shadow-sm);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .custom-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border-gold); }
+
+  .ornate-dark-card {
+    background: linear-gradient(160deg, #1a1535 0%, #0a0618 100%);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 16px; padding: 45px 35px; color: #faf5ea;
+    position: relative; overflow: hidden; height: 100%; box-shadow: var(--shadow-md);
+  }
+  .ornate-dark-card::before {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.25); border-radius: 12px; pointer-events: none;
+  }
+  .ornate-dark-card h3 { color: var(--gold-bright); font-family: var(--serif); }
+
+  .icon-circle {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(212, 162, 76, 0.12);
+    border: 1.5px solid rgba(212, 162, 76, 0.35);
+    display: grid; place-items: center; color: var(--gold-bright); margin-bottom: 24px;
+  }
+  .icon-circle svg { width: 26px; height: 26px; }
+
+  /* FAQ */
+  .faq-section .accordion-item {
+    border: 0 !important; border-radius: 12px !important;
+    overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-sm);
+  }
+  .faq-section .accordion-button {
+    font-family: var(--serif); font-weight: 600;
+    color: var(--ink); background: #fff; padding: 18px 24px;
+  }
+  .faq-section .accordion-button:not(.collapsed) {
+    color: var(--gold-deep); background: var(--bg-cream-deep);
+    box-shadow: none;
+  }
+  .faq-section .accordion-button:focus { box-shadow: 0 0 0 0.2rem rgba(212, 162, 76, 0.2); }
+  .faq-section .accordion-body { color: var(--ink-soft); padding: 16px 24px 22px; line-height: 1.7; }
+  .faq-lang-toggle .btn { margin: 0 4px; min-width: 92px; padding: 6px 16px; font-size: 14px; }
+  .faq-lang-toggle .btn-outline-gold { color: var(--gold-deep) !important; border-color: var(--gold); }
+  .faq-lang-toggle .btn-outline-gold:hover { background: rgba(212, 162, 76, 0.08); color: var(--gold-deep) !important; }
+  .faq-lang-pane[hidden] { display: none !important; }
+  [lang="hi"], [lang="bn"] { font-family: 'Noto Sans', 'Inter', sans-serif; }
+
+  footer { background: var(--cosmic-deep); color: #c4bba8; padding: 50px 0 28px; }
+  footer a { color: #c4bba8; text-decoration: none; transition: color 0.3s; }
+  footer a:hover { color: var(--gold-bright); }
+  .foot-grid {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 32px; padding-bottom: 28px;
+    border-bottom: 1px solid rgba(212, 162, 76, 0.15);
+  }
+  .foot-links { display: flex; gap: 32px; flex-wrap: wrap; }
+  .foot-links a { color: #c4bba8; font-size: 14px; }
+  .foot-socials { display: flex; gap: 10px; }
+  .foot-socials a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    display: grid; place-items: center; color: var(--gold); transition: all 0.3s;
+  }
+  .foot-socials a:hover { background: var(--gold); color: var(--cosmic-deep); }
+  .foot-socials svg { width: 16px; height: 16px; }
+
+  @media (max-width: 1024px) {
+    .course-hero { padding: 80px 0 80px; }
+  }
+  @media (max-width: 768px) {
+    .course-hero { padding: 60px 0 50px; }
+    .course-hero h1 { font-size: clamp(28px, 7vw, 40px); }
+    .section-padding { padding: 50px 0; }
+    .section-title { font-size: clamp(22px, 5vw, 30px); }
+    .custom-card, .ornate-dark-card { padding: 28px 22px; }
+    .foot-grid { gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    .course-hero { padding: 40px 0 32px; }
+    .section-padding { padding: 32px 0; }
+    .custom-card, .ornate-dark-card { padding: 22px 18px; }
+    .btn-gold { padding: 12px 24px !important; font-size: 14px; }
+    .faq-section .accordion-button { padding: 14px 18px; font-size: 15px; }
+    .faq-section .accordion-body { padding: 14px 18px 18px; font-size: 14px; }
+    .foot-grid { flex-direction: column; text-align: center; gap: 24px; }
+    .foot-links { justify-content: center; gap: 18px 24px; }
+  }
+
+  /* Features stripe */
+  .features-stripe {
+    background: linear-gradient(135deg, var(--cosmic-mid) 0%, var(--cosmic-purple) 50%, var(--cosmic-deep) 100%);
+    padding: 56px 0; color: #faf5ea; position: relative;
+  }
+  .features-stripe::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(1px 1px at 18% 30%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 75% 60%, rgba(240,200,120,0.45), transparent),
+      radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,0.3), transparent);
+    background-size: 360px 360px; pointer-events: none; opacity: 0.7;
+  }
+  .features-stripe .container { position: relative; z-index: 1; }
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+  .feature-cell { padding: 8px 4px; }
+  .feature-icon { width: 64px; height: 64px; margin: 0 auto 14px; color: #ffffff; }
+  .feature-icon svg { width: 100%; height: 100%; }
+  .feature-headline { font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--gold-bright); margin-bottom: 4px; }
+  .feature-sub { font-size: 14px; color: #e8e0d0; letter-spacing: 0.4px; }
+  @media (max-width: 992px) { .features-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; } }
+  @media (max-width: 480px) {
+    .features-stripe { padding: 40px 0; }
+    .features-grid { grid-template-columns: 1fr; gap: 28px; }
+    .feature-icon { width: 56px; height: 56px; margin-bottom: 10px; }
+    .feature-headline { font-size: 20px; }
+  }
+</style>
+
+<!-- SEO + social previews -->
+<link rel="canonical" href="https://internationalvedicacademy.com/reiki-healing.html" />
+<meta name="theme-color" content="#1a1535" />
+<meta name="author" content="International Vedic Academy" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="International Vedic Academy" />
+<meta property="og:title" content="Learn Reiki Healing Online — International Vedic Academy" />
+<meta property="og:description" content="Learn the traditional Japanese energy healing system. Reiki principles, hand positions, chakra balancing, self-healing and distant healing in our online course." />
+<meta property="og:url" content="https://internationalvedicacademy.com/reiki-healing.html" />
+<meta property="og:image" content="https://internationalvedicacademy.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_IN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Learn Reiki Healing Online — International Vedic Academy" />
+<meta name="twitter:description" content="Learn the traditional Japanese energy healing system. Reiki principles, hand positions, chakra balancing, self-healing and distant healing in our online course." />
+<meta name="twitter:image" content="https://internationalvedicacademy.com/og-image.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "International Vedic Academy",
+  "url": "https://internationalvedicacademy.com",
+  "logo": "https://internationalvedicacademy.com/favicon.png",
+  "description": "Online Vedic academy teaching Vedic Astrology, Numerology, Tarot, Palmistry, Vastu Shastra, Crystal Healing and Reiki Healing.",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Reiki Healing",
+  "description": "Online Reiki Healing course covering Reiki principles, energy channeling, hand positions, aura cleansing, chakra balancing, self-healing, distant healing and client healing protocols.",
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "International Vedic Academy",
+    "url": "https://internationalvedicacademy.com"
+  },
+  "courseMode": "online",
+  "educationalLevel": "Beginner to Advanced",
+  "numberOfCredits": 9,
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://internationalvedicacademy.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Reiki Healing", "item": "https://internationalvedicacademy.com/reiki-healing.html" }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+      <img src="assets/img/logo.png" class="img-fluid" alt="International Vedic Academy"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Courses
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark border-0 shadow-lg">
+            <li><a class="dropdown-item" href="vedic-astrology.html">Vedic Astrology</a></li>
+            <li><a class="dropdown-item" href="tarot-card.html">Tarot Card Reading</a></li>
+            <li><a class="dropdown-item" href="numerology.html">Numerology</a></li>
+            <li><a class="dropdown-item" href="palmistry.html">Palmistry</a></li>
+            <li><a class="dropdown-item" href="vastu-shastra.html">Vastu Shastra</a></li>
+            <li><a class="dropdown-item" href="crystal-healing.html">Crystal Healing</a></li>
+            <li><a class="dropdown-item" href="reiki-healing.html">Reiki Healing</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
+        <li class="nav-item ms-lg-2"><a href="#enroll" class="btn btn-gold" data-enroll-modal>Enroll Now</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="course-hero bg-cosmic">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="text-uppercase small fw-bold d-block mb-3" style="letter-spacing: 3px; color: var(--gold-bright);">Japanese Energy Healing System</span>
+        <h1>Learn <span class="gold-gradient-text">Reiki Healing</span> Online</h1>
+        <p class="lead mt-4">The Reiki Healing Course at International Vedic Academy is designed to teach students the traditional Japanese energy healing system that promotes physical, emotional, mental, and spiritual well-being. It is suitable for beginners as well as individuals seeking professional healing and energy work skills.</p>
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
+          <a href="#enroll" class="btn btn-gold">Enroll Now</a>
+          <a href="#syllabus" class="btn btn-outline-gold">View Course details</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="celestial-graphic">
+          <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
+            <!-- Outer rotating halo -->
+            <g class="halo-ring" stroke="#d4a24c" stroke-width="0.8" opacity="0.55">
+              <circle cx="200" cy="200" r="185" stroke-dasharray="2 8"/>
+              <circle cx="200" cy="200" r="170" stroke-dasharray="6 6" opacity="0.5"/>
+              <!-- Eight points around the halo -->
+              <g fill="#f0c878" stroke="none">
+                <circle cx="200" cy="20"  r="3"/>
+                <circle cx="327" cy="73"  r="3"/>
+                <circle cx="380" cy="200" r="3"/>
+                <circle cx="327" cy="327" r="3"/>
+                <circle cx="200" cy="380" r="3"/>
+                <circle cx="73"  cy="327" r="3"/>
+                <circle cx="20"  cy="200" r="3"/>
+                <circle cx="73"  cy="73"  r="3"/>
+              </g>
+            </g>
+
+            <!-- Pulsing aura layers -->
+            <g class="aura-pulse" fill="#f0c878" stroke="none" fill-opacity="0.08">
+              <circle cx="200" cy="200" r="140"/>
+            </g>
+            <circle cx="200" cy="200" r="115" stroke="#f0c878" stroke-width="1" opacity="0.4"/>
+            <circle cx="200" cy="200" r="95"  stroke="#f0c878" stroke-width="0.8" opacity="0.55"/>
+
+            <!-- Central energy figure: open hands releasing energy -->
+            <g stroke="#f0c878" stroke-width="1.4">
+              <!-- Energy core -->
+              <circle cx="200" cy="200" r="22" fill="#1a1535" fill-opacity="0.9"/>
+              <circle cx="200" cy="200" r="8"  fill="#f0c878" stroke="none"/>
+              <!-- Radiating energy lines -->
+              <line x1="200" y1="160" x2="200" y2="100" stroke-dasharray="2 4"/>
+              <line x1="200" y1="240" x2="200" y2="300" stroke-dasharray="2 4"/>
+              <line x1="160" y1="200" x2="100" y2="200" stroke-dasharray="2 4"/>
+              <line x1="240" y1="200" x2="300" y2="200" stroke-dasharray="2 4"/>
+              <line x1="172" y1="172" x2="138" y2="138" stroke-dasharray="2 4"/>
+              <line x1="228" y1="172" x2="262" y2="138" stroke-dasharray="2 4"/>
+              <line x1="172" y1="228" x2="138" y2="262" stroke-dasharray="2 4"/>
+              <line x1="228" y1="228" x2="262" y2="262" stroke-dasharray="2 4"/>
+
+              <!-- Stylized hands cupping the core -->
+              <path d="M125 240 Q140 215 170 215 Q188 215 200 230" stroke-width="1.6" opacity="0.85"/>
+              <path d="M275 240 Q260 215 230 215 Q212 215 200 230" stroke-width="1.6" opacity="0.85"/>
+              <path d="M125 240 Q132 256 152 258"   stroke-width="1.2" opacity="0.7"/>
+              <path d="M275 240 Q268 256 248 258"   stroke-width="1.2" opacity="0.7"/>
+            </g>
+
+            <!-- Subtle outer sparkles -->
+            <g fill="#f0c878">
+              <circle cx="55"  cy="120" r="2"/>
+              <circle cx="345" cy="120" r="2"/>
+              <circle cx="55"  cy="280" r="1.5"/>
+              <circle cx="345" cy="280" r="1.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROP STRIPE -->
+<section class="features-stripe">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 22 L32 12 L58 22 L32 32 Z"/>
+            <path d="M16 26 V40 C16 44 24 48 32 48 C40 48 48 44 48 40 V26"/>
+            <path d="M58 22 V36"/>
+            <circle cx="58" cy="38" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="feature-headline">Professional</div>
+        <div class="feature-sub">Certification</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="14" width="44" height="28" rx="2"/>
+            <path d="M6 46 H58 L60 50 H4 Z" fill="currentColor" stroke="none"/>
+            <circle cx="32" cy="28" r="6"/>
+            <path d="M30 24 L36 28 L30 32 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="feature-headline">100% Live</div>
+        <div class="feature-sub">Online Classes</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="22" r="6"/>
+            <path d="M10 42 C10 36 16 32 22 32 C28 32 34 36 34 42"/>
+            <circle cx="42" cy="22" r="5"/>
+            <path d="M36 42 C36 36 42 32 48 32"/>
+            <circle cx="46" cy="46" r="6"/>
+            <path d="M50 50 L56 56"/>
+          </svg>
+        </div>
+        <div class="feature-headline">100% Placement</div>
+        <div class="feature-sub">Support</div>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="22" cy="20" r="6"/>
+            <path d="M22 28 V44 M14 50 L22 44 L30 50 M22 36 L28 32"/>
+            <path d="M48 14 L51 22 L59 23 L53 28 L55 36 L48 32 L41 36 L43 28 L37 23 L45 22 Z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="feature-headline">1 On 1</div>
+        <div class="feature-sub">Mentorship</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="syllabus" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title title-gold-line-center">Our Curriculum</h2>
+        <p class="text-secondary">From foundational Reiki concepts to advanced healing protocols — structured for confident, real-world practice.</p>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-6">
+        <div class="custom-card h-100">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="mb-3">What We Teach</h3>
+          <p class="text-secondary mb-0">Students learn Reiki principles, energy channeling techniques, hand positions, aura cleansing, chakra balancing, self-healing methods, distant healing practices, energy protection techniques, and client healing protocols. The course covers both foundational and advanced Reiki concepts.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="custom-card h-100">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="mb-3">How We Teach</h3>
+          <p class="text-secondary mb-0">We teach Reiki through step-by-step guided instruction, practical healing sessions, demonstrations, attunement guidance, and supervised practice. Students gain confidence through real-world healing applications and structured energy-work exercises.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section-padding bg-cosmic text-white">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title text-white title-gold-line-center">Values &amp; Opportunities</h2>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-6">
+        <div class="ornate-dark-card">
+          <h3 class="mb-3">Why Learn Reiki Healing</h3>
+          <p class="text-light opacity-75 mb-0">Reiki is widely practiced because it offers a simple yet powerful method for promoting relaxation, stress reduction, and energy balance. It can be used for personal well-being, spiritual development, and complementary wellness support, making it valuable for both personal and professional growth.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ornate-dark-card">
+          <h3 class="mb-3">Career Opportunities</h3>
+          <p class="text-light opacity-75 mb-0">A trained student can build a career as a Reiki practitioner, energy healer, wellness coach, holistic therapist, spiritual consultant, workshop trainer, or healing content educator. As awareness of holistic wellness continues to grow, Reiki offers strong opportunities for independent practice, online consultations, and wellness-focused businesses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section-padding faq-section" style="background: var(--bg-cream-deep);">
+  <div class="container" style="max-width: 880px;">
+    <div class="text-center mb-4">
+      <h2 class="section-title title-gold-line-center">Reiki Healing — <em>FAQs</em></h2>
+      <p class="text-secondary">Common questions about the course, certification, and what to expect.</p>
+    </div>
+
+    <div class="faq-lang-toggle text-center mb-4" role="group" aria-label="FAQ language">
+      <button type="button" class="btn btn-sm btn-gold active" data-faq-lang="en">English</button>
+      <button type="button" class="btn btn-sm btn-outline-gold" data-faq-lang="hi">हिन्दी</button>
+      <button type="button" class="btn btn-sm btn-outline-gold" data-faq-lang="bn">বাংলা</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="faq-lang-pane" data-faq-pane="en">
+      <div class="accordion" id="faqAccordion-en">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-1">What is Reiki Healing?</button></h2>
+          <div id="faq-en-1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Reiki is a Japanese energy healing technique that focuses on promoting relaxation, stress reduction, and overall energetic balance through gentle energy channeling methods.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-2">Is this course suitable for beginners?</button></h2>
+          <div id="faq-en-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. The course starts with fundamental Reiki concepts and gradually progresses to practical healing techniques.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-3">Do I need any spiritual background to learn Reiki?</button></h2>
+          <div id="faq-en-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">No. Reiki can be learned by anyone regardless of their spiritual, religious, or professional background.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-4">Will I learn self-healing techniques?</button></h2>
+          <div id="faq-en-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. Self-healing is one of the core components of Reiki training, and students learn how to apply Reiki for their own well-being.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-5">Can Reiki be performed remotely?</button></h2>
+          <div id="faq-en-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. The course introduces the principles and techniques of distance healing, which is an important aspect of advanced Reiki practice.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-6">Will I learn chakra balancing through Reiki?</button></h2>
+          <div id="faq-en-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. Students learn how Reiki energy can be used to support chakra balancing and energy harmonization.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-7">Can Reiki be used alongside other wellness practices?</button></h2>
+          <div id="faq-en-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. Reiki is commonly integrated with meditation, yoga, holistic wellness, counseling, and other complementary practices.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-8">Can I become a professional Reiki practitioner after this course?</button></h2>
+          <div id="faq-en-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. With proper training and practice, students can offer Reiki sessions, wellness consultations, workshops, and holistic healing services.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-9">Is certification provided after completion?</button></h2>
+          <div id="faq-en-9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">Yes. Students who successfully complete the course requirements receive a recognized course completion certificate.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-en-10">How is Reiki taught in the online format?</button></h2>
+          <div id="faq-en-10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-en"><div class="accordion-body">The course includes guided lessons, demonstrations, practical exercises, energy-work training, and instructor support to help students develop confidence in Reiki practice.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HINDI -->
+    <div class="faq-lang-pane" data-faq-pane="hi" hidden lang="hi">
+      <div class="accordion" id="faqAccordion-hi">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-1">रेकी हीलिंग क्या है?</button></h2>
+          <div id="faq-hi-1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">रेकी एक जापानी ऊर्जा उपचार तकनीक है जो कोमल ऊर्जा चैनलिंग विधियों के माध्यम से विश्राम, तनाव में कमी, और समग्र ऊर्जावान संतुलन को बढ़ावा देने पर केंद्रित है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-2">क्या यह कोर्स शुरुआती लोगों के लिए उपयुक्त है?</button></h2>
+          <div id="faq-hi-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। यह कोर्स मूलभूत रेकी अवधारणाओं से शुरू होता है और धीरे-धीरे व्यावहारिक उपचार तकनीकों की ओर बढ़ता है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-3">क्या रेकी सीखने के लिए मुझे किसी आध्यात्मिक पृष्ठभूमि की आवश्यकता है?</button></h2>
+          <div id="faq-hi-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">नहीं। रेकी कोई भी सीख सकता है, चाहे उनकी आध्यात्मिक, धार्मिक, या पेशेवर पृष्ठभूमि कुछ भी हो।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-4">क्या मैं स्वयं-उपचार तकनीकें सीखूंगा?</button></h2>
+          <div id="faq-hi-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। स्वयं-उपचार रेकी प्रशिक्षण के मुख्य घटकों में से एक है, और छात्र अपनी भलाई के लिए रेकी लागू करना सीखते हैं।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-5">क्या रेकी दूर से किया जा सकता है?</button></h2>
+          <div id="faq-hi-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। यह कोर्स दूरी उपचार के सिद्धांतों और तकनीकों का परिचय देता है, जो उन्नत रेकी अभ्यास का एक महत्वपूर्ण पहलू है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-6">क्या मैं रेकी के माध्यम से चक्र संतुलन सीखूंगा?</button></h2>
+          <div id="faq-hi-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। छात्र सीखते हैं कि कैसे रेकी ऊर्जा का उपयोग चक्र संतुलन और ऊर्जा सामंजस्य का समर्थन करने के लिए किया जा सकता है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-7">क्या रेकी का उपयोग अन्य वेलनेस प्रथाओं के साथ किया जा सकता है?</button></h2>
+          <div id="faq-hi-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। रेकी को आमतौर पर ध्यान, योग, समग्र वेलनेस, परामर्श, और अन्य पूरक प्रथाओं के साथ एकीकृत किया जाता है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-8">क्या मैं इस कोर्स के बाद एक पेशेवर रेकी प्रैक्टिशनर बन सकता हूं?</button></h2>
+          <div id="faq-hi-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। उचित प्रशिक्षण और अभ्यास के साथ, छात्र रेकी सत्र, वेलनेस परामर्श, कार्यशालाएं, और समग्र उपचार सेवाएं प्रदान कर सकते हैं।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-9">क्या पूरा होने के बाद प्रमाणपत्र दिया जाता है?</button></h2>
+          <div id="faq-hi-9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">हां। जो छात्र सफलतापूर्वक कोर्स की आवश्यकताओं को पूरा करते हैं, उन्हें मान्यता प्राप्त कोर्स पूरा होने का प्रमाणपत्र मिलता है।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-hi-10">रेकी को ऑनलाइन प्रारूप में कैसे पढ़ाया जाता है?</button></h2>
+          <div id="faq-hi-10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-hi"><div class="accordion-body">कोर्स में निर्देशित पाठ, प्रदर्शन, व्यावहारिक अभ्यास, ऊर्जा-कार्य प्रशिक्षण, और प्रशिक्षक सहायता शामिल हैं ताकि छात्रों को रेकी अभ्यास में आत्मविश्वास विकसित करने में मदद मिल सके।</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENGALI -->
+    <div class="faq-lang-pane" data-faq-pane="bn" hidden lang="bn">
+      <div class="accordion" id="faqAccordion-bn">
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-1">রেইকি হিলিং কী?</button></h2>
+          <div id="faq-bn-1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">রেইকি একটি জাপানি শক্তি নিরাময় কৌশল যা মৃদু শক্তি চ্যানেলিং পদ্ধতির মাধ্যমে শিথিলতা, চাপ হ্রাস ও সামগ্রিক শক্তি ভারসাম্যের উন্নয়নের উপর কেন্দ্রীভূত।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-2">এই কোর্সটি কি নতুনদের জন্য উপযুক্ত?</button></h2>
+          <div id="faq-bn-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। কোর্সটি মৌলিক রেইকি ধারণা দিয়ে শুরু হয় এবং ধীরে ধীরে ব্যবহারিক নিরাময় কৌশলের দিকে অগ্রসর হয়।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-3">রেইকি শিখতে কি আমার কোনো আধ্যাত্মিক পটভূমির প্রয়োজন?</button></h2>
+          <div id="faq-bn-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">না। আধ্যাত্মিক, ধর্মীয় বা পেশাদার পটভূমি নির্বিশেষে যে কেউ রেইকি শিখতে পারেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-4">আমি কি আত্ম-নিরাময়ের কৌশল শিখব?</button></h2>
+          <div id="faq-bn-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। আত্ম-নিরাময় রেইকি প্রশিক্ষণের মূল উপাদানগুলির একটি, এবং শিক্ষার্থীরা নিজেদের কল্যাণের জন্য রেইকি প্রয়োগ করতে শেখেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-5">রেইকি কি দূর থেকে করা সম্ভব?</button></h2>
+          <div id="faq-bn-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। কোর্সটি দূরবর্তী নিরাময়ের নীতি ও কৌশলগুলির পরিচয় দেয়, যা উন্নত রেইকি অনুশীলনের একটি গুরুত্বপূর্ণ দিক।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-6">রেইকির মাধ্যমে কি আমি চক্র ভারসাম্য শিখব?</button></h2>
+          <div id="faq-bn-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। শিক্ষার্থীরা শেখেন কীভাবে রেইকি শক্তি চক্র ভারসাম্য ও শক্তি সমন্বয়ে সহায়তা করতে ব্যবহার করা যায়।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-7">রেইকি কি অন্যান্য ওয়েলনেস অনুশীলনের সাথে ব্যবহার করা যায়?</button></h2>
+          <div id="faq-bn-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। রেইকি সাধারণত ধ্যান, যোগ, সামগ্রিক ওয়েলনেস, কাউন্সেলিং ও অন্যান্য পরিপূরক অনুশীলনের সাথে একীভূত করা হয়।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-8">এই কোর্সের পরে কি আমি একজন পেশাদার রেইকি প্র্যাকটিশনার হতে পারব?</button></h2>
+          <div id="faq-bn-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। যথাযথ প্রশিক্ষণ ও অনুশীলনের সাথে শিক্ষার্থীরা রেইকি সেশন, ওয়েলনেস কনসাল্টেশন, কর্মশালা ও সামগ্রিক নিরাময় পরিষেবা প্রদান করতে পারেন।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-9">কোর্স সমাপ্তির পরে কি সার্টিফিকেট দেওয়া হয়?</button></h2>
+          <div id="faq-bn-9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">হ্যাঁ। যে শিক্ষার্থীরা কোর্সের প্রয়োজনীয়তা সফলভাবে পূরণ করেন তারা একটি স্বীকৃত কোর্স সম্পূর্ণতা সার্টিফিকেট পান।</div></div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-bn-10">অনলাইন ফরম্যাটে রেইকি কীভাবে শেখানো হয়?</button></h2>
+          <div id="faq-bn-10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion-bn"><div class="accordion-body">কোর্সে নির্দেশিত পাঠ, প্রদর্শন, ব্যবহারিক অনুশীলন, শক্তি-কাজের প্রশিক্ষণ ও প্রশিক্ষকের সহায়তা অন্তর্ভুক্ত রয়েছে যাতে শিক্ষার্থীরা রেইকি অনুশীলনে আত্মবিশ্বাস বিকাশ করতে পারেন।</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLLMENT -->
+<section id="enroll" class="section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="custom-card border-gold p-5">
+          <div class="text-center mb-4">
+            <h2 class="font-serif mb-2 text-dark">Enroll in Reiki Healing</h2>
+            <p class="text-secondary small">Begin your structured pathway into Reiki energy work and professional healing practice.</p>
+          </div>
+          <form id="enroll-form" class="row g-3" action="https://formspree.io/f/mqeozdpo" method="POST" novalidate>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="New enrollment - Reiki Healing">
+            <input type="hidden" name="course" value="Reiki Healing">
+            <div class="col-md-6">
+              <label class="form-label text-dark small fw-bold">Full Name</label>
+              <input type="text" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-dark small fw-bold">Phone Number</label>
+              <input type="tel" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-dark small fw-bold">Email Address</label>
+              <input type="email" class="form-control rounded-pill bg-light border-0 py-2.5 px-3" name="_replyto" placeholder="Enter your email address" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-dark small fw-bold">Prior Reiki Experience (Optional)</label>
+              <select name="experience" class="form-select rounded-pill bg-light border-0 py-2.5 px-3">
+                <option value="none">Beginner (No prior experience)</option>
+                <option value="level1">Reiki Level 1 already done</option>
+                <option value="advanced">Advanced (Aspiring practitioner)</option>
+              </select>
+            </div>
+            <div class="col-12 text-center mt-4">
+              <button type="submit" class="btn btn-gold px-5 py-3">Submit Inquiry</button>
+              <p class="form-status mt-3" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <a href="index.html" class="logo" aria-label="Home">
+        <img src="assets/img/logo.png" class="img-fluid" alt="International Vedic Academy" />
+      </a>
+      <div class="foot-links">
+        <a href="about-us.html">About Us</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="foot-socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r="0.6" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M6.5 5.5l4 2.5-4 2.5z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 8h2.2l.4-2.4H9.5v-1c0-.6.3-1 1-1H12V1h-2.2c-1.7 0-2.6 1-2.6 2.6v2H5.5V8h1.7v6h2.3V8z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1a7 7 0 00-6 10.6L1 15l3.4-1A7 7 0 108 1z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="assets/js/content.js"></script>
+<script defer src="assets/js/enroll-modal.js"></script>
+
+<!-- Inline enroll-form validation + submit -->
+<script>
+  (function () {
+    const f = document.getElementById('enroll-form'); if (!f) return;
+    let s = f.querySelector('.form-status'); if (!s) { s = document.createElement('p'); s.className = 'form-status mt-3'; f.appendChild(s); }
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const bad = Array.from(f.querySelectorAll('[required]')).filter(el => {
+        const v = (el.value || '').trim();
+        if (!v) return true;
+        if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return true;
+        if (el.type === 'tel' && v.replace(/\D/g, '').length < 7) return true;
+        return false;
+      });
+      if (bad.length) { s.textContent = 'Please fill all required fields correctly.'; s.style.color = '#8b1a1a'; try { bad[0].focus(); } catch (_) {} return; }
+      s.textContent = 'Sending...'; s.style.color = '';
+      try {
+        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } });
+        if (r.ok) { s.textContent = 'Thanks - we will contact you shortly.'; s.style.color = '#2d5016'; f.reset(); }
+        else { const d = await r.json().catch(() => ({})); s.textContent = (d.errors ? d.errors.map(x => x.message).join(', ') : 'Something went wrong.'); s.style.color = '#8b1a1a'; }
+      } catch { s.textContent = 'Network error. Please try again.'; s.style.color = '#8b1a1a'; }
+    });
+  })();
+</script>
+
+<!-- FAQ language toggle -->
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.faq-lang-toggle [data-faq-lang]');
+    var panes = document.querySelectorAll('[data-faq-pane]');
+    if (!buttons.length) return;
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lang = btn.getAttribute('data-faq-lang');
+        buttons.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('active', on);
+          b.classList.toggle('btn-gold', on);
+          b.classList.toggle('btn-outline-gold', !on);
+        });
+        panes.forEach(function (p) {
+          p.hidden = p.getAttribute('data-faq-pane') !== lang;
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
