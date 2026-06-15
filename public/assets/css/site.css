@@ -5,12 +5,16 @@
    sitewide.
 
    Sections:
-     1. Body background (replaces the deprecated background.png)
+     1. Body background — PNG backdrop with cream gradient as fallback layer
      2. Logo sizing
      3. Cross-cutting responsive utilities (tables, hero cards, forms, images)
 */
 
 /* ---- 1. Body background ------------------------------------------------- */
+/* The PNG is the visible layer; the cream + accent gradients sit underneath
+   as a fallback so the page still has the brand backdrop if background.png
+   ever fails to load. Root-relative URL so the rule works from any page
+   depth (marketing pages at /, portal pages at /portal/). */
 
 :root {
   --bg-cream: #fff7e6;
@@ -19,11 +23,10 @@
 
 body {
   background:
+    url("/assets/img/background.png") center center / cover no-repeat fixed,
     radial-gradient(ellipse at top left,     rgba(212, 162, 76, 0.08), transparent 60%),
     radial-gradient(ellipse at bottom right, rgba(26,  14, 46, 0.05), transparent 60%),
-    linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+    linear-gradient(180deg, var(--bg-cream, #fff7e6) 0%, var(--bg-cream-deep, #fbf2dd) 100%);
 }
 
 /* ---- 2. Logo sizing ----------------------------------------------------- */
