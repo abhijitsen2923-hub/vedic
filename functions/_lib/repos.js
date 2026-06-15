@@ -390,6 +390,36 @@ export async function getCourseFaqs(env) {
   return map;
 }
 
+// --- Careers (sheet-driven job openings) ---
+
+export const CAREERS_TAB = "Careers";
+
+// Returns currently-active job openings, sorted by `order`. A row is "active"
+// only when is_active=TRUE (case-insensitive) AND both role_title and
+// apply_url are non-empty — without either, the listing has no useful content
+// to render, so we drop the row silently.
+export async function getOpenJobs(env) {
+  const rows = await readTab(env, CAREERS_TAB);
+  return rows
+    .filter((r) => {
+      if (String(r.is_active || "").trim().toUpperCase() !== "TRUE") return false;
+      if (!String(r.role_title || "").trim()) return false;
+      if (!String(r.apply_url || "").trim()) return false;
+      return true;
+    })
+    .map((r) => ({
+      job_id: String(r.job_id || "").trim(),
+      role_title: String(r.role_title).trim(),
+      location: String(r.location || "").trim(),
+      type: String(r.type || "").trim(),
+      description: String(r.description || "").trim(),
+      apply_url: String(r.apply_url).trim(),
+      posted_date: String(r.posted_date || "").trim(),
+      order: Number(r.order) || 0,
+    }))
+    .sort((a, b) => a.order - b.order);
+}
+
 // --- Marketing site content ---
 
 export const CONTENT_TAB = "Content";

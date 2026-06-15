@@ -104,6 +104,7 @@ const NUMERIC_COLUMNS = {
   Classes: ["module_number", "duration_min"],
   Resources: ["module_number"],
   FAQs: ["order"],
+  Careers: ["order"],
 };
 
 // Required header columns per tab. readTab throws if any are missing — the
@@ -126,6 +127,7 @@ const EXPECTED_HEADERS = {
   Content: ["key", "value"],
   IconTypes: ["icon_type", "svg_or_emoji"],
   FAQs: ["course_id", "lang", "order", "question", "answer"],
+  Careers: ["job_id", "role_title", "location", "type", "description", "apply_url", "posted_date", "is_active", "order"],
 };
 
 function validateHeaders(tab, headers) {
