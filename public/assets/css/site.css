@@ -41,6 +41,23 @@ body {
   }
 }
 
+/* Footer logo — slightly smaller than the navbar so visual hierarchy stays
+   "header is primary, footer is secondary". Matches the height of the
+   foot-grid's text row, keeping the three-cell layout (logo | links | socials)
+   balanced. */
+footer .logo img,
+footer a.logo img {
+  width: auto;
+  max-width: 140px;
+  height: auto;
+}
+@media (max-width: 480px) {
+  footer .logo img,
+  footer a.logo img {
+    max-width: 110px;
+  }
+}
+
 /* ---- 3. Cross-cutting responsive utilities ----------------------------- */
 
 /* Tables: scroll horizontally inside their wrapper instead of bursting the
