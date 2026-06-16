@@ -35,12 +35,15 @@ body {
 .brand-row .brand-logo {
   width: auto;
   max-width: 180px;
+  max-height: 56px;          /* hard cap so the logo can never push the navbar taller */
   height: auto;
+  object-fit: contain;
 }
 @media (max-width: 480px) {
   .navbar-brand img,
   .brand-row .brand-logo {
     max-width: 130px;
+    max-height: 44px;
   }
 }
 
@@ -164,13 +167,23 @@ img {
 .bg-cosmic .nav-link {
   color: #e8e0d0 !important;
   font-size: 14.5px;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
+  white-space: nowrap;              /* never wrap a single nav label onto two lines */
   transition: color 0.3s;
 }
 .bg-cosmic .nav-link:hover,
 .bg-cosmic .nav-link.active,
 .bg-cosmic .nav-link.show {
   color: var(--gold-bright, #f0c878) !important;
+}
+/* Keep the inline navbar items on a single row at >=lg; below lg the offcanvas
+   drawer takes over (section 7) and items stack vertically inside the panel. */
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .navbar-expand-lg .navbar-nav .nav-item { white-space: nowrap; }
 }
 
 /* Defensive: keep .dropdown-menu-dark on-brand under .bg-cosmic */
