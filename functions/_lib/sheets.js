@@ -128,6 +128,7 @@ const EXPECTED_HEADERS = {
   IconTypes: ["icon_type", "svg_or_emoji"],
   FAQs: ["course_id", "lang", "order", "question", "answer"],
   Careers: ["job_id", "role_title", "location", "type", "description", "apply_url", "posted_date", "is_active", "order"],
+  Horoscopes: ["sign_id", "week_label", "content"],
 };
 
 function validateHeaders(tab, headers) {

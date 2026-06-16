@@ -420,6 +420,27 @@ export async function getOpenJobs(env) {
     .sort((a, b) => a.order - b.order);
 }
 
+// --- Weekly horoscopes (sheet-driven, one row per zodiac sign) ---
+
+export const HOROSCOPES_TAB = "Horoscopes";
+
+// Returns { [sign_id]: { week_label, content } }. Blank content rows still
+// appear in the map (so the frontend can render a "Coming soon" placeholder
+// for that sign); only rows with a missing sign_id are dropped.
+export async function getWeeklyHoroscopes(env) {
+  const rows = await readTab(env, HOROSCOPES_TAB);
+  const map = {};
+  for (const r of rows) {
+    const signId = String(r.sign_id || "").trim().toLowerCase();
+    if (!signId) continue;
+    map[signId] = {
+      week_label: String(r.week_label || "").trim(),
+      content: String(r.content || "").trim(),
+    };
+  }
+  return map;
+}
+
 // --- Marketing site content ---
 
 export const CONTENT_TAB = "Content";

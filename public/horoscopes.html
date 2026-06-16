@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<title>Weekly Horoscope — International Vedic Academy</title>
+<meta name="description" content="This week's horoscope for every zodiac sign — Aries through Pisces. Updated weekly by the International Vedic Academy team." />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-cream: #f7f1e3;
+    --bg-cream-deep: #f0e8d3;
+    --bg-white: #ffffff;
+    --ink: #1a1535;
+    --ink-soft: #4a4365;
+    --ink-muted: #7a7290;
+    --cosmic-deep: #0a0618;
+    --cosmic-mid: #1a1535;
+    --cosmic-purple: #2a1f5e;
+    --gold: #d4a24c;
+    --gold-bright: #f0c878;
+    --gold-deep: #a8791f;
+    --border-light: rgba(26, 21, 53, 0.08);
+    --border-gold: rgba(212, 162, 76, 0.3);
+    --shadow-sm: 0 4px 12px rgba(26, 21, 53, 0.06);
+    --shadow-md: 0 8px 24px rgba(26, 21, 53, 0.08);
+    --serif: 'Fraunces', Georgia, serif;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+  }
+  body { font-family: var(--sans); color: var(--ink); overflow-x: hidden; line-height: 1.6; }
+  h1, h2, h3, h4, .font-serif { font-family: var(--serif); }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color: #1a0f00 !important; font-weight: 600; border: none; border-radius: 50px;
+    padding: 10px 24px; transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 162, 76, 0.3);
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 162, 76, 0.5); }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #f0c878, #d4a24c);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .section-padding { padding: 80px 0; }
+
+  footer { background: var(--cosmic-deep); color: #c4bba8; padding: 50px 0 28px; }
+  footer a { color: #c4bba8; text-decoration: none; transition: color 0.3s; }
+  footer a:hover { color: var(--gold-bright); }
+  .foot-grid {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 32px; padding-bottom: 28px;
+    border-bottom: 1px solid rgba(212, 162, 76, 0.15);
+  }
+  .foot-links { display: flex; gap: 32px; flex-wrap: wrap; }
+  .foot-links a { color: #c4bba8; font-size: 14px; }
+  .foot-socials { display: flex; gap: 10px; }
+  .foot-socials a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    display: grid; place-items: center; color: var(--gold); transition: all 0.3s;
+  }
+  .foot-socials a:hover { background: var(--gold); color: var(--cosmic-deep); }
+  .foot-socials svg { width: 16px; height: 16px; }
+
+  @media (max-width: 640px) {
+    .section-padding { padding: 50px 0; }
+    .foot-grid { flex-direction: column; text-align: center; gap: 24px; }
+    .foot-links { justify-content: center; gap: 18px 24px; }
+  }
+</style>
+
+<!-- SEO -->
+<link rel="canonical" href="https://internationalvedicacademy.com/horoscopes.html" />
+<meta name="theme-color" content="#1a1535" />
+<meta name="author" content="International Vedic Academy" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="International Vedic Academy" />
+<meta property="og:title" content="Weekly Horoscope — International Vedic Academy" />
+<meta property="og:description" content="This week's horoscope for every zodiac sign. Updated weekly by our team." />
+<meta property="og:url" content="https://internationalvedicacademy.com/horoscopes.html" />
+<meta property="og:image" content="https://internationalvedicacademy.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_IN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Weekly Horoscope — International Vedic Academy" />
+<meta name="twitter:description" content="This week's horoscope for every zodiac sign." />
+<meta name="twitter:image" content="https://internationalvedicacademy.com/og-image.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "International Vedic Academy",
+  "url": "https://internationalvedicacademy.com",
+  "logo": "https://internationalvedicacademy.com/favicon.png",
+  "description": "Online Vedic academy teaching Vedic Astrology, Numerology, Tarot, Palmistry, Vastu Shastra, Crystal Healing and Reiki Healing.",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://internationalvedicacademy.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Horoscope", "item": "https://internationalvedicacademy.com/horoscopes.html" }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-cosmic py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+      <img src="assets/img/logo.png" class="img-fluid" alt="International Vedic Academy"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav" aria-label="Open menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" id="mainNav" tabindex="-1" aria-labelledby="mainNavLabel">
+      <div class="offcanvas-header">
+        <span class="offcanvas-title visually-hidden" id="mainNavLabel">Menu</span>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Courses
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark border-0 shadow-lg">
+              <li><a class="dropdown-item" href="vedic-astrology.html">Vedic Astrology</a></li>
+              <li><a class="dropdown-item" href="tarot-card.html">Tarot Card Reading</a></li>
+              <li><a class="dropdown-item" href="numerology.html">Numerology</a></li>
+              <li><a class="dropdown-item" href="palmistry.html">Palmistry</a></li>
+              <li><a class="dropdown-item" href="vastu-shastra.html">Vastu Shastra</a></li>
+              <li><a class="dropdown-item" href="crystal-healing.html">Crystal Healing</a></li>
+              <li><a class="dropdown-item" href="reiki-healing.html">Reiki Healing</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link active" href="horoscopes.html">Horoscope</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+          <li class="nav-item"><a class="nav-link" href="/portal/login.html">Student Login</a></li>
+          <li class="nav-item ms-lg-2"><a href="index.html#enroll" class="btn btn-gold" data-enroll-modal>Enroll Now</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="horoscope-hero bg-cosmic">
+  <div class="container text-center">
+    <span class="text-uppercase small fw-bold d-block mb-3" style="letter-spacing: 3px; color: var(--gold-bright);">Your Cosmic Forecast</span>
+    <h1 class="mb-3">This Week's <span class="gold-gradient-text">Horoscope</span></h1>
+    <p class="lead mt-3 mx-auto" id="horoscope-week-label" style="max-width: 720px;">
+      Choose your sign below to read the week ahead.
+    </p>
+  </div>
+</section>
+
+<!-- APP MOUNT: hydrated by /api/horoscopes + assets/js/horoscopes.js -->
+<section class="section-padding">
+  <div class="container" style="max-width: 1080px;">
+    <div id="horoscope-loading" class="text-center py-5">
+      <span class="text-secondary">Loading this week's horoscope…</span>
+    </div>
+    <div id="horoscope-grid" class="horoscope-grid" hidden></div>
+    <div id="horoscope-reading" class="horoscope-reading" hidden></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <a href="index.html" class="logo" aria-label="Home">
+        <img src="assets/img/logo.png" class="img-fluid" alt="International Vedic Academy" />
+      </a>
+      <div class="foot-links">
+        <a href="about-us.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="careers.html">Careers</a>
+        <a href="horoscopes.html">Horoscope</a>
+      </div>
+      <div class="foot-socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r="0.6" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M6.5 5.5l4 2.5-4 2.5z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 8h2.2l.4-2.4H9.5v-1c0-.6.3-1 1-1H12V1h-2.2c-1.7 0-2.6 1-2.6 2.6v2H5.5V8h1.7v6h2.3V8z" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1a7 7 0 00-6 10.6L1 15l3.4-1A7 7 0 108 1z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="assets/js/content.js"></script>
+<script defer src="assets/js/enroll-modal.js"></script>
+<script defer src="assets/js/horoscopes.js"></script>
+<script>
+  // Reveal the grid once horoscopes.js finishes its first paint. The hydrator
+  // hides #horoscope-loading and writes into #horoscope-grid; unhide the grid.
+  document.addEventListener("DOMContentLoaded", function () {
+    var grid = document.getElementById("horoscope-grid");
+    if (grid) grid.hidden = false;
+  });
+</script>
+</body>
+</html>
