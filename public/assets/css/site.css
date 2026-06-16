@@ -34,17 +34,32 @@ body {
 .navbar-brand img,
 .brand-row .brand-logo {
   width: auto;
-  max-width: 180px;
-  max-height: 56px;          /* hard cap so the logo can never push the navbar taller */
+  max-width: 150px;          /* tightened from 180px so the navbar stays compact sitewide */
+  max-height: 44px;          /* hard cap on height — the logo can never push the navbar taller */
   height: auto;
   object-fit: contain;
 }
 @media (max-width: 480px) {
   .navbar-brand img,
   .brand-row .brand-logo {
-    max-width: 130px;
-    max-height: 44px;
+    max-width: 120px;
+    max-height: 38px;
   }
+}
+
+/* Force a uniform, compact navbar height on every marketing page.
+   Bootstrap's `py-3` on the <nav> + the brand img padding combine to make some
+   pages feel taller than others (especially when the inline logo dimensions
+   differ slightly). These overrides clamp the whole panel to the same size. */
+.navbar.navbar-dark.bg-cosmic {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  min-height: 64px;
+}
+.navbar.navbar-dark.bg-cosmic .navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 1.25rem;
 }
 
 /* Footer logo — slightly smaller than the navbar so visual hierarchy stays
