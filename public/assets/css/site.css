@@ -126,8 +126,20 @@ img {
    <style>. Centralised so a single edit reflows every page. blog.html
    intentionally opts out (uses a light editorial navbar). */
 
+/* Vertically-fading gradient: opaque dark at the top where the nav text sits,
+   fading to fully transparent at the bottom. The transparent edge lets the
+   section behind the navbar (cosmic hero on home, cream body on every other
+   page) show through, so the navbar visually merges with whatever's below
+   without a hard horizontal boundary. White nav text stays readable because
+   it sits in the top 35 % where the gradient is still at full opacity. */
 .bg-cosmic {
-  background: linear-gradient(180deg, var(--cosmic-deep, #0a0618) 0%, var(--cosmic-mid, #1a1535) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--cosmic-deep, #0a0618) 0%,
+    rgba(10, 6, 24, 0.85)      35%,
+    rgba(26, 21, 53, 0.45)     75%,
+    rgba(26, 21, 53, 0)       100%
+  );
   color: #faf5ea;
   position: relative;
 }
@@ -493,17 +505,13 @@ img {
 /* Fixes from the homepage audit:
    - .hero-visual reserved 380px of empty space below the SVG cards on mobile
      even when display:none, pushing the CTA below the fold.
-   - Inline :root in index.html declared a different --bg-cream than site.css,
-     so inline-styled panels drifted off-brand.
    - Inline @768px and site.css @480px both clamp()'d .hero h1, causing a
      ~20% size jump at the boundary.
    - background-attachment: fixed on the body PNG caused paint thrash on
-     mobile scroll. */
-
-body {
-  --bg-cream: #fff7e6;
-  --bg-cream-deep: #fbf2dd;
-}
+     mobile scroll.
+   Note: the former `body { --bg-cream: ... }` override here was removed once
+   home.css was extracted and stopped declaring its own colliding :root cream
+   values — site.css's :root is now the single source of truth. */
 
 @media (max-width: 768px) {
   .hero-visual { min-height: 0 !important; aspect-ratio: auto !important; }
@@ -520,22 +528,8 @@ body {
   body { background-attachment: scroll !important; }
 }
 
-/* Match Bootstrap's responsive `.container` ladder, scoped to the navbar.
-   This neutralises the inline `.container { max-width: 1280px }` override
-   in index.html so the homepage navbar lines up pixel-identically with
-   about-us.html and every other marketing page at every viewport width.
-   Specificity (.navbar > .container = 0,2,0) beats inline `.container`
-   (0,1,0), so no !important is needed. */
-.navbar > .container {
-  width: 100%;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 12px;
-  padding-right: 12px;
-}
-@media (min-width: 576px)  { .navbar > .container { max-width: 540px;  } }
-@media (min-width: 768px)  { .navbar > .container { max-width: 720px;  } }
-@media (min-width: 992px)  { .navbar > .container { max-width: 960px;  } }
-@media (min-width: 1200px) { .navbar > .container { max-width: 1140px; } }
-@media (min-width: 1400px) { .navbar > .container { max-width: 1320px; } }
+/* Note: the former `.navbar > .container` Bootstrap-ladder rule was removed
+   here once home.css dropped its `.container { max-width: 1280px }` override
+   in Phase 3 of the surgical rewrite. The homepage navbar now uses Bootstrap's
+   default `.container` straight from bootstrap.min.css, identical to every
+   other marketing page. */
