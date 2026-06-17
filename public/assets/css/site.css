@@ -520,16 +520,22 @@ body {
   body { background-attachment: scroll !important; }
 }
 
-/* Homepage-only fix: index.html declares a wider inline `.container`
-   (max-width: 1280px; padding: 0 32px), which makes its navbar stretch wider
-   and feel less tight than the other pages that inherit Bootstrap's default
-   .container. Scope the navbar's container back to the Bootstrap defaults
-   used by every other page so all navbars align consistently. */
+/* Match Bootstrap's responsive `.container` ladder, scoped to the navbar.
+   This neutralises the inline `.container { max-width: 1280px }` override
+   in index.html so the homepage navbar lines up pixel-identically with
+   about-us.html and every other marketing page at every viewport width.
+   Specificity (.navbar > .container = 0,2,0) beats inline `.container`
+   (0,1,0), so no !important is needed. */
 .navbar > .container {
-  max-width: 1140px;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 12px;
   padding-right: 12px;
 }
-@media (min-width: 1200px) {
-  .navbar > .container { max-width: 1140px; }
-}
+@media (min-width: 576px)  { .navbar > .container { max-width: 540px;  } }
+@media (min-width: 768px)  { .navbar > .container { max-width: 720px;  } }
+@media (min-width: 992px)  { .navbar > .container { max-width: 960px;  } }
+@media (min-width: 1200px) { .navbar > .container { max-width: 1140px; } }
+@media (min-width: 1400px) { .navbar > .container { max-width: 1320px; } }
