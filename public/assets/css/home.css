@@ -55,7 +55,7 @@
     overflow: hidden;
     min-height: 640px;
     background:
-      url("assets/img/hero-bg.jpg") center top / cover no-repeat,
+      url("/assets/img/hero-bg.jpg") center top / cover no-repeat,
       linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
     background-color: #0a0618;
   }
