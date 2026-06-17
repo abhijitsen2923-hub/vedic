@@ -45,15 +45,40 @@
      other marketing page exactly. */
 
   /* ============ HERO COSMIC BACKGROUND (Hybrid: image base + animated overlays) ============ */
+  /* Fallback declaration for legacy browsers without image-set() support. */
   .hero-bg {
     position: relative;
     overflow: hidden;
     min-height: 640px;
-/* New cosmic backdrop - image; gradient kept as fallback layer */
     background:
       url("assets/img/hero-bg.jpg") center top / cover no-repeat,
       linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
     background-color: #0a0618;
+  }
+
+  /* Modern browsers: AVIF / WebP / JPEG cascade. */
+  .hero-bg {
+    background:
+      image-set(
+        url("assets/img/hero-bg.avif") type("image/avif"),
+        url("assets/img/hero-bg.webp") type("image/webp"),
+        url("assets/img/hero-bg.jpg")  type("image/jpeg")
+      ) center top / cover no-repeat,
+      linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
+  }
+
+  /* Mobile: serve an 800 px-wide variant so phones don't pull the full 1920w
+     hero. Cuts ~75 KB even on AVIF browsers. */
+  @media (max-width: 768px) {
+    .hero-bg {
+      background:
+        image-set(
+          url("assets/img/hero-bg-sm.avif") type("image/avif"),
+          url("assets/img/hero-bg-sm.webp") type("image/webp"),
+          url("assets/img/hero-bg-sm.jpg")  type("image/jpeg")
+        ) center top / cover no-repeat,
+        linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
+    }
   }
 
   /* Subtle readability gradient for headline text on the left side */
