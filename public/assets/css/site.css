@@ -488,3 +488,48 @@ img {
 @media (max-width: 380px) {
   .horoscope-grid { grid-template-columns: 1fr; }
 }
+
+/* ---- 10. Homepage responsive recovery (Phase A) ------------------------- */
+/* Fixes from the homepage audit:
+   - .hero-visual reserved 380px of empty space below the SVG cards on mobile
+     even when display:none, pushing the CTA below the fold.
+   - Inline :root in index.html declared a different --bg-cream than site.css,
+     so inline-styled panels drifted off-brand.
+   - Inline @768px and site.css @480px both clamp()'d .hero h1, causing a
+     ~20% size jump at the boundary.
+   - background-attachment: fixed on the body PNG caused paint thrash on
+     mobile scroll. */
+
+body {
+  --bg-cream: #fff7e6;
+  --bg-cream-deep: #fbf2dd;
+}
+
+@media (max-width: 768px) {
+  .hero-visual { min-height: 0 !important; aspect-ratio: auto !important; }
+  .hero-inner  { min-height: 0 !important; }
+  .hero        { padding: 24px 0 32px !important; }
+}
+
+@media (max-width: 991.98px) {
+  .hero h1     { font-size: clamp(26px, 6vw, 44px) !important; letter-spacing: -0.5px; }
+  .hero p.lead { font-size: clamp(14px, 2.5vw, 17px) !important; }
+}
+
+@media (max-width: 768px) {
+  body { background-attachment: scroll !important; }
+}
+
+/* Homepage-only fix: index.html declares a wider inline `.container`
+   (max-width: 1280px; padding: 0 32px), which makes its navbar stretch wider
+   and feel less tight than the other pages that inherit Bootstrap's default
+   .container. Scope the navbar's container back to the Bootstrap defaults
+   used by every other page so all navbars align consistently. */
+.navbar > .container {
+  max-width: 1140px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+@media (min-width: 1200px) {
+  .navbar > .container { max-width: 1140px; }
+}
