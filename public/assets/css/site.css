@@ -142,19 +142,15 @@ img {
    <style>. Centralised so a single edit reflows every page. blog.html
    intentionally opts out (uses a light editorial navbar). */
 
-/* Vertically-fading gradient: opaque dark at the top where the nav text sits,
-   fading to fully transparent at the bottom. The transparent edge lets the
-   section behind the navbar (cosmic hero on home, cream body on every other
-   page) show through, so the navbar visually merges with whatever's below
-   without a hard horizontal boundary. White nav text stays readable because
-   it sits in the top 35 % where the gradient is still at full opacity. */
+/* Solid dark cosmic gradient. The previous transparent-fade variant looked
+   right on the homepage (where it merged into the hero) but let the cream
+   body show through the bottom of the navbar on every other page, producing
+   an unwanted whitish fade. Owner wants the solid dark look sitewide. */
 .bg-cosmic {
   background: linear-gradient(
     180deg,
     var(--cosmic-deep, #0a0618) 0%,
-    rgba(10, 6, 24, 0.85)      35%,
-    rgba(26, 21, 53, 0.45)     75%,
-    rgba(26, 21, 53, 0)       100%
+    var(--cosmic-mid,  #1a1535) 100%
   );
   color: #faf5ea;
   position: relative;

@@ -223,35 +223,12 @@
     color: var(--gold);
     margin-top: 2px;
   }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 36px;
-    align-items: center;
-  }
-  nav ul a {
-    color: #e8e0d0;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    transition: color 0.3s;
-    position: relative;
-    padding: 4px 0;
-  }
-  nav ul a:hover { color: var(--gold-bright); }
-  nav ul a.active {
-    color: var(--gold-bright);
-  }
-  nav ul a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 2px;
-  }
+  /* `nav ul *` rules from the pre-rewrite homepage navigation removed —
+     they were unintentionally matching the Bootstrap navbar's
+     `<ul class="navbar-nav">` (since the navbar sits inside `<header><nav>`),
+     applying a 36px gap that spread items across the navbar instead of
+     grouping them on the right. site.css's `.bg-cosmic .nav-link` styles
+     are the single source of truth for navbar appearance now. */
   .nav-right {
     display: flex;
     gap: 12px;
@@ -1169,7 +1146,9 @@
      (1024 px) now keeps the desktop hero layout, consistent with every other
      marketing page that uses Bootstrap defaults. */
   @media (max-width: 991.98px) {
-    nav ul { display: none; }
+    /* `nav ul { display: none }` removed — it was hiding the offcanvas drawer's
+       links on the mobile homepage. Bootstrap's `.navbar-expand-lg` already
+       handles the desktop→mobile transition correctly. */
     .hero-inner { grid-template-columns: 1fr; gap: 50px; text-align: center; }
     .hero-visual { margin: 0 auto; }
     .hero-ctas { justify-content: center; }
