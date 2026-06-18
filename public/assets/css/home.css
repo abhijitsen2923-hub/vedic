@@ -45,34 +45,45 @@
      other marketing page exactly. */
 
   /* ============ HERO COSMIC BACKGROUND (Hybrid: image base + animated overlays) ============ */
-  /* Plain url() — the image-set() variant was removed because the AVIF / WebP
-     variant files don't exist yet. Browsers pick the first format they support
-     in image-set(); when AVIF 404s they don't fall through to JPG, leaving the
-     hero showing only the gradient. Re-add image-set() once squoosh-produced
-     variants land in /assets/img/. */
+  /* The image is anchored to the right and sized to ~55 % of the hero width,
+     not full-bleed. This gives the dancing cards a clean stage on the right
+     and leaves the left half as calm dark gradient — ideal backdrop for the
+     headline. Mobile (≤768) restores full-bleed via the @media block below. */
   .hero-bg {
     position: relative;
     overflow: hidden;
     min-height: 640px;
     background:
-      url("/assets/img/hero-bg.jpg") center top / cover no-repeat,
+      url("/assets/img/hero-bg.jpg") right center / 55% 100% no-repeat,
       linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
     background-color: #0a0618;
   }
 
-  /* Subtle readability gradient for headline text on the left side */
+  /* Horizontal fade from solid dark on the left to clear on the right, softening
+     the seam between the gradient backdrop and the image. Text on the left
+     stays crisply readable; the image emerges cleanly on the right. */
   .hero-bg::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg,
-      rgba(10, 6, 24, 0.78) 0%,
-      rgba(10, 6, 24, 0.55) 25%,
-      rgba(10, 6, 24, 0.25) 50%,
-      rgba(10, 6, 24, 0.05) 75%,
-      rgba(10, 6, 24, 0) 100%);
+      rgba(10, 6, 24, 0.95) 0%,
+      rgba(10, 6, 24, 0.80) 35%,
+      rgba(10, 6, 24, 0.40) 55%,
+      rgba(10, 6, 24, 0.10) 75%,
+      rgba(10, 6, 24, 0)   100%);
     z-index: 1;
     pointer-events: none;
+  }
+
+  /* Mobile: cards are hidden (see .hero-cards-img @media rule), so let the
+     image cover the whole hero again as a backdrop for the text + CTAs. */
+  @media (max-width: 768px) {
+    .hero-bg {
+      background:
+        url("/assets/img/hero-bg.jpg") center top / cover no-repeat,
+        linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
+    }
   }
 
   /* Bottom fade to cream so it blends into stats section */
