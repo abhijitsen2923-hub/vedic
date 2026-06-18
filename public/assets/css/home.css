@@ -1160,7 +1160,13 @@
        links on the mobile homepage. Bootstrap's `.navbar-expand-lg` already
        handles the desktop→mobile transition correctly. */
     .hero-inner { grid-template-columns: 1fr; gap: 28px; text-align: center; }
-    .hero-visual { margin: 0 auto; }
+    /* Hide the entire .hero-visual on mobile. Everything inside it (the
+       desktop <img>, the .hv-scene sparkles, the dancing cards SVG) is
+       desktop-only — on mobile the image lives inside .hero-content as
+       .hero-image-mobile. Without this rule, .hero-visual rendered as a
+       460px-tall block below the content, leaking hero-bg.jpg through the
+       desktop <img> and showing sparkle `+` decorations. */
+    .hero-visual { display: none; }
     .hero-content { text-align: center; }
 
     /* Mobile hero image — bulletproof edge-to-edge. The 100vw + centring
@@ -1177,13 +1183,17 @@
       height: auto;
       margin-left: 50%;
       transform: translateX(-50%);
-      margin-top: 12px;
-      margin-bottom: 12px;
+      margin-top: 8px;
+      margin-bottom: 0;
       border-radius: 0;
       box-shadow: none;
-      -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
-              mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
+      /* Stronger 15 % fade top + bottom so the image dissolves into the dark
+         cosmic backdrop instead of feeling like a pasted-on photo. */
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
+              mask-image: linear-gradient(180deg, transparent 0%, black 15%, black 85%, transparent 100%);
     }
+    /* Pull the CTAs tighter to the image. */
+    .hero-ctas { margin-top: 12px; }
     /* Slightly larger avatars + students text to match the mockup proportions. */
     .avatars-stack .avatar {
       width: 42px;
