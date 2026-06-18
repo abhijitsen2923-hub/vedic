@@ -466,6 +466,12 @@
   /* Floating tarot/numerology cards — now a single self-animating SVG asset
      at /assets/img/hero-cards.svg. The previous .hv-card* CSS (rotation,
      positioning, gold border, halo, animation) lives inside the SVG itself. */
+  /* Mobile-only inline hero image (the cosmic centerpiece in the mockup).
+     Hidden on desktop because the desktop visual is the right-column
+     background image + cards. Shown as a contained block on mobile via the
+     ≤991.98px @media rules below. */
+  .hero-image-mobile { display: none; }
+
   .hero-cards-img {
     position: absolute;
     inset: 0;
@@ -1160,9 +1166,40 @@
     /* `nav ul { display: none }` removed — it was hiding the offcanvas drawer's
        links on the mobile homepage. Bootstrap's `.navbar-expand-lg` already
        handles the desktop→mobile transition correctly. */
-    .hero-inner { grid-template-columns: 1fr; gap: 50px; text-align: center; }
+    .hero-inner { grid-template-columns: 1fr; gap: 28px; text-align: center; }
     .hero-visual { margin: 0 auto; }
-    .hero-ctas { justify-content: center; }
+    .hero-content { text-align: center; }
+
+    /* Mobile hero image — contained centerpiece between the subtitle and CTAs. */
+    .hero-image-mobile {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      margin: 12px auto 4px;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    /* Remove the full-bleed background image on mobile — the inline <img>
+       is now the visual. Keep only the cosmic gradient as backdrop. */
+    .hero-bg {
+      background: linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
+    }
+    /* Stack CTAs vertically as full-width pills (aligned with the image width). */
+    .hero-ctas {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      justify-content: center;
+    }
+    .hero-ctas .btn,
+    .hero-ctas .btn-gold,
+    .hero-ctas .btn-watch {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      justify-content: center;
+    }
     .student-row { justify-content: center; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px 0; padding: 28px; }
     .stat-item:nth-child(2) { border-right: none; }
