@@ -44,47 +44,22 @@
      container (540/720/960/1140/1320 at sm/md/lg/xl/xxl), matching every
      other marketing page exactly. */
 
-  /* ============ HERO COSMIC BACKGROUND (Hybrid: image base + animated overlays) ============ */
-  /* The image is anchored to the right and sized to ~55 % of the hero width,
-     not full-bleed. This gives the dancing cards a clean stage on the right
-     and leaves the left half as calm dark gradient — ideal backdrop for the
-     headline. Mobile (≤768) restores full-bleed via the @media block below. */
+  /* ============ HERO COSMIC BACKGROUND ============ */
+  /* The hero image lives as an <img class="hero-image-desktop"> inside
+     .hero-visual (desktop) and <img class="hero-image-mobile"> inside
+     .hero-content (mobile). The CSS background here is just the cosmic
+     gradient backdrop — no image, no distortion. */
   .hero-bg {
     position: relative;
     overflow: hidden;
     min-height: 640px;
-    background:
-      url("/assets/img/hero-bg.jpg") right center / 55% 100% no-repeat,
-      linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
+    background: linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
     background-color: #0a0618;
   }
 
-  /* Horizontal fade from solid dark on the left to clear on the right, softening
-     the seam between the gradient backdrop and the image. Text on the left
-     stays crisply readable; the image emerges cleanly on the right. */
-  .hero-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg,
-      rgba(10, 6, 24, 0.95) 0%,
-      rgba(10, 6, 24, 0.80) 35%,
-      rgba(10, 6, 24, 0.40) 55%,
-      rgba(10, 6, 24, 0.10) 75%,
-      rgba(10, 6, 24, 0)   100%);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  /* Mobile: cards are hidden (see .hero-cards-img @media rule), so let the
-     image cover the whole hero again as a backdrop for the text + CTAs. */
-  @media (max-width: 768px) {
-    .hero-bg {
-      background:
-        url("/assets/img/hero-bg.jpg") center top / cover no-repeat,
-        linear-gradient(180deg, #0a0618 0%, #0a0618 45%, #14102a 75%, #1a1535 100%);
-    }
-  }
+  /* Former `::before` left-fade no longer needed — image is confined to
+     .hero-visual on desktop, so the headline column is already dark gradient. */
+  .hero-bg::before { display: none; }
 
   /* Bottom fade to cream so it blends into stats section */
   .hero-bg::after {
@@ -414,15 +389,33 @@
     color: #a89d87;
   }
 
-  /* ============ HERO VISUAL (Animated overlays on top of image) ============ */
+  /* ============ HERO VISUAL (Image block + animated overlays) ============ */
   .hero-visual {
     position: relative;
-    aspect-ratio: 1.2 / 1;
+    aspect-ratio: 1.05 / 1;       /* slightly more square so the image block is taller */
     width: 100%;
-    max-width: 460px;
+    max-width: 560px;             /* up from 460 — bigger visual area for the cards */
     margin-left: auto;
+    margin-right: -40px;          /* push past the container gutter for the "spilling right" look */
     height: 100%;
-    min-height: 380px;
+    min-height: 460px;            /* up from 380 — accommodates the larger cards */
+  }
+
+  /* Desktop hero image — anchored inside .hero-visual at natural aspect via
+     object-fit: cover. Hidden on mobile (mobile uses .hero-image-mobile). */
+  .hero-image-desktop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;       /* tune to `center 30%` if the wheel ends up too low */
+    z-index: 0;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+  @media (max-width: 991.98px) {
+    .hero-image-desktop { display: none; }
   }
   .hv-scene {
     position: absolute;
@@ -1170,20 +1163,36 @@
     .hero-visual { margin: 0 auto; }
     .hero-content { text-align: center; }
 
-    /* Mobile hero image — edge-to-edge full-bleed centerpiece between subtitle
-       and CTAs. Negative horizontal margins push it past the Bootstrap
-       `.container` 12 px gutter so the image touches the phone bezels exactly
-       as the mockup shows. `body { overflow-x: hidden }` (already set) prevents
-       any horizontal scrollbar from the bleed. */
+    /* Mobile hero image — bulletproof edge-to-edge. The 100vw + centring
+       transform pins the image to the viewport edges regardless of any
+       parent's padding (Bootstrap container, hero section, etc.). The
+       vertical mask-image gradient fades the top + bottom of the image into
+       the cosmic dark backdrop, so the image looks embedded in the gradient
+       rather than dropped on it. `body { overflow-x: hidden }` prevents any
+       horizontal scrollbar from the 100vw bleed. */
     .hero-image-mobile {
       display: block;
-      width: calc(100% + 24px);
-      max-width: none;
+      width: 100vw;
+      max-width: 100vw;
       height: auto;
-      margin: 16px -12px 8px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+      margin-top: 12px;
+      margin-bottom: 12px;
       border-radius: 0;
       box-shadow: none;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
+              mask-image: linear-gradient(180deg, transparent 0%, black 8%, black 92%, transparent 100%);
     }
+    /* Slightly larger avatars + students text to match the mockup proportions. */
+    .avatars-stack .avatar {
+      width: 42px;
+      height: 42px;
+      font-size: 14px;
+      margin-left: -14px;
+    }
+    .avatars-stack .avatar:first-child { margin-left: 0; }
+    .student-text strong { font-size: 16px; }
     /* Remove the full-bleed background image on mobile — the inline <img>
        is now the visual. Keep only the cosmic gradient as backdrop. */
     .hero-bg {
