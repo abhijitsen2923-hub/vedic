@@ -1170,15 +1170,19 @@
     .hero-visual { margin: 0 auto; }
     .hero-content { text-align: center; }
 
-    /* Mobile hero image — contained centerpiece between the subtitle and CTAs. */
+    /* Mobile hero image — edge-to-edge full-bleed centerpiece between subtitle
+       and CTAs. Negative horizontal margins push it past the Bootstrap
+       `.container` 12 px gutter so the image touches the phone bezels exactly
+       as the mockup shows. `body { overflow-x: hidden }` (already set) prevents
+       any horizontal scrollbar from the bleed. */
     .hero-image-mobile {
       display: block;
-      width: 100%;
-      max-width: 320px;
+      width: calc(100% + 24px);
+      max-width: none;
       height: auto;
-      margin: 12px auto 4px;
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      margin: 16px -12px 8px;
+      border-radius: 0;
+      box-shadow: none;
     }
     /* Remove the full-bleed background image on mobile — the inline <img>
        is now the visual. Keep only the cosmic gradient as backdrop. */
