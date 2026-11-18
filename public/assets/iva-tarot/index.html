@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Choose one of three tarot cards and explore a thoughtful message on relationships, your near future, or career, from International Vedic Academy." />
+  <link rel="icon" type="image/png" href="../../favicon.png" />
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
+  <title>Pick a Tarot Card — 3-Card Tarot Insight | International Vedic Academy</title>
+  
+  <!-- Typography matching IVA Brand Design System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Scoped Widget Styles -->
+  <link rel="stylesheet" href="../css/tarot-widget.css" />
+  <style>
+    :root { color-scheme: dark; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #090e23;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #ecedfa;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body>
+
+<section class="iva-tarot" id="iva-tarot-widget" aria-labelledby="iva-tarot-title">
+  <div class="iva-tarot__shell">
+    
+    <!-- Official Academy Brand Header -->
+    <a href="/" class="iva-tarot__brand" title="International Vedic Academy Homepage">
+      <img src="../img/logo.png" class="iva-tarot__brand-logo" alt="International Vedic Academy Logo" />
+      <span>International Vedic Academy</span>
+    </a>
+
+    <p class="iva-tarot__kicker">A Moment of Cosmic Reflection</p>
+    <h1 class="iva-tarot__title" id="iva-tarot-title">Pick a Card. Discover Your Message.</h1>
+    <p class="iva-tarot__lead">Pause for a moment, set an intention, and choose the card you feel drawn to. Your reveal offers perspective on an important area of your life.</p>
+    <p class="iva-tarot__guide" id="iva-tarot-instruction">Choose one card below to reveal your message.</p>
+
+    <!-- 3 Interactive Tarot Cards -->
+    <div class="iva-tarot__cards" role="group" aria-label="Choose one of three tarot cards">
+      
+      <!-- Card 1: The Sun -->
+      <button class="iva-tarot__card-button" type="button" data-card="1" aria-label="Reveal tarot card 1: Love & Relationships" aria-pressed="false">
+        <span class="iva-tarot__card">
+          <span class="iva-tarot__card-inner">
+            <span class="iva-tarot__card-face iva-tarot__card-face--back">
+              <img src="card-back.png" alt="International Vedic Academy Tarot Card Back" draggable="false" />
+            </span>
+            <span class="iva-tarot__card-face iva-tarot__card-face--front">
+              <img src="card-1-the-sun.png" alt="Tarot Card 1: The Sun" draggable="false" />
+            </span>
+          </span>
+        </span>
+        <span class="iva-tarot__card-label">Card 1</span>
+      </button>
+
+      <!-- Card 2: The Star -->
+      <button class="iva-tarot__card-button" type="button" data-card="2" aria-label="Reveal tarot card 2: Near Future" aria-pressed="false">
+        <span class="iva-tarot__card">
+          <span class="iva-tarot__card-inner">
+            <span class="iva-tarot__card-face iva-tarot__card-face--back">
+              <img src="card-back.png" alt="International Vedic Academy Tarot Card Back" draggable="false" />
+            </span>
+            <span class="iva-tarot__card-face iva-tarot__card-face--front">
+              <img src="card-2-the-star.png" alt="Tarot Card 2: The Star" draggable="false" />
+            </span>
+          </span>
+        </span>
+        <span class="iva-tarot__card-label">Card 2</span>
+      </button>
+
+      <!-- Card 3: The Chariot -->
+      <button class="iva-tarot__card-button" type="button" data-card="3" aria-label="Reveal tarot card 3: Career & Goals" aria-pressed="false">
+        <span class="iva-tarot__card">
+          <span class="iva-tarot__card-inner">
+            <span class="iva-tarot__card-face iva-tarot__card-face--back">
+              <img src="card-back.png" alt="International Vedic Academy Tarot Card Back" draggable="false" />
+            </span>
+            <span class="iva-tarot__card-face iva-tarot__card-face--front">
+              <img src="card-3-the-chariot.png" alt="Tarot Card 3: The Chariot" draggable="false" />
+            </span>
+          </span>
+        </span>
+        <span class="iva-tarot__card-label">Card 3</span>
+      </button>
+
+    </div>
+
+    <p class="iva-tarot__hint" id="iva-tarot-hint">There is no right or wrong choice. Follow your curiosity. ✨</p>
+
+    <!-- Revealed Reading Section -->
+    <article class="iva-tarot__reading" id="iva-tarot-reading" aria-live="polite" aria-atomic="true" hidden>
+      <div class="iva-tarot__reading-panel">
+        <span class="iva-tarot__eyebrow" id="iva-tarot-area"></span>
+        <h3 class="iva-tarot__headline" id="iva-tarot-headline"></h3>
+        <p class="iva-tarot__subtitle" id="iva-tarot-subtitle"></p>
+        <p class="iva-tarot__reading-copy" id="iva-tarot-message"></p>
+
+        <div class="iva-tarot__details">
+          <div class="iva-tarot__detail">
+            <p class="iva-tarot__detail-label">Your Small Next Step</p>
+            <p id="iva-tarot-step"></p>
+          </div>
+          <div class="iva-tarot__detail">
+            <p class="iva-tarot__detail-label">A Thought to Carry With You</p>
+            <p id="iva-tarot-affirmation"></p>
+          </div>
+        </div>
+
+        <div class="iva-tarot__actions">
+          <button type="button" class="iva-tarot__button iva-tarot__button--secondary" id="iva-tarot-reset">Explore Another Card</button>
+          <a class="iva-tarot__button" id="iva-tarot-cta" href="/tarot-card.html">Learn to Read Tarot →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Course Promotion Banner -->
+    <aside class="iva-tarot__course" aria-label="Tarot course at International Vedic Academy">
+      <div class="iva-tarot__course-text">
+        <h3>Want to Learn Tarot Reading Like a Pro?</h3>
+        <p>Go beyond a single card. Explore Major & Minor Arcana, spreads, intuition, practical readings, and ethical consultation in IVA's certified Tarot course.</p>
+        <div class="iva-tarot__course-pills">
+          <span class="iva-tarot__course-pill">✦ Live & Interactive Classes</span>
+          <span class="iva-tarot__course-pill">✦ Certification Program</span>
+          <span class="iva-tarot__course-pill">✦ Real-World Practice</span>
+        </div>
+      </div>
+      <a class="iva-tarot__button" href="/tarot-card.html">Explore the Tarot Course →</a>
+    </aside>
+
+    <p class="iva-tarot__disclaimer">These are fixed, general tarot-themed reflections for enjoyment and self-exploration — not personalized readings or guaranteed predictions. They are not financial, medical, or legal advice.</p>
+  </div>
+</section>
+
+<!-- Widget Behavior Script -->
+<script defer src="../js/tarot-widget.js"></script>
+
+</body>
+</html>
